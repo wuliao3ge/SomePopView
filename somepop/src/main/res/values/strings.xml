@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SlidePicker</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="title">标题</string>
+    <string name="des">这是一个描述</string>
 </resources>

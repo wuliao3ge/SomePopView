@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.yy.somepop.R;
 import com.yy.somepop.framework.DateInterface;
-import com.yy.somepop.framework.Defaultlnterface;
+import com.yy.somepop.framework.DefaultInterface;
 import com.yy.somepop.utils.StringUtils;
 import com.yy.somepop.wheelview.WheelView;
 
@@ -23,8 +23,8 @@ public class DateChoiceDialog extends Dialog implements View.OnClickListener{
 
     //
     private String title;
-    private Defaultlnterface leftlistener;
-    private Defaultlnterface rightlistener;
+    private DefaultInterface leftlistener;
+    private DefaultInterface rightlistener;
     private DateInterface centerDateInterface;
     private DefaultState defaultState;
     private Context context;
@@ -92,35 +92,27 @@ public class DateChoiceDialog extends Dialog implements View.OnClickListener{
         return this;
     }
 
-    public DateChoiceDialog setLeftlistener(Defaultlnterface leftlistener) {
-        this.leftlistener = leftlistener;
-        return this;
-    }
 
-    public DateChoiceDialog setRightlistener(Defaultlnterface rightlistener) {
-        this.rightlistener = rightlistener;
-        return this;
-    }
 
     @Override
     public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.dialog_date_btn1) {
-            if (leftlistener != null) {
-                leftlistener.onClick(this, false);
-            }
-            this.dismiss();
-        } else if (i == R.id.dialog_date_btn2) {
-            if (rightlistener != null) {
-                rightlistener.onClick(this, true);
-            }
-            this.dismiss();
-        } else if (i == R.id.dialog_date_btn3) {
-            if (rightlistener != null) {
-                rightlistener.onClick(this, true);
-            }
-            this.dismiss();
-        }
+//        int i = v.getId();
+//        if (i == R.id.dialog_date_btn1) {
+//            if (leftlistener != null) {
+//                leftlistener.onClick(this, false);
+//            }
+//            this.dismiss();
+//        } else if (i == R.id.dialog_date_btn2) {
+//            if (rightlistener != null) {
+//                rightlistener.onClick(this, true);
+//            }
+//            this.dismiss();
+//        } else if (i == R.id.dialog_date_btn3) {
+//            if (rightlistener != null) {
+//                rightlistener.onClick(this, true);
+//            }
+//            this.dismiss();
+//        }
     }
 
 

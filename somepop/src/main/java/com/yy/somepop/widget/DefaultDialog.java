@@ -20,11 +20,18 @@ import java.util.Date;
 
 public class DefaultDialog extends Dialog implements View.OnClickListener{
 
-    //
+    //标题内容
     private String title;
+//    描述内容
+    private String des;
+//    左侧按钮
     private DefaultInterface leftListener;
+//    右侧按钮
     private DefaultInterface rightListener;
+//    中间按钮
     private DefaultInterface centerListener;
+
+//    全局举兵
     private Context context;
     //左侧按钮描述
     private String leftBtnDes;
@@ -33,17 +40,19 @@ public class DefaultDialog extends Dialog implements View.OnClickListener{
     //中间按钮描述
     private String centerBtnDes;
 
+//    标题
     private TextView tvTitle;
-    private WheelView wvYear;
-    private WheelView wvMonth;
-    private WheelView wvDay;
+//   描述
+    private TextView tvDes;
+//    标题和描述的分割线
+    private View division1;
+
+//    左侧按钮
     private TextView tvBtn1;
+//    右侧按钮
     private TextView tvBtn2;
+//    中间按钮
     private TextView tvBtn3;
-
-
-    private Date StartTime;
-    private Date endTime;
 
 
     public DefaultDialog(@NonNull Context context) {
@@ -59,38 +68,107 @@ public class DefaultDialog extends Dialog implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_datechoice);
+        setContentView(R.layout.dialog_default);
         init();
     }
 
     private void init(){
-        tvTitle = (TextView)findViewById(R.id.dialog_date_title);
-        wvYear = (WheelView)findViewById(R.id.dialog_date_wv1);
-        wvMonth = (WheelView)findViewById(R.id.dialog_date_wv2);
-        wvDay = (WheelView)findViewById(R.id.dialog_date_wv3);
-        tvBtn1 = (TextView)findViewById(R.id.dialog_date_btn1);
-        tvBtn2 = (TextView)findViewById(R.id.dialog_date_btn2);
-        tvBtn3 = (TextView)findViewById(R.id.dialog_date_btn3);
+        tvTitle = (TextView)findViewById(R.id.dialog_default_title);
+        tvDes = (TextView)findViewById(R.id.dialog_default_des);
+        division1 = (View)findViewById(R.id.dialog_default_division1);
 
-        /** 设置标题*/
-        if(!StringUtils.isEmpty(title))
-        {
-            tvTitle.setVisibility(View.VISIBLE);
-            tvTitle.setText(title);
-        }else{
-            tvTitle.setVisibility(View.GONE);
-        }
-
+        tvBtn1 = (TextView)findViewById(R.id.dialog_default_btn1);
+        tvBtn2 = (TextView)findViewById(R.id.dialog_default_btn2);
+        tvBtn3 = (TextView)findViewById(R.id.dialog_default_btn3);
 
 
         /** 设置按钮监听 */
         tvBtn1.setOnClickListener(this);
         tvBtn2.setOnClickListener(this);
         tvBtn3.setOnClickListener(this);
+
+
+        /** 设置标题*/
+        if(!StringUtils.isEmpty(title))
+        {
+            tvTitle.setVisibility(View.VISIBLE);
+            division1.setVisibility(View.VISIBLE);
+            tvTitle.setText(title);
+        }else{
+            division1.setVisibility(View.GONE);
+            tvTitle.setVisibility(View.GONE);
+        }
+        /** 设置描述*/
+        if(!StringUtils.isEmpty(des))
+        {
+            tvDes.setVisibility(View.VISIBLE);
+            tvDes.setText(des);
+        }else{
+            tvDes.setVisibility(View.GONE);
+        }
+
+        if(leftListener!=null&&rightListener!=null&&centerListener!=null)
+        {
+            tvBtn1.setVisibility(View.VISIBLE);
+            tvBtn2.setVisibility(View.VISIBLE);
+            tvBtn3.setVisibility(View.VISIBLE);
+            tvBtn3.setBackgroundResource(R.drawable.bg_btn_square_white);
+        }else if(leftListener==null||rightListener==null&&centerListener!=null){
+            tvBtn1.setVisibility(View.GONE);
+            tvBtn2.setVisibility(View.GONE);
+            tvBtn3.setVisibility(View.VISIBLE);
+            tvBtn3.setBackgroundResource(R.drawable.bg_btn_round_white);
+        }else{
+
+        }
+
+
+
     }
 
     public DefaultDialog setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    public DefaultDialog setDes(String des) {
+        this.des = des;
+        return this;
+    }
+
+
+    public String getLeftBtnDes() {
+        return leftBtnDes;
+    }
+
+    public DefaultDialog setLeftBtnDes(String leftBtnDes) {
+        this.leftBtnDes = leftBtnDes;
+        return this;
+    }
+
+    public String getRightBtnDes() {
+        return rightBtnDes;
+    }
+
+    public DefaultDialog setRightBtnDes(String rightBtnDes) {
+        this.rightBtnDes = rightBtnDes;
+        return this;
+    }
+
+    public String getCenterBtnDes() {
+        return centerBtnDes;
+    }
+
+    public DefaultDialog setCenterBtnDes(String centerBtnDes) {
+        this.centerBtnDes = centerBtnDes;
         return this;
     }
 
@@ -124,17 +202,17 @@ public class DefaultDialog extends Dialog implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.dialog_date_btn1) {
+        if (i == R.id.dialog_default_btn1) {
             if (leftListener != null) {
                 leftListener.onClick(this, false);
             }
             this.dismiss();
-        } else if (i == R.id.dialog_date_btn2) {
+        } else if (i == R.id.dialog_default_btn2) {
             if (rightListener != null) {
                 rightListener.onClick(this, true);
             }
             this.dismiss();
-        } else if (i == R.id.dialog_date_btn3) {
+        } else if (i == R.id.dialog_default_btn3) {
             if (centerListener != null) {
                 centerListener.onClick(this, true);
             }

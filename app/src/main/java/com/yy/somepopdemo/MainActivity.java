@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.yy.somepop.framework.DefaultInterface;
+import com.yy.somepop.framework.DefaultListener;
 import com.yy.somepop.widget.DefaultDialog;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -28,13 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new DefaultDialog(this)
                         .setTitle("默认样式标题")
                         .setDes("默认样式描述")
-                        .setLeftListener(new DefaultInterface() {
-                            @Override
-                            public void onClick(Dialog dialog, boolean confirm) {
-
-                            }
-                        })
-                        .setRightListener(new DefaultInterface() {
+                        .setRightListener(new DefaultListener() {
                             @Override
                             public void onClick(Dialog dialog, boolean confirm) {
 
@@ -44,13 +38,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_no_title:
                 new DefaultDialog(this)
                         .setDes("默认样式描述")
-                        .setLeftListener(new DefaultInterface() {
+                        .setLeftListener(new DefaultListener() {
                             @Override
                             public void onClick(Dialog dialog, boolean confirm) {
 
                             }
                         })
-                        .setRightListener(new DefaultInterface() {
+                        .setRightListener(new DefaultListener() {
                             @Override
                             public void onClick(Dialog dialog, boolean confirm) {
 

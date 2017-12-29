@@ -26,30 +26,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.btn_default:
                 new DefaultDialog(this)
-                        .setTitle("默认样式标题")
-                        .setDes("默认样式描述")
-                        .setRightListener(new DefaultListener() {
-                            @Override
-                            public void onClick(Dialog dialog, boolean confirm) {
-
-                            }
-                        }).show();
+                        .show();
+//                        .setMessage("默认样式描述")
+//                        .setRightListener(new DefaultListener() {
+//                            @Override
+//                            public void onClick(Dialog dialog, boolean confirm) {
+//
+//                            }
+//                        })
+//                        .show();
                 break;
             case R.id.btn_no_title:
-                new DefaultDialog(this)
-                        .setDes("默认样式描述")
-                        .setLeftListener(new DefaultListener() {
-                            @Override
-                            public void onClick(Dialog dialog, boolean confirm) {
-
-                            }
-                        })
-                        .setRightListener(new DefaultListener() {
-                            @Override
-                            public void onClick(Dialog dialog, boolean confirm) {
-
-                            }
-                        }).show();
+//                new DefaultDialog(this)
+//                        .setMessage("默认样式描述")
+//                        .setLeftListener(new DefaultListener() {
+//                            @Override
+//                            public void onClick(Dialog dialog, boolean confirm) {
+//
+//                            }
+//                        })
+//                        .setRightListener(new DefaultListener() {
+//                            @Override
+//                            public void onClick(Dialog dialog, boolean confirm) {
+//
+//                            }
+//                        })
+//                        .show();
                 break;
         }
     }

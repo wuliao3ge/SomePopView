@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yy.somepop.R;
+import com.yy.somepop.base.BaseDialog;
 import com.yy.somepop.databinding.DialogDefaultBinding;
 import com.yy.somepop.framework.DefaultListener;
 import com.yy.somepop.model.DefaultDialogModel;
@@ -20,22 +21,18 @@ import com.yy.somepop.model.DefaultDialogModel;
  * Created by ly on 2017/12/27.
  */
 
-public class DefaultDialog extends Dialog {
+public class DefaultDialog extends BaseDialog {
 
-
-    private Context context;
     private DialogDefaultBinding binding;
-    private DefaultDialogModel defaultDialogModel;
+//    private DefaultDialogModel defaultDialogModel;
 
     public DefaultDialog(@NonNull Context context) {
         super(context);
-        this.context = context;
         init();
     }
 
     public DefaultDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
-        this.context = context;
         init();
     }
 
@@ -46,12 +43,11 @@ public class DefaultDialog extends Dialog {
                 null, false);
         binding = DataBindingUtil.bind(view);
         setContentView(binding.getRoot());
-
-        binding.setModel(defaultDialogModel);
+        binding.setModel(baseDialogModel);
     }
 
     private void init(){
-        defaultDialogModel = new DefaultDialogModel();
+//        defaultDialogModel = new DefaultDialogModel();
     }
 
 }

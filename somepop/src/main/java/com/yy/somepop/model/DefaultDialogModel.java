@@ -1,10 +1,5 @@
 package com.yy.somepop.model;
 
-import android.databinding.Bindable;
-import android.databinding.BindingAdapter;
-import android.util.TypedValue;
-import android.widget.TextView;
-
 import com.yy.somepop.R;
 import com.yy.somepop.framework.DefaultListener;
 
@@ -19,7 +14,7 @@ public class DefaultDialogModel {
     private DefaultListener leftListener;
     private DefaultListener centerListener;
     private int titleSize = R.dimen.font_title;
-    private int titleColor = R.color.default_title_color;
+    private int titleColor = R.color.default_text_color;
 
 
 

@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.btn_default:
                 new DefaultDialog(this)
+                        .setDialogTitle(R.string.title)
+                        .setDialogMessage(R.string.message)
+                        .setDialogTitleSize(32f)
                         .show();
 //                        .setMessage("默认样式描述")
 //                        .setRightListener(new DefaultListener() {

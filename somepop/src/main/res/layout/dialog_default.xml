@@ -21,10 +21,13 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:padding="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:text="@{model.title}"
             app:setTextSize="@{model.titleSize}"
-            app:setTextColor="@{model.titleColor}"/>
+            app:setTextColor="@{model.titleColor}"
+            android:visibility="@{model.title.empty?View.GONE:View.VISIBLE}"
+            />
         <View
             android:id="@+id/dialog_default_division1"
             android:layout_width="match_parent"
@@ -39,11 +42,13 @@
             android:padding="12dp"
             android:text="@{model.message}"
             android:textSize="@dimen/font_des"
+            android:visibility="@{model.message.empty?View.GONE:View.VISIBLE}"
             android:textColor="@android:color/black"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/division_size"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray"
+            />
 
         <LinearLayout
             android:id="@+id/dialog_default_btn_ll"

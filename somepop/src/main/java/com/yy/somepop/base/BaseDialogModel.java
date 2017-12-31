@@ -17,7 +17,7 @@ public class BaseDialogModel {
 
 
 //    标题字体大小
-    private float titleSize ;
+    private int titleSize  = R.dimen.font_title;
 //    标题颜色
     private int titleColor = R.color.default_text_color;
 //    消息字体大小
@@ -71,11 +71,11 @@ public class BaseDialogModel {
     }
 
 
-    public float getTitleSize() {
+    public int getTitleSize() {
         return titleSize;
     }
 
-    public void setTitleSize(float titleSize) {
+    public void setTitleSize(int titleSize) {
         this.titleSize = titleSize;
     }
 

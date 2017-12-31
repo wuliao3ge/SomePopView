@@ -11,9 +11,9 @@ import android.widget.TextView;
 public class AttrSettingUtils {
 //    设置textview的字体大小
     @BindingAdapter("setTextSize")
-    public static void setTextSize(TextView textView, float font){
+    public static void setTextSize(TextView textView, int font){
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                font);
+                textView.getContext().getResources().getDimensionPixelSize(font));
     }
 
 //  设置textview的字体颜色

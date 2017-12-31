@@ -77,29 +77,34 @@ public class BaseDialog extends Dialog {
     }
     /**
      * 设置标题字大小
-     * @param id
+     * @param id 字体大小资源id
      * @return
      */
-    public BaseDialog setDialogTitleSize(@DimenRes int id)
+    public BaseDialog setTitleSize(@DimenRes int id)
     {
-        baseDialogModel.setTitleSize(context.getResources().getDimensionPixelSize(id));
+        baseDialogModel.setTitleSize(id);
         return this;
     }
+
+//    /**
+//     * 设置标题字大小
+//     * @param size
+//     * @return
+//     */
+//    public BaseDialog setDialogTitleSize(float size)
+//    {
+//        baseDialogModel.setTitleSize(size);
+//        return this;
+//    }
 
     /**
-     * 设置标题字大小
-     * @param size
+     * 设置标题颜色
+     * @param id 颜色资源id
      * @return
      */
-    public BaseDialog setDialogTitleSize(float size)
+    public BaseDialog setTitleColor(@ColorRes int id)
     {
-        baseDialogModel.setTitleSize(size);
-        return this;
-    }
-
-    public BaseDialog setDialogTitleColor(@ColorRes int id)
-    {
-//        baseDialogModel.setTitleColor(context.getResources().);
+        baseDialogModel.setTitleColor(id);
         return this;
     }
 

@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new DefaultDialog(this)
                         .setDialogTitle(R.string.title)
                         .setDialogMessage(R.string.message)
-                        .setDialogTitleSize(32f)
+                        .setTitleSize(R.dimen.font_title )
+                        .setTitleColor(R.color.colorPrimary)
                         .show();
 //                        .setMessage("默认样式描述")
 //                        .setRightListener(new DefaultListener() {

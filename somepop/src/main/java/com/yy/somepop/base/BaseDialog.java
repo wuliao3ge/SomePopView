@@ -2,8 +2,10 @@ package com.yy.somepop.base;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.support.annotation.AnyRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -108,8 +110,134 @@ public class BaseDialog extends Dialog {
         return this;
     }
 
+    /**
+     * 设置消息字体大小
+     * @param id 字体大小资源id
+     * @return
+     */
+    public BaseDialog setMessageSize(@DimenRes int id)
+    {
+        baseDialogModel.setMessageSize(id);
+        return this;
+    }
+
+    /**
+     * 设置消息颜色
+     * @param id 颜色资源id
+     * @return
+     */
+    public BaseDialog setMessageColor(@ColorRes int id)
+    {
+        baseDialogModel.setMessageColor(id);
+        return this;
+    }
+
+    /**
+     * 设置左侧按钮字体大小
+     * @param id 字体大小资源id
+     * @return
+     */
+    public BaseDialog setLeftBtnSize(@DimenRes int id)
+    {
+        baseDialogModel.setLeftBtnSize(id);
+        return this;
+    }
+
+    /**
+     * 设置左侧按钮颜色
+     * @param id 颜色资源id
+     * @return
+     */
+    public BaseDialog setLeftBtnColor(@ColorRes int id)
+    {
+        baseDialogModel.setLeftBtnColor(id);
+        return this;
+    }
+    /**
+     * 设置右侧按钮字体大小
+     * @param id 字体大小资源id
+     * @return
+     */
+    public BaseDialog setRightBtnSize(@DimenRes int id)
+    {
+        baseDialogModel.setRightBtnSize(id);
+        return this;
+    }
+
+    /**
+     * 设置右侧按钮颜色
+     * @param id 颜色资源id
+     * @return
+     */
+    public BaseDialog setRightBtnColor(@ColorRes int id)
+    {
+        baseDialogModel.setRightBtnColor(id);
+        return this;
+    }
 
 
+    /**
+     * 设置整体背景
+     * @param id 背景id
+     * @return
+     */
+    public BaseDialog setDefaultBackground(@DrawableRes int id){
+        baseDialogModel.setDefaultBackground(id);
+        return this;
+    }
+
+
+    /**
+     * 设置标题背景
+     * @param id 背景id
+     * @return
+     */
+    public BaseDialog setTitleBackground(@DrawableRes int id){
+        baseDialogModel.setTitleBackground(id);
+        return this;
+    }
+
+    /**
+     * 设置消息背景
+     * @param id 背景id
+     * @return
+     */
+    public BaseDialog setMessageBackground(@DrawableRes int id){
+        baseDialogModel.setMessageBackground(id);
+        return this;
+    }
+
+
+    /**
+     * 设置左侧按钮背景
+     * @param id 背景id
+     * @return
+     */
+    public BaseDialog setLeftBtnBackground(@DrawableRes int id){
+        baseDialogModel.setLeftBtnBackground(id);
+        return this;
+    }
+
+    /**
+     * 设置右侧按钮背景
+     * @param id 背景id
+     * @return
+     */
+    public BaseDialog setRightBtnBackground(@DrawableRes int id){
+        baseDialogModel.setRightBtnBackground(id);
+        return this;
+    }
+
+
+    /**
+     * 设置是否显示横向分割线
+     * @param
+     * @return
+     */
+    public BaseDialog setisShowDivision(boolean ishsow){
+        baseDialogModel.setShowDivision(ishsow);
+        return this;
+    }
 
 
 

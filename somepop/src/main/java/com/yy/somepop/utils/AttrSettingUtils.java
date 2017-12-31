@@ -2,6 +2,7 @@ package com.yy.somepop.utils;
 
 import android.databinding.BindingAdapter;
 import android.util.TypedValue;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -20,6 +21,26 @@ public class AttrSettingUtils {
     @BindingAdapter("setTextColor")
     public static void setTextColor(TextView textView, int color){
         textView.setTextColor(textView.getResources().getColor(color));
+    }
+
+
+    @BindingAdapter("setLayoutBackground")
+    public static void setLLBackground(LinearLayout linearLayout, int Res){
+        if(Res>0)
+        {
+            linearLayout.setBackgroundResource(Res);
+        }
+
+    }
+
+
+    @BindingAdapter("setTvBackground")
+    public static void setTvBackground(TextView textView, int Res){
+        if(Res>0)
+        {
+            textView.setBackgroundResource(Res);
+        }
+
     }
 
 }

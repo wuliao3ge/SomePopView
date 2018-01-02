@@ -36,17 +36,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setLeftBtnColor(R.color.colorPrimaryDark)
                         .setRightBtnSize(R.dimen.font_title)
                         .setRightBtnColor(R.color.colorAccent)
-                        .setDefaultBackground(R.drawable.bg_dialog_round_white)
-                        .setTitleBackground(R.drawable.bg_btn_round_white)
+                        .setDivisionColor(R.color.colorPrimary)
+                        .setDivisionSize(R.dimen.division_size1)
+                        .setisShowDivision(false)
+                        .setLeftBtnText("哈哈哈")
+                        .setRightBtnText("嘿嘿嘿")
+//                        .setDefaultBackground(R.drawable.bg_dialog_round_white)
+//                        .setTitleBackground(R.drawable.bg_btn_round_white)
                         .show();
-//                        .setMessage("默认样式描述")
-//                        .setRightListener(new DefaultListener() {
-//                            @Override
-//                            public void onClick(Dialog dialog, boolean confirm) {
-//
-//                            }
-//                        })
-//                        .show();
                 break;
             case R.id.btn_no_title:
 //                new DefaultDialog(this)

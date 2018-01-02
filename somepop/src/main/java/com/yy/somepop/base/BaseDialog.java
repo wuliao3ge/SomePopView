@@ -2,11 +2,9 @@ package com.yy.somepop.base;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.support.annotation.AnyRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -22,19 +20,19 @@ public class BaseDialog extends Dialog {
     public BaseDialog(@NonNull Context context) {
         super(context);
         this.context = context;
-        baseDialogModel = new BaseDialogModel();
+        baseDialogModel = new BaseDialogModel(this);
     }
 
     public BaseDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
         this.context = context;
-        baseDialogModel = new BaseDialogModel();
+        baseDialogModel = new BaseDialogModel(this);
     }
 
     protected BaseDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
         this.context = context;
-        baseDialogModel = new BaseDialogModel();
+        baseDialogModel = new BaseDialogModel(this);
     }
     /**
      * 设置标题
@@ -88,16 +86,6 @@ public class BaseDialog extends Dialog {
         return this;
     }
 
-//    /**
-//     * 设置标题字大小
-//     * @param size
-//     * @return
-//     */
-//    public BaseDialog setDialogTitleSize(float size)
-//    {
-//        baseDialogModel.setTitleSize(size);
-//        return this;
-//    }
 
     /**
      * 设置标题颜色
@@ -132,6 +120,30 @@ public class BaseDialog extends Dialog {
         return this;
     }
 
+
+
+    /**
+     * 设置左侧按钮描述
+     * @param id 资源id
+     * @return
+     */
+    public BaseDialog setLeftBtnText(@StringRes int id)
+    {
+        baseDialogModel.setLeftbtntext(context.getResources().getString(id));
+        return this;
+    }
+
+    /**
+     * 设置左侧按钮描述
+     * @param text 描述
+     * @return
+     */
+    public BaseDialog setLeftBtnText(@NonNull CharSequence text)
+    {
+        baseDialogModel.setLeftbtntext(text.toString());
+        return this;
+    }
+
     /**
      * 设置左侧按钮字体大小
      * @param id 字体大小资源id
@@ -153,6 +165,30 @@ public class BaseDialog extends Dialog {
         baseDialogModel.setLeftBtnColor(id);
         return this;
     }
+
+    /**
+     * 设置右侧按钮描述
+     * @param id 资源id
+     * @return
+     */
+    public BaseDialog setRightBtnText(@StringRes int id)
+    {
+        baseDialogModel.setRightbtntext(context.getResources().getString(id));
+        return this;
+    }
+
+    /**
+     * 设置右侧按钮描述
+     * @param text 描述
+     * @return
+     */
+    public BaseDialog setRightBtnText(@NonNull CharSequence text)
+    {
+        baseDialogModel.setRightbtntext(text.toString());
+        return this;
+    }
+
+
     /**
      * 设置右侧按钮字体大小
      * @param id 字体大小资源id
@@ -231,7 +267,7 @@ public class BaseDialog extends Dialog {
 
     /**
      * 设置是否显示横向分割线
-     * @param
+     * @param  ishsow 是否显示
      * @return
      */
     public BaseDialog setisShowDivision(boolean ishsow){
@@ -239,11 +275,24 @@ public class BaseDialog extends Dialog {
         return this;
     }
 
+    /**
+     * 设置分割线的颜色
+     * @param id 颜色id
+     * @return
+     */
+    public BaseDialog setDivisionColor(@ColorRes int id){
+       baseDialogModel.setDivisionColor(id);
+        return this;
+    }
 
-
-
-
-
-
-
+    /**
+     * 设置风格线高度（宽度）
+     * @param id 资源id
+     * @return
+     */
+    public BaseDialog setDivisionSize(@DimenRes int id)
+    {
+        baseDialogModel.setDivisionSize(id);
+        return this;
+    }
 }

@@ -14,8 +14,6 @@ public class BaseDialogModel {
     private String message = "";
     private String leftbtntext = "取消";
     private String rightbtntext = "确定";
-
-
     //整体背景颜色
     private int defaultBackground  = R.drawable.bg_round_white;
 //    标题背景颜色
@@ -30,7 +28,6 @@ public class BaseDialogModel {
     private int messageSize = R.dimen.font_title;
 //    消息字体颜色
     private int messageColor = R.color.default_text_color;
-
 //    左侧按钮背景颜色
     private int leftBtnBackground;
     //    左侧按钮字体大小
@@ -43,16 +40,55 @@ public class BaseDialogModel {
     private int rightBtnSize = R.dimen.font_des;
     //    右侧按钮字体颜色
     private int rightBtnColor = R.color.default_text_color;
-
-    private boolean isShowDivision = true;
-
-    private int btnDivisionColor;
+    //是否显示标题和消息之间的分割线 默认不显示
+    private boolean isShowDivision = false;
+//  分割线颜色
+    private int divisionColor;
+//    分割线大小
     private int divisionSize ;
-
-
 
     private DefaultListener rightListener;
     private DefaultListener leftListener;
+
+    private BaseDialog baseDialog;
+
+
+    public BaseDialogModel(BaseDialog baseDialog) {
+        this.baseDialog = baseDialog;
+    }
+
+    public void onLeftListener(){
+        if(baseDialog!=null)
+        {
+            baseDialog.dismiss();
+            if(leftListener!=null)
+            {
+                leftListener.onClick(baseDialog);
+            }
+        }
+    }
+
+    public void onRightListener(){
+        if(baseDialog!=null)
+        {
+            baseDialog.dismiss();
+            if(rightListener!=null)
+            {
+                rightListener.onClick(baseDialog);
+            }
+        }
+    }
+
+
+    public BaseDialog getBaseDialog() {
+        return baseDialog;
+    }
+
+    public void setBaseDialog(BaseDialog baseDialog) {
+        this.baseDialog = baseDialog;
+    }
+
+
 
     public String getTitle() {
         return title;
@@ -215,12 +251,12 @@ public class BaseDialogModel {
         isShowDivision = showDivision;
     }
 
-    public int getBtnDivisionColor() {
-        return btnDivisionColor;
+    public int getDivisionColor() {
+        return divisionColor;
     }
 
-    public void setBtnDivisionColor(int btnDivisionColor) {
-        this.btnDivisionColor = btnDivisionColor;
+    public void setDivisionColor(int divisionColor) {
+        this.divisionColor = divisionColor;
     }
 
     public int getDivisionSize() {

@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yy.somepop.R;
-import com.yy.somepop.framework.DateInterface;
 import com.yy.somepop.framework.DefaultListener;
 import com.yy.somepop.utils.StringUtils;
 import com.yy.somepop.wheelview.WheelView;
@@ -25,7 +24,6 @@ public class DateChoiceDialog extends Dialog implements View.OnClickListener{
     private String title;
     private DefaultListener leftlistener;
     private DefaultListener rightlistener;
-    private DateInterface centerDateInterface;
     private DefaultState defaultState;
     private Context context;
     private String confirm;

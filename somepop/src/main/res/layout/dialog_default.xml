@@ -31,8 +31,10 @@
             android:id="@+id/dialog_default_division1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/division_size"
-            android:visibility="@{model.title.empty?View.GONE:View.VISIBLE}"
-            android:background="@android:color/darker_gray"/>
+            android:visibility="@{model.title.empty||!model.showDivision?View.GONE:View.VISIBLE}"
+            app:setDivisionColor="@{model.divisionColor}"
+            app:setDivisionSizeForV="@{model.divisionSize}"
+            />
         <TextView
             android:id="@+id/dialog_default_des"
             android:layout_width="match_parent"
@@ -47,7 +49,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/division_size"
-            android:background="@android:color/darker_gray"
+            app:setDivisionColor="@{model.divisionColor}"
+            app:setDivisionSizeForV="@{model.divisionSize}"
             android:visibility="@{model.message.empty?View.GONE:View.VISIBLE}"
             />
 
@@ -63,14 +66,18 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.0"
                 android:gravity="center"
-                android:text="@string/cancel"
+                android:text="@{model.leftbtntext}"
                 app:setTextSize="@{model.leftBtnSize}"
-                app:setTextColor="@{model.leftBtnColor}"/>
+                app:setTextColor="@{model.leftBtnColor}"
+                android:onClick="@{()->model.onLeftListener()}"
+                />
 
             <View
                 android:layout_width="@dimen/division_size"
                 android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"/>
+                app:setDivisionColor="@{model.divisionColor}"
+                app:setDivisionSizeForH="@{model.divisionSize}"
+                />
 
             <TextView
                 android:id="@+id/dialog_default_btn2"
@@ -78,9 +85,11 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_weight="1.0"
-                android:text="@string/confirm"
+                android:text="@{model.rightbtntext}"
                 app:setTextSize="@{model.rightBtnSize}"
-                app:setTextColor="@{model.rightBtnColor}"/>
+                app:setTextColor="@{model.rightBtnColor}"
+                android:onClick="@{()->model.onRightListener()}"
+                />
 
         </LinearLayout>
 

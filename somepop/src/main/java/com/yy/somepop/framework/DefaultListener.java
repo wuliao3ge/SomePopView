@@ -7,5 +7,5 @@ import android.app.Dialog;
  */
 
 public interface DefaultListener {
-    void onClick(Dialog dialog, boolean confirm);
+    void onClick(Dialog dialog);
 }

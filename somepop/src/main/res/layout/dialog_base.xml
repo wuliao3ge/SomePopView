@@ -51,8 +51,9 @@
             android:layout_height="@dimen/division_size"
             app:setDivisionColor="@{model.divisionColor}"
             app:setDivisionSizeForV="@{model.divisionSize}"
-            android:visibility="@{model.message.empty?View.GONE:View.VISIBLE}"
+            android:visibility="visible"
             />
+        <!--android:visibility="@{model.message.empty?View.GONE:View.VISIBLE}"-->
 
         <LinearLayout
             android:id="@+id/dialog_default_btn_ll"

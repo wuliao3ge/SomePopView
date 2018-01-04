@@ -25,25 +25,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (id)
         {
             case R.id.btn_default:
-                new DefaultDialog(this,R.style.dialog)
-                        .setDialogTitle(R.string.title)
-                        .setDialogMessage(R.string.message)
-                        .setTitleSize(R.dimen.font_title )
-                        .setTitleColor(R.color.colorPrimary)
-                        .setMessageSize(R.dimen.font_title)
-                        .setMessageColor(R.color.colorAccent)
-                        .setLeftBtnSize(R.dimen.font_des)
-                        .setLeftBtnColor(R.color.colorPrimaryDark)
-                        .setRightBtnSize(R.dimen.font_title)
-                        .setRightBtnColor(R.color.colorAccent)
-                        .setDivisionColor(R.color.colorPrimary)
-                        .setDivisionSize(R.dimen.division_size1)
-                        .setisShowDivision(false)
-                        .setLeftBtnText("哈哈哈")
-                        .setRightBtnText("嘿嘿嘿")
-//                        .setDefaultBackground(R.drawable.bg_dialog_round_white)
-//                        .setTitleBackground(R.drawable.bg_btn_round_white)
-                        .show();
+                DefaultDialog defaultDialog = new DefaultDialog(this,R.style.dialog)
+                        .setDialogTitle("hahahah");
+                defaultDialog.setCanceledOnTouchOutside(false);
+                defaultDialog.show();
+
+//                        .setDialogMessage(R.string.message)
+//                        .setTitleSize(R.dimen.font_title )
+//                        .setTitleColor(R.color.colorPrimary)
+//                        .setMessageSize(R.dimen.font_title)
+//                        .setMessageColor(R.color.colorAccent)
+//                        .setLeftBtnSize(R.dimen.font_des)
+//                        .setLeftBtnColor(R.color.colorPrimaryDark)
+//                        .setRightBtnSize(R.dimen.font_title)
+//                        .setRightBtnColor(R.color.colorAccent)
+//                        .setDivisionColor(R.color.colorPrimary)
+//                        .setDivisionSize(R.dimen.division_size1)
+//                        .setisShowDivision(false)
+//                        .setLeftBtnText("哈哈哈")
+//                        .setRightBtnText("嘿嘿嘿");
+
                 break;
             case R.id.btn_no_title:
 //                new DefaultDialog(this)

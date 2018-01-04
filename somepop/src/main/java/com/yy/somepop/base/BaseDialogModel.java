@@ -47,10 +47,18 @@ public class BaseDialogModel {
 //    分割线大小
     private int divisionSize ;
 
+    //左侧按钮监听
     private DefaultListener rightListener;
+    //右侧按钮
     private DefaultListener leftListener;
+//  中间按钮监听
+    private DefaultListener centerListener;
+
+
+
 
     private BaseDialog baseDialog;
+
 
 
     public BaseDialogModel(BaseDialog baseDialog) {
@@ -265,5 +273,13 @@ public class BaseDialogModel {
 
     public void setDivisionSize(int divisionSize) {
         this.divisionSize = divisionSize;
+    }
+
+    public DefaultListener getCenterListener() {
+        return centerListener;
+    }
+
+    public void setCenterListener(DefaultListener centerListener) {
+        this.centerListener = centerListener;
     }
 }

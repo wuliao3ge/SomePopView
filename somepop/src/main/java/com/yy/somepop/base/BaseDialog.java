@@ -2,12 +2,19 @@ package com.yy.somepop.base;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.view.LayoutInflater;
+import android.view.View;
+
+import com.yy.somepop.R;
+import com.yy.somepop.databinding.DialogDefaultBinding;
 
 /**
  * Created by ly on 2017/12/29.
@@ -34,14 +41,34 @@ public class BaseDialog extends Dialog {
         this.context = context;
         baseDialogModel = new BaseDialogModel(this);
     }
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initView();
+    }
+
+
+
+    protected void initView(){
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_base,
+                null, false);
+        DialogDefaultBinding binding = DataBindingUtil.bind(view);
+        setContentView(binding.getRoot());
+        binding.setModel(baseDialogModel);
+    }
+
+
     /**
      * 设置标题
      * @param title 标题
      * @return
      */
-    public BaseDialog setDialogTitle(@Nullable CharSequence title){
+    public <T extends BaseDialog> T setDialogTitle(@Nullable CharSequence title){
         baseDialogModel.setTitle(title.toString());
-        return this;
+        return (T)this;
     }
 
     /**
@@ -49,10 +76,10 @@ public class BaseDialog extends Dialog {
      * @param titleId 资源id
      * @return
      */
-    public BaseDialog setDialogTitle(@StringRes int titleId)
+    public <T extends BaseDialog> T setDialogTitle(@StringRes int titleId)
     {
         baseDialogModel.setTitle(context.getResources().getString(titleId));
-        return this;
+        return (T)this;
     }
 
     /**
@@ -60,9 +87,9 @@ public class BaseDialog extends Dialog {
      * @param message 消息字符
      * @return
      */
-    public BaseDialog setDialogMessage(@NonNull CharSequence message){
+    public <T extends BaseDialog> T setDialogMessage(@NonNull CharSequence message){
         baseDialogModel.setMessage(message.toString());
-        return this;
+        return (T)this;
     }
 
     /**
@@ -70,20 +97,20 @@ public class BaseDialog extends Dialog {
      * @param messageId 消息id
      * @return
      */
-    public BaseDialog setDialogMessage(@StringRes int messageId)
+    public <T extends BaseDialog> T setDialogMessage(@StringRes int messageId)
     {
         baseDialogModel.setMessage(context.getResources().getString(messageId));
-        return this;
+        return (T)this;
     }
     /**
      * 设置标题字大小
      * @param id 字体大小资源id
      * @return
      */
-    public BaseDialog setTitleSize(@DimenRes int id)
+    public <T extends BaseDialog> T setTitleSize(@DimenRes int id)
     {
         baseDialogModel.setTitleSize(id);
-        return this;
+        return (T)this;
     }
 
 
@@ -92,10 +119,10 @@ public class BaseDialog extends Dialog {
      * @param id 颜色资源id
      * @return
      */
-    public BaseDialog setTitleColor(@ColorRes int id)
+    public <T extends BaseDialog> T setTitleColor(@ColorRes int id)
     {
         baseDialogModel.setTitleColor(id);
-        return this;
+        return (T)this;
     }
 
     /**
@@ -103,10 +130,10 @@ public class BaseDialog extends Dialog {
      * @param id 字体大小资源id
      * @return
      */
-    public BaseDialog setMessageSize(@DimenRes int id)
+    public <T extends BaseDialog> T setMessageSize(@DimenRes int id)
     {
         baseDialogModel.setMessageSize(id);
-        return this;
+        return (T)this;
     }
 
     /**
@@ -114,10 +141,10 @@ public class BaseDialog extends Dialog {
      * @param id 颜色资源id
      * @return
      */
-    public BaseDialog setMessageColor(@ColorRes int id)
+    public <T extends BaseDialog> T setMessageColor(@ColorRes int id)
     {
         baseDialogModel.setMessageColor(id);
-        return this;
+        return (T)this;
     }
 
 
@@ -127,10 +154,10 @@ public class BaseDialog extends Dialog {
      * @param id 资源id
      * @return
      */
-    public BaseDialog setLeftBtnText(@StringRes int id)
+    public <T extends BaseDialog> T setLeftBtnText(@StringRes int id)
     {
         baseDialogModel.setLeftbtntext(context.getResources().getString(id));
-        return this;
+        return (T)this;
     }
 
     /**
@@ -138,10 +165,10 @@ public class BaseDialog extends Dialog {
      * @param text 描述
      * @return
      */
-    public BaseDialog setLeftBtnText(@NonNull CharSequence text)
+    public <T extends BaseDialog> T setLeftBtnText(@NonNull CharSequence text)
     {
         baseDialogModel.setLeftbtntext(text.toString());
-        return this;
+        return (T)this;
     }
 
     /**
@@ -149,10 +176,10 @@ public class BaseDialog extends Dialog {
      * @param id 字体大小资源id
      * @return
      */
-    public BaseDialog setLeftBtnSize(@DimenRes int id)
+    public <T extends BaseDialog> T setLeftBtnSize(@DimenRes int id)
     {
         baseDialogModel.setLeftBtnSize(id);
-        return this;
+        return (T)this;
     }
 
     /**
@@ -160,10 +187,10 @@ public class BaseDialog extends Dialog {
      * @param id 颜色资源id
      * @return
      */
-    public BaseDialog setLeftBtnColor(@ColorRes int id)
+    public <T extends BaseDialog> T setLeftBtnColor(@ColorRes int id)
     {
         baseDialogModel.setLeftBtnColor(id);
-        return this;
+        return (T)this;
     }
 
     /**
@@ -171,10 +198,10 @@ public class BaseDialog extends Dialog {
      * @param id 资源id
      * @return
      */
-    public BaseDialog setRightBtnText(@StringRes int id)
+    public <T extends BaseDialog> T setRightBtnText(@StringRes int id)
     {
         baseDialogModel.setRightbtntext(context.getResources().getString(id));
-        return this;
+        return (T)this;
     }
 
     /**
@@ -182,10 +209,10 @@ public class BaseDialog extends Dialog {
      * @param text 描述
      * @return
      */
-    public BaseDialog setRightBtnText(@NonNull CharSequence text)
+    public <T extends BaseDialog> T setRightBtnText(@NonNull CharSequence text)
     {
         baseDialogModel.setRightbtntext(text.toString());
-        return this;
+        return (T)this;
     }
 
 
@@ -194,10 +221,10 @@ public class BaseDialog extends Dialog {
      * @param id 字体大小资源id
      * @return
      */
-    public BaseDialog setRightBtnSize(@DimenRes int id)
+    public <T extends BaseDialog> T setRightBtnSize(@DimenRes int id)
     {
         baseDialogModel.setRightBtnSize(id);
-        return this;
+        return (T)this;
     }
 
     /**
@@ -205,10 +232,10 @@ public class BaseDialog extends Dialog {
      * @param id 颜色资源id
      * @return
      */
-    public BaseDialog setRightBtnColor(@ColorRes int id)
+    public <T extends BaseDialog> T setRightBtnColor(@ColorRes int id)
     {
         baseDialogModel.setRightBtnColor(id);
-        return this;
+        return (T)this;
     }
 
 
@@ -217,9 +244,9 @@ public class BaseDialog extends Dialog {
      * @param id 背景id
      * @return
      */
-    public BaseDialog setDefaultBackground(@DrawableRes int id){
+    public <T extends BaseDialog> T setDefaultBackground(@DrawableRes int id){
         baseDialogModel.setDefaultBackground(id);
-        return this;
+        return (T)this;
     }
 
 
@@ -228,9 +255,9 @@ public class BaseDialog extends Dialog {
      * @param id 背景id
      * @return
      */
-    public BaseDialog setTitleBackground(@DrawableRes int id){
+    public <T extends BaseDialog> T setTitleBackground(@DrawableRes int id){
         baseDialogModel.setTitleBackground(id);
-        return this;
+        return (T)this;
     }
 
     /**
@@ -238,9 +265,9 @@ public class BaseDialog extends Dialog {
      * @param id 背景id
      * @return
      */
-    public BaseDialog setMessageBackground(@DrawableRes int id){
+    public <T extends BaseDialog> T setMessageBackground(@DrawableRes int id){
         baseDialogModel.setMessageBackground(id);
-        return this;
+        return (T)this;
     }
 
 
@@ -249,9 +276,9 @@ public class BaseDialog extends Dialog {
      * @param id 背景id
      * @return
      */
-    public BaseDialog setLeftBtnBackground(@DrawableRes int id){
+    public <T extends BaseDialog> T setLeftBtnBackground(@DrawableRes int id){
         baseDialogModel.setLeftBtnBackground(id);
-        return this;
+        return (T)this;
     }
 
     /**
@@ -259,9 +286,9 @@ public class BaseDialog extends Dialog {
      * @param id 背景id
      * @return
      */
-    public BaseDialog setRightBtnBackground(@DrawableRes int id){
+    public <T extends BaseDialog> T setRightBtnBackground(@DrawableRes int id){
         baseDialogModel.setRightBtnBackground(id);
-        return this;
+        return (T)this;
     }
 
 
@@ -270,9 +297,9 @@ public class BaseDialog extends Dialog {
      * @param  ishsow 是否显示
      * @return
      */
-    public BaseDialog setisShowDivision(boolean ishsow){
+    public <T extends BaseDialog> T setisShowDivision(boolean ishsow){
         baseDialogModel.setShowDivision(ishsow);
-        return this;
+        return (T)this;
     }
 
     /**
@@ -280,9 +307,9 @@ public class BaseDialog extends Dialog {
      * @param id 颜色id
      * @return
      */
-    public BaseDialog setDivisionColor(@ColorRes int id){
+    public <T extends BaseDialog> T setDivisionColor(@ColorRes int id){
        baseDialogModel.setDivisionColor(id);
-        return this;
+        return (T)this;
     }
 
     /**
@@ -290,9 +317,9 @@ public class BaseDialog extends Dialog {
      * @param id 资源id
      * @return
      */
-    public BaseDialog setDivisionSize(@DimenRes int id)
+    public <T extends BaseDialog> T setDivisionSize(@DimenRes int id)
     {
         baseDialogModel.setDivisionSize(id);
-        return this;
+        return (T)this;
     }
 }

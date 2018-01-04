@@ -21,27 +21,22 @@ public class DefaultDialog extends BaseDialog {
 
     public DefaultDialog(@NonNull Context context) {
         super(context);
-        init();
+//        init();
     }
 
     public DefaultDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
-        init();
+//        init();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_default,
-                null, false);
-        binding = DataBindingUtil.bind(view);
-        setContentView(binding.getRoot());
-        binding.setModel(baseDialogModel);
+//        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_default,
+//                null, false);
+//        binding = DataBindingUtil.bind(view);
+//        setContentView(binding.getRoot());
+//        binding.setModel(baseDialogModel);
     }
-
-    private void init(){
-//        defaultDialogModel = new DefaultDialogModel();
-    }
-
 }
 

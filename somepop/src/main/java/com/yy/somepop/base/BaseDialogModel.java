@@ -43,9 +43,9 @@ public class BaseDialogModel {
     //是否显示标题和消息之间的分割线 默认不显示
     private boolean isShowDivision = false;
 //  分割线颜色
-    private int divisionColor;
+    private int divisionColor = R.color.default_division_color;
 //    分割线大小
-    private int divisionSize ;
+    private int divisionSize =R.dimen.division_size;
 
     //左侧按钮监听
     private DefaultListener rightListener;

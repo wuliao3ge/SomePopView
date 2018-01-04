@@ -14,7 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.yy.somepop.R;
-import com.yy.somepop.databinding.DialogDefaultBinding;
+import com.yy.somepop.databinding.DialogBaseBinding;
 
 /**
  * Created by ly on 2017/12/29.
@@ -55,7 +55,7 @@ public class BaseDialog extends Dialog {
     protected void initView(){
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_base,
                 null, false);
-        DialogDefaultBinding binding = DataBindingUtil.bind(view);
+        DialogBaseBinding binding = DataBindingUtil.bind(view);
         setContentView(binding.getRoot());
         binding.setModel(baseDialogModel);
     }

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
     <dimen name="font_title">16sp</dimen>
     <dimen name="font_des">14sp</dimen>
     <dimen name="font_btn">14sp</dimen>
-
-    <dimen name="division_size">1px</dimen>
-    <dimen name="division_size1">5px</dimen>
+    <dimen name="division_size">2px</dimen>
 </resources>

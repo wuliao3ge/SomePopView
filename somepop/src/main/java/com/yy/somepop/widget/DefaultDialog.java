@@ -1,15 +1,10 @@
 package com.yy.somepop.widget;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.LayoutInflater;
-import android.view.View;
 
-import com.yy.somepop.R;
 import com.yy.somepop.base.BaseDialog;
-import com.yy.somepop.databinding.DialogDefaultBinding;
 
 /**
  * Created by ly on 2017/12/27.
@@ -17,7 +12,7 @@ import com.yy.somepop.databinding.DialogDefaultBinding;
 
 public class DefaultDialog extends BaseDialog {
 
-    private DialogDefaultBinding binding;
+//    private DialogDefaultBinding binding;
 
     public DefaultDialog(@NonNull Context context) {
         super(context);

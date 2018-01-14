@@ -1,7 +1,5 @@
 package com.yy.somepop.utils;
 
-import android.content.Context;
-
 import com.yy.somepop.wheelview.WheelView;
 
 import java.text.DecimalFormat;
@@ -16,6 +14,64 @@ import java.util.Date;
  */
 
 public class TimeUtils {
+    // strTime要转换的String类型的时间
+    // formatType时间格式
+    // strTime的时间格式和formatType的时间格式必须相同
+    public static long stringToLong(String strTime, String formatType)
+            throws ParseException {
+        Date date = stringToDate(strTime, formatType); // String类型转成date类型
+        if (date == null) {
+            return 0;
+        } else {
+            long currentTime = dateToLong(date); // date类型转成long类型
+            return currentTime;
+        }
+    }
+
+    // currentTime要转换的long类型的时间
+    // formatType要转换的时间格式yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日 HH时mm分ss秒
+    public static Date longToDate(long currentTime, String formatType)
+            throws ParseException {
+        Date dateOld = new Date(currentTime); // 根据long类型的毫秒数生命一个date类型的时间
+        String sDateTime = dateToString(dateOld, formatType); // 把date类型的时间转换为string
+        Date date = stringToDate(sDateTime, formatType); // 把String类型转换为Date类型
+        return date;
+    }
+
+    // strTime要转换的string类型的时间，formatType要转换的格式yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日
+    // HH时mm分ss秒，
+    // strTime的时间格式必须要与formatType的时间格式相同
+    public static Date stringToDate(String strTime, String formatType)
+            throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat(formatType);
+        Date date = null;
+        date = formatter.parse(strTime);
+        return date;
+    }
+
+    // currentTime要转换的long类型的时间
+    // formatType要转换的string类型的时间格式
+    public static String longToString(long currentTime, String formatType)
+            throws ParseException {
+        Date date = longToDate(currentTime, formatType); // long类型转成Date类型
+        String strTime = dateToString(date, formatType); // date类型转成String
+        return strTime;
+    }
+
+
+    // formatType格式为yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日 HH时mm分ss秒
+    // data Date类型的时间
+    public static String dateToString(Date data, String formatType) {
+        return new SimpleDateFormat(formatType).format(data);
+    }
+
+
+
+    // date要转换的date类型的时间
+    public static long dateToLong(Date date) {
+        return date.getTime();
+    }
+
     public static final Date dateFromTimeUtilsStr(String stringDate){
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
@@ -28,10 +84,7 @@ public class TimeUtils {
         return  date;
     }
 
-    public static final String timeToStr(Date time){
-        SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
-        return sdf.format(time);
-    }
+
 
     public static final Date timeFromCNStr(String stringTime){
         SimpleDateFormat sdf=new SimpleDateFormat("H点m分");
@@ -103,156 +156,5 @@ public class TimeUtils {
 
 
 
-    public static ArrayList<String> buildDays(TimeRange timeRange) {
-        Calendar calendarStart = Calendar.getInstance();
-        calendarStart.setTime(timeRange.getStart_time());
-        Calendar calendarEnd = Calendar.getInstance();
-        calendarEnd.setTime(timeRange.getEnd_time());
 
-        calendarStart.add(Calendar.MINUTE, 10);//分钟需要取整，1月1日23:55 则从 1月2日00:00开始
-
-        ArrayList<String> daysList = new ArrayList<>();
-        while (calendarStart.before(calendarEnd)) {
-            Date date = calendarStart.getTime();
-            daysList.add(TimeUtils.dateToStr(date));
-            calendarStart.add(Calendar.DAY_OF_MONTH,1);
-        }
-        //如果循环后开始的日期等于结束的日期，则把结束的日期也加上，如果不等于，说明已经加过了
-        if (isInSameDay(calendarStart,calendarEnd)) {
-            Date date = calendarEnd.getTime();
-            daysList.add(TimeUtils.dateToStr(date));
-        }
-
-        return  daysList;
-    }
-    public static ArrayList buildHoursByDay(WheelView wheelViewDay, TimeRange timeRange) {
-        if (wheelViewDay.getSelectedPosition() == 0) {
-            return buildHourListStart(timeRange);
-        } else if (wheelViewDay.getSelectedPosition() == wheelViewDay.getSize() - 1) {
-            return buildHourListEnd(timeRange);
-        }else {
-            return buildNomalHourList();
-        }
-    }
-    public static ArrayList buildMinutesByDayHour(WheelView wheelViewDay, WheelView wheelViewHour, TimeRange timeRange) {
-        if (wheelViewDay.getSelectedPosition() == 0 && wheelViewHour.getSelectedPosition() == 0) {
-            return buildMinuteListStart(timeRange);
-        } else if (wheelViewDay.getSelectedPosition() == wheelViewDay.getSize() - 1 &&
-                wheelViewHour.getSelectedPosition() == wheelViewHour.getSize() - 1) {
-            return buildMinuteListEnd(timeRange);
-        } else {
-            return buildNomalMinuteList();
-        }
-    }
-
-    public static ArrayList buildHourListStart(TimeRange timeRange) {
-        Date dateStart = timeRange.getStart_time();
-        Calendar calendarStart = Calendar.getInstance();
-        calendarStart.setTime(dateStart);
-        calendarStart.add(Calendar.MINUTE,10);//分钟需要取整，5.55则从6:00开始
-
-        int hourStart = calendarStart.get(Calendar.HOUR_OF_DAY);
-        int min = calendarStart.get(Calendar.MINUTE);
-        ArrayList hourList = new ArrayList<>();
-
-        //需要判断起止时间是否为同一天，如果不在同一天，第一天小时范围为n-23
-        Date dateEnd = timeRange.getEnd_time();
-        Calendar calendarEnd = Calendar.getInstance();
-        calendarEnd.setTime(dateEnd);
-        int hourEnd;
-        if (isInSameDay(calendarStart, calendarEnd)) {
-            hourEnd = calendarEnd.get(Calendar.HOUR_OF_DAY);
-        }else{
-            hourEnd = 23;
-        }
-
-        for (int i = hourStart; i <= hourEnd; i++) {
-            hourList.add(i + "点");
-        }
-
-        return hourList;
-    }
-    public static ArrayList buildNomalHourList() {
-        ArrayList hourList = new ArrayList<>();
-
-        for (int i = 0; i < 24; i++) {
-            hourList.add(i + "点");
-        }
-
-        return hourList;
-    }
-    public static ArrayList buildHourListEnd(TimeRange timeRange) {
-        Date dateEnd = timeRange.getEnd_time();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(dateEnd);
-
-        int hourEnd = calendar.get(Calendar.HOUR_OF_DAY);
-
-        ArrayList hourList = new ArrayList<>();
-
-        for (int i = 0; i <= hourEnd; i++) {
-            hourList.add(i + "点");
-        }
-
-        return hourList;
-    }
-
-    public static ArrayList buildMinuteListStart(TimeRange timeRange ) {
-        Date dateStart = timeRange.getStart_time();
-        Calendar calendarStart = Calendar.getInstance();
-        calendarStart.setTime(dateStart);
-        calendarStart.add(Calendar.MINUTE, 10);//分钟需要取整，5.55则从6:00开始
-        int minStart = (calendarStart.get(Calendar.MINUTE) / 10) * 10;//取整
-        Calendar calendarEnd = Calendar.getInstance();
-        calendarEnd.setTime(timeRange.getEnd_time());
-        int minEnd ;
-        if (isInSameHour(calendarStart, calendarEnd)) {
-            minEnd = (calendarEnd.get(Calendar.MINUTE) / 10) * 10;
-        }else{
-            minEnd = 50;
-        }
-        ArrayList minList = new ArrayList<>();
-
-        for (int i = minStart; i <= minEnd; i += 10) {
-            minList.add(i + "分");
-        }
-        return minList;
-    }
-    public static ArrayList buildMinuteListEnd(TimeRange timeRange) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(timeRange.getEnd_time());
-        int minEnd = (calendar.get(Calendar.MINUTE) / 10) * 10;
-        ArrayList minList = new ArrayList<>();
-
-        for (int i = 0; i <= minEnd; i += 10) {
-            minList.add(i + "分");
-        }
-
-        return minList;
-    }
-    public static ArrayList buildNomalMinuteList() {
-        ArrayList minuteList = new ArrayList<>();
-
-        for (int i = 0; i < 60; i += 10) {
-            minuteList.add(i + "分");
-        }
-        return minuteList;
-    }
-
-    //判断两个日期是否在同一天
-    public static boolean isInSameDay(Calendar calendar1, Calendar calendar2) {
-        return calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
-                && calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH)
-                && calendar1.get(Calendar.DAY_OF_MONTH) == calendar2
-                .get(Calendar.DAY_OF_MONTH);
-    }
-
-    //判断两个日期是否位于同一小时
-    public static boolean isInSameHour(Calendar calendar1, Calendar calendar2) {
-        return calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
-                && calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH)
-                && calendar1.get(Calendar.DAY_OF_MONTH) == calendar2.get(Calendar.DAY_OF_MONTH)
-                && calendar1.get(Calendar.HOUR_OF_DAY) == calendar2.get(Calendar.HOUR_OF_DAY);
-
-    }
 }

@@ -76,7 +76,7 @@ public class WheelView extends View {
     List<String> items;
 
     // 显示几个条目
-    int itemsVisible = 7;
+    int itemsVisible = 5;
     float textSizeCenter = 18;
     float textSizeOuter = 13;
     int textColorOuter = 0xffbbbbbb;

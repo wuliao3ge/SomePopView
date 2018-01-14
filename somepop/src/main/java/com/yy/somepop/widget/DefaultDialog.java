@@ -5,12 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.yy.somepop.base.BaseDialog;
+import com.yy.somepop.databinding.DialogBaseBinding;
 
 /**
  * Created by ly on 2017/12/27.
  */
 
-public class DefaultDialog extends BaseDialog {
+public class DefaultDialog extends BaseDialog<DefaultDialog> {
 
 //    private DialogDefaultBinding binding;
 
@@ -32,6 +33,11 @@ public class DefaultDialog extends BaseDialog {
 //        binding = DataBindingUtil.bind(view);
 //        setContentView(binding.getRoot());
 //        binding.setModel(baseDialogModel);
+    }
+
+    @Override
+    public void init() {
+
     }
 }
 

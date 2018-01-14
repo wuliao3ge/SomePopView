@@ -1,15 +1,20 @@
 package com.yy.somepopdemo;
 
-import android.app.Dialog;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.yy.somepop.framework.DefaultListener;
+
+import com.yy.somepop.framework.DataChoiceListener;
+
+import com.yy.somepop.widget.DateAndTimeChoiceDialog;
 import com.yy.somepop.widget.DefaultDialog;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    DefaultDialog bottomDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.btn_default:
                 DefaultDialog defaultDialog = new DefaultDialog(this,R.style.dialog)
-                        .setDialogTitle("hahahah");
+                        .setDialogTitle("hahahah")
+                        .setDialogMessage("gagagag");
                 defaultDialog.setCanceledOnTouchOutside(false);
                 defaultDialog.show();
 
@@ -47,22 +53,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btn_no_title:
-//                new DefaultDialog(this)
-//                        .setMessage("默认样式描述")
-//                        .setLeftListener(new DefaultListener() {
-//                            @Override
-//                            public void onClick(Dialog dialog, boolean confirm) {
-//
-//                            }
-//                        })
-//                        .setRightListener(new DefaultListener() {
-//                            @Override
-//                            public void onClick(Dialog dialog, boolean confirm) {
-//
-//                            }
-//                        })
-//                        .show();
+                    new DateAndTimeChoiceDialog(this,R.style.dialog)
+                    .setDialogTitle("请选择时间")
+                            .setDataChoiceListener(new DataChoiceListener() {
+                                @Override
+                                public void dataChoice(long time) {
+
+                                }
+                            })
+                    .show();
                 break;
         }
     }
+
+
 }

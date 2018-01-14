@@ -1,5 +1,6 @@
 package com.yy.somepop.utils;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -32,5 +33,8 @@ public class TimeRange {
     public void setEnd_time(Date end_time) {
         this.end_time = TimeUtils.dateTimeToStr(end_time);
     }
+
+
+
 }
 

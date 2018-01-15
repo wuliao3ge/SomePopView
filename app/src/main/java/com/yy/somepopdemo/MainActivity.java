@@ -3,6 +3,7 @@ package com.yy.somepopdemo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -55,10 +56,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_no_title:
                     new DateAndTimeChoiceDialog(this,R.style.dialog)
                     .setDialogTitle("请选择时间")
+                            .setStartTime(2011,1,5)
                             .setDataChoiceListener(new DataChoiceListener() {
                                 @Override
                                 public void dataChoice(long time) {
-
+                                    Log.i("时间选择器",time+"");
                                 }
                             })
                     .show();

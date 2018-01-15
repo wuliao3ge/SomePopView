@@ -61,8 +61,13 @@ public class Common {
 
         return  time;
     }
-    public static final String dateTimeToStr(Date dateTime){
+
+    public static final String AlldateTimeToStr(Date dateTime){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return  sdf.format(dateTime);
+    }
+    public static final String dateTimeToStr(Date dateTime){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return  sdf.format(dateTime);
     }
 

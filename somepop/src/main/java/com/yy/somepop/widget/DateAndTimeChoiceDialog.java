@@ -6,8 +6,10 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.yy.somepop.R;
 import com.yy.somepop.base.BaseDialog;
@@ -17,9 +19,10 @@ import com.yy.somepop.framework.DefaultListener;
 import com.yy.somepop.utils.DateAndTimeUtils;
 import com.yy.somepop.utils.TimeRange;
 import com.yy.somepop.utils.TimeUtils;
-import com.yy.somepop.utils.Common;
 import com.yy.somepop.wheelview.WheelView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -36,10 +39,8 @@ import java.util.List;
 public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog> {
 
     private DataChoiceListener dataChoiceListener;
-    private Date startTime;
-    private Date endTime;
     private DialogSelectDateTimeBinding binding;
-
+    private TimeRange timeRange;
 
     public DateAndTimeChoiceDialog(@NonNull Context context) {
         super(context);
@@ -56,72 +57,69 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        initData();
     }
 
     @Override
     public void init() {
-
+        timeRange = DateAndTimeUtils.getTimeRange();
         setisShowDivision(true);
-
         View outerView = LayoutInflater.from(context).inflate(R.layout.dialog_select_date_time,
                 null);
         binding = DataBindingUtil.bind(outerView);
-        final TimeRange timeRange = DateAndTimeUtils.getTimeRange();
         binding.wv1.setItems(DateAndTimeUtils.buildYears(timeRange),0);
         binding.wv2.setItems(DateAndTimeUtils.buildMonths(binding.wv1,timeRange),0);
-        binding.wv4.setItems(Common.buildNomalHourList(),0);
-        binding.wv5.setItems(Common.buildNomalHourList(),0);
-
-        binding.wv3.setItems(Common.buildNomalAllMinuteList(),0);
+        binding.wv3.setItems(DateAndTimeUtils.buildDays(binding.wv1,binding.wv2,timeRange),0);
+        binding.wv4.setItems(DateAndTimeUtils.buildNomalHourList(),0);
+        binding.wv5.setItems(DateAndTimeUtils.buildNomalMinuteList(),0);
         //联动逻辑效果
         binding.wv1.setOnItemSelectedListener(new WheelView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index,String item) {
-                List hourStrList = DateAndTimeUtils.buildMonths(binding.wv1,timeRange);
-                int newIndexHour = hourStrList.indexOf(binding.wv2.getSelectedItem());
-                binding.wv2.setItems(hourStrList,newIndexHour);
-//                List minStrList = Common.buildMinutesByDayHour(wv1, wv2, timeRange);
-//                int newIndexMin = minStrList.indexOf(wv3.getSelectedItem());
-//                binding.wv3.setItems(minStrList,newIndexMin);
+                List<String> monthsStrList = DateAndTimeUtils.buildMonths(binding.wv1,timeRange);
+                int newIndexHour = monthsStrList.indexOf(binding.wv2.getSelectedItem());
+                binding.wv2.setItems(monthsStrList,newIndexHour);
             }
         });
         binding.wv2.setOnItemSelectedListener(new WheelView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index,String item) {
-//                List minStrList = Common.buildMinutesByDayHour(wv1, wv2, timeRange);
-//                int newIndexMin = minStrList.indexOf(wv3.getSelectedItem());
-//                wv3.setItems(minStrList,newIndexMin);
+                List<String> daysStrList = DateAndTimeUtils.buildDays(binding.wv1, binding.wv2, timeRange);
+                int newIndexMin = daysStrList.indexOf(binding.wv3.getSelectedItem());
+                binding.wv3.setItems(daysStrList,newIndexMin);
             }
         });
         //将布局设置给Dialog
         setView(outerView);
-
-
         baseDialogModel.setRightListener(new DefaultListener() {
             @Override
             public void onClick(Dialog dialog) {
                 if(dataChoiceListener!=null)
                 {
-                    String selectDateTimeStrToShow;
-                    long times = 0;
-                    String mSelectDate = binding.wv1.getSelectedItem();
-                    String mSelectHour = binding.wv2.getSelectedItem();
-                    String mSelectMin = binding.wv3.getSelectedItem();
-//                    String time = mSelectHour + mSelectMin;
-//                    time = Common.timeToStr(Common.dateTimeFromCustomStr( mSelectDate, time));
-//                    try {
-//                        times = TimeUtils.stringToLong(time,"yyyy-MM-dd HH:mm");
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
-//                    dataChoiceListener.dataChoice(times);
+                    String mSelectYear = binding.wv1.getSelectedItem();
+                    String mSelectMonth = binding.wv2.getSelectedItem();
+                    String mSelectDay = binding.wv3.getSelectedItem();
+                    String mSelectHour = binding.wv4.getSelectedItem();
+                    String mSelectMin = binding.wv5.getSelectedItem();
+                    Date date = DateAndTimeUtils.dateTimeFromCustomStr(mSelectYear,mSelectMonth,mSelectDay,mSelectHour,mSelectMin);
+//                    String time = TimeUtils.dateTimeToStr(date);
+//                    Toast.makeText(context, "selectDateTime: "+time+date.getTime(), Toast.LENGTH_SHORT).show();
+//                    Log.i("selectDateTime:",String.valueOf(date.getTime()));
+//                    Log.i("longToDate：",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date.getTime())));
+                    dataChoiceListener.dataChoice(date.getTime());
                 }
             }
         });
-
     }
 
+
+    public void initData(){
+        binding.wv1.setItems(DateAndTimeUtils.buildYears(timeRange),0);
+        binding.wv2.setItems(DateAndTimeUtils.buildMonths(binding.wv1,timeRange),0);
+        binding.wv3.setItems(DateAndTimeUtils.buildDays(binding.wv1,binding.wv2,timeRange),0);
+        binding.wv4.setItems(DateAndTimeUtils.buildNomalHourList(),0);
+        binding.wv5.setItems(DateAndTimeUtils.buildNomalMinuteList(),0);
+    }
 
     public DataChoiceListener getDataChoiceListener() {
         return dataChoiceListener;
@@ -133,18 +131,37 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
     }
 
     public Date getStartTime() {
-        return startTime;
+        return timeRange.getStart_time();
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public DateAndTimeChoiceDialog setStartTime(Date startTime) {
+//        this.startTime = startTime;
+        timeRange.setStart_time(startTime);
+        return this;
     }
 
     public Date getEndTime() {
-        return endTime;
+        return timeRange.getEnd_time();
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public DateAndTimeChoiceDialog setEndTime(Date endTime) {
+        timeRange.setEnd_time(endTime);
+        return this;
     }
+
+
+    public DateAndTimeChoiceDialog setStartTime(int year,int month,int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year,month-1,day);
+        timeRange.setStart_time(calendar.getTime());
+        return this;
+    }
+
+    public DateAndTimeChoiceDialog setEndTime(int year,int month,int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year,month-1,day);
+        timeRange.setEnd_time(calendar.getTime());
+        return this;
+    }
+
 }

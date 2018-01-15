@@ -328,6 +328,11 @@ public class WheelView extends View {
     public final void setItems(List<String> items, int initPosition) {
         setInitPosition(initPosition);
         setItems(items);
+        if(onItemSelectedListener!=null)
+        {
+//            onItemSelectedListener.onItemSelected(initPosition,items.get(initPosition));
+            postDelayed(new OnItemSelectedRunnable(this), 200L);
+        }
     }
 
 

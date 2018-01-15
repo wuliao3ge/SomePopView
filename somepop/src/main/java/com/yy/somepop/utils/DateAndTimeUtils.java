@@ -1,7 +1,11 @@
 package com.yy.somepop.utils;
 
+import android.content.Intent;
+
 import com.yy.somepop.wheelview.WheelView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,7 +29,7 @@ public class DateAndTimeUtils {
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.set(1970,0,1);
         Calendar calendarEnd = Calendar.getInstance();
-        calendarEnd.set(1971,6,31);
+        calendarEnd.set(2080,11,31);
         TimeRange timeRange = new TimeRange();
         timeRange.setStart_time(calendarStart.getTime());
         timeRange.setEnd_time(calendarEnd.getTime());
@@ -151,18 +155,225 @@ public class DateAndTimeUtils {
     }
 
 
+    /**
+     * 生成日期列表
+     * @param wheelViewYear 年选择器
+     * @param wheelViewMonth 月选择器
+     * @param timeRange 开始和结束时间
+     * @return
+     */
+    public static List<String> buildDays(WheelView wheelViewYear,WheelView wheelViewMonth,TimeRange timeRange) {
+        Calendar calendarStart = Calendar.getInstance();
+        calendarStart.setTime(timeRange.getStart_time());
+        Calendar calendarEnd = Calendar.getInstance();
+        calendarEnd.setTime(timeRange.getEnd_time());
+        int currentYear = Integer.valueOf(wheelViewYear.getSelectedItem().replace("年",""));
+        int currentMonth = Integer.valueOf(wheelViewMonth.getSelectedItem().replace("月",""));
+        if(isSameMonth(timeRange.getStart_time(),timeRange.getEnd_time()))
+        {
+            return buildStartAndEndDayList(timeRange);
+        }else if(isSameMonth(currentYear,currentMonth,timeRange.getStart_time())){
+            return buildDayListStart(currentYear,currentMonth,timeRange);
+        }else if(isSameMonth(currentYear,currentMonth,timeRange.getEnd_time())){
+            return buildDayListEnd(timeRange);
+        }else{
+            return buildNomalDayList(currentYear,currentMonth);
+        }
+    }
 
-    public static ArrayList<String> buildDays(WheelView wheelViewYear,WheelView wheelViewMonth,TimeRange timeRange) {
+    /**
+     * 根据开始时间生成日期列表
+     * @param timeRange 开始和结束时间
+     * @return
+     */
+    public static List<String> buildDayListStart(int currentYear,int currentMonth,TimeRange timeRange)
+    {
 
-        return new ArrayList<>();
+        List<String> months = new ArrayList<>();
+        Calendar calendarStart = Calendar.getInstance();
+        calendarStart.setTime(timeRange.getStart_time());
+        int startDay = calendarStart.get(Calendar.DAY_OF_MONTH);
+        calendarStart.set(currentYear,currentMonth,0);
+        int endDay = calendarStart.getActualMaximum(Calendar.DATE);
+        for(int i= startDay;i<=endDay;i++)
+        {
+            months.add(i+"日");
+        }
+        return months;
+    }
+
+    /**
+     * 根据结束时间生成日期列表
+     * @param timeRange 开始和结束时间
+     * @return
+     */
+    public static List<String> buildDayListEnd(TimeRange timeRange)
+    {
+        List<String> days = new ArrayList<>();
+        Calendar calendarEnd = Calendar.getInstance();
+        calendarEnd.setTime(timeRange.getEnd_time());
+        int endDay = calendarEnd.get(Calendar.DAY_OF_MONTH);
+        for(int i= 1;i<=endDay;i++)
+        {
+            days.add(i+"日");
+        }
+        return days;
+    }
+
+    /**
+     * 生成整个月的日期
+     * @return
+     */
+    public static List<String> buildNomalDayList(int currentYear,int currentMonth){
+        List<String> days = new ArrayList<>();
+        Calendar calendarStart = Calendar.getInstance();
+        calendarStart.set(currentYear,currentMonth,0);
+        int endDay = calendarStart.getActualMaximum(Calendar.DATE);
+        for(int i = 1;i<=endDay;i++)
+        {
+            days.add(i+"日");
+        }
+        return days;
+    }
+
+    /**
+     * 当开始年份和结束结束年份相同时生成月份列表
+     * @param timeRange 开始和结束时间
+     * @return
+     */
+    public static List<String> buildStartAndEndDayList(TimeRange timeRange)
+    {
+        List<String> days = new ArrayList<>();
+        Calendar calendarStart = Calendar.getInstance();
+        calendarStart.setTime(timeRange.getStart_time());
+        Calendar calendarEnd = Calendar.getInstance();
+        calendarEnd.setTime(timeRange.getEnd_time());
+        int starDay = calendarStart.get(Calendar.DAY_OF_MONTH);
+        int endDay = calendarEnd.get(Calendar.DAY_OF_MONTH);
+        for(int i= starDay;i<=endDay;i++)
+        {
+            days.add(i+"日");
+        }
+        return days;
+    }
+
+    /**
+     * 根据选择的年月日时分生成deta
+     * @param year 年
+     * @param month 月
+     * @param day 日
+     * @param hour 时
+     * @param min 分
+     * @return
+     */
+    public static final Date dateTimeFromCustomStr(String year,String month,
+                                                   String day,String hour, String min){
+
+
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日HH点mm分");//小写的mm表示的是分钟
+        String dstr=year+month+day+hour+min;
+        try {
+            date = sdf.parse(dstr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
 
 
+    /**
+     * 判断是否为同一月
+     * @param calendar1
+     * @param calendar2
+     * @return
+     */
+    private static boolean isSameMonth(Calendar calendar1, Calendar calendar2) {
+        return calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
+                && calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH);
+    }
+
+    /**
+     * 判断是否为同一月
+     * @param date1
+     * @param date2
+     * @return
+     */
+    private static boolean isSameMonth(Date date1, Date date2) {
+        Calendar calDateA = Calendar.getInstance();
+        calDateA.setTime(date1);
+
+        Calendar calDateB = Calendar.getInstance();
+        calDateB.setTime(date2);
+
+        return calDateA.get(Calendar.YEAR) == calDateB.get(Calendar.YEAR)
+                && calDateA.get(Calendar.MONTH) == calDateB.get(Calendar.MONTH);
+    }
+
+
+    /**
+     * 判断是否为同一月
+     * @param year 年
+     * @param month 月
+     * @param date1 判断的时间
+     * @return
+     */
+    private static boolean isSameMonth(int year,int month,Date date1) {
+        Calendar calDateA = Calendar.getInstance();
+        calDateA.setTime(date1);
+
+
+        return calDateA.get(Calendar.YEAR) == year
+                && calDateA.get(Calendar.MONTH) == month-1;
+    }
+
+
+    /**
+     * 获取某年某月有多少天
+     * @param year
+     * @param month
+     * @return
+     */
+    public int getDayOfMonth(int year,int month){
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, 0); //输入类型为int类型
+        return c.get(Calendar.DAY_OF_MONTH);
+    }
 
 
 
+    /**
+     * 判断是否为同一天
+     * @param calendar1
+     * @param calendar2
+     * @return
+     */
+    public static boolean isSameDay(Calendar calendar1, Calendar calendar2) {
+        return calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
+                && calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH)
+                && calendar1.get(Calendar.DAY_OF_MONTH) == calendar2
+                .get(Calendar.DAY_OF_MONTH);
+    }
 
+    /**
+     * 判断是否为同一天
+     * @param date1
+     * @param date2
+     * @return
+     */
+    public static boolean isSameDay(Date date1, Date date2) {
+        Calendar calDateA = Calendar.getInstance();
+        calDateA.setTime(date1);
+
+        Calendar calDateB = Calendar.getInstance();
+        calDateB.setTime(date2);
+
+        return calDateA.get(Calendar.YEAR) == calDateB.get(Calendar.YEAR)
+                && calDateA.get(Calendar.MONTH) == calDateB.get(Calendar.MONTH)
+                && calDateA.get(Calendar.DAY_OF_MONTH) == calDateB
+                .get(Calendar.DAY_OF_MONTH);
+    }
 
 
 
@@ -341,5 +552,18 @@ public class DateAndTimeUtils {
                 && calendar1.get(Calendar.DAY_OF_MONTH) == calendar2.get(Calendar.DAY_OF_MONTH)
                 && calendar1.get(Calendar.HOUR_OF_DAY) == calendar2.get(Calendar.HOUR_OF_DAY);
 
+    }
+
+
+    public static final Date timeFromCNStr(String stringTime){
+        SimpleDateFormat sdf=new SimpleDateFormat("H点m分");
+        Date time = null;
+        try {
+            time =sdf.parse(stringTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return  time;
     }
 }

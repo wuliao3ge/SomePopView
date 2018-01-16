@@ -52,6 +52,7 @@ public abstract class BaseDialog<T> extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         initView();
     }
 
@@ -64,6 +65,7 @@ public abstract class BaseDialog<T> extends Dialog {
         setContentView(binding.getRoot());
         binding.setModel(baseDialogModel);
         binding.isview.setVisibility(View.VISIBLE);
+        setView();
         if(additionalView!=null)
         {
             binding.isview.addView(additionalView);
@@ -72,9 +74,10 @@ public abstract class BaseDialog<T> extends Dialog {
 
 
     abstract public void init();
+    abstract public void setView();
 
 
-    public void setView(View view){
+    protected void addView(View view){
         this.additionalView = view;
     }
 

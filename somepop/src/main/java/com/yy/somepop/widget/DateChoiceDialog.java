@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 import com.yy.somepop.R;
 import com.yy.somepop.base.BaseDialog;
+import com.yy.somepop.databinding.DialogSelectDateBinding;
+import com.yy.somepop.framework.DataChoiceListener;
 import com.yy.somepop.framework.DefaultListener;
 import com.yy.somepop.utils.StringUtils;
+import com.yy.somepop.utils.TimeRange;
 import com.yy.somepop.wheelview.WheelView;
 
 import java.util.Date;
@@ -22,6 +25,12 @@ import java.util.Date;
 
 public class DateChoiceDialog extends BaseDialog {
 
+
+    private DataChoiceListener dataChoiceListener;
+    private DialogSelectDateBinding binding;
+    private TimeRange timeRange;
+    private int lineColor;
+    private int interval;
     public DateChoiceDialog(@NonNull Context context) {
         super(context);
     }
@@ -36,6 +45,11 @@ public class DateChoiceDialog extends BaseDialog {
 
     @Override
     public void init() {
+
+    }
+
+    @Override
+    public void setView() {
 
     }
 }

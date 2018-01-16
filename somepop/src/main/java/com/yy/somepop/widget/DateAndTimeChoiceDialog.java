@@ -3,7 +3,7 @@ package com.yy.somepop.widget;
 import android.app.Dialog;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -41,6 +41,8 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
     private DataChoiceListener dataChoiceListener;
     private DialogSelectDateTimeBinding binding;
     private TimeRange timeRange;
+    private int lineColor;
+    private int interval;
 
     public DateAndTimeChoiceDialog(@NonNull Context context) {
         super(context);
@@ -54,19 +56,18 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
         super(context, cancelable, cancelListener);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initData();
-    }
 
     @Override
     public void init() {
         timeRange = DateAndTimeUtils.getTimeRange();
-        setisShowDivision(true);
         View outerView = LayoutInflater.from(context).inflate(R.layout.dialog_select_date_time,
                 null);
         binding = DataBindingUtil.bind(outerView);
+    }
+
+    @Override
+    public void setView() {
+        setisShowDivision(true);
         binding.wv1.setItems(DateAndTimeUtils.buildYears(timeRange),0);
         binding.wv2.setItems(DateAndTimeUtils.buildMonths(binding.wv1,timeRange),0);
         binding.wv3.setItems(DateAndTimeUtils.buildDays(binding.wv1,binding.wv2,timeRange),0);
@@ -89,8 +90,6 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
                 binding.wv3.setItems(daysStrList,newIndexMin);
             }
         });
-        //将布局设置给Dialog
-        setView(outerView);
         baseDialogModel.setRightListener(new DefaultListener() {
             @Override
             public void onClick(Dialog dialog) {
@@ -102,23 +101,31 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
                     String mSelectHour = binding.wv4.getSelectedItem();
                     String mSelectMin = binding.wv5.getSelectedItem();
                     Date date = DateAndTimeUtils.dateTimeFromCustomStr(mSelectYear,mSelectMonth,mSelectDay,mSelectHour,mSelectMin);
-//                    String time = TimeUtils.dateTimeToStr(date);
-//                    Toast.makeText(context, "selectDateTime: "+time+date.getTime(), Toast.LENGTH_SHORT).show();
-//                    Log.i("selectDateTime:",String.valueOf(date.getTime()));
-//                    Log.i("longToDate：",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date.getTime())));
+                    String time = TimeUtils.dateTimeToStr(date);
+                    Toast.makeText(context, "selectDateTime: "+time+date.getTime(), Toast.LENGTH_SHORT).show();
+                    Log.i("selectDateTime:",String.valueOf(date.getTime()));
+                    Log.i("longToDate：",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date.getTime())));
                     dataChoiceListener.dataChoice(date.getTime());
                 }
             }
         });
+        //将布局设置给Dialog
+        addView(binding.getRoot());
     }
 
 
-    public void initData(){
-        binding.wv1.setItems(DateAndTimeUtils.buildYears(timeRange),0);
-        binding.wv2.setItems(DateAndTimeUtils.buildMonths(binding.wv1,timeRange),0);
-        binding.wv3.setItems(DateAndTimeUtils.buildDays(binding.wv1,binding.wv2,timeRange),0);
-        binding.wv4.setItems(DateAndTimeUtils.buildNomalHourList(),0);
-        binding.wv5.setItems(DateAndTimeUtils.buildNomalMinuteList(),0);
+    public int getLineColor() {
+        return lineColor;
+    }
+
+    public DateAndTimeChoiceDialog setLineColor(@ColorRes int Res) {
+        this.lineColor = Res;
+        binding.wv1.setLineColor(Res);
+        binding.wv2.setLineColor(Res);
+        binding.wv3.setLineColor(Res);
+        binding.wv4.setLineColor(Res);
+        binding.wv5.setLineColor(Res);
+        return this;
     }
 
     public DataChoiceListener getDataChoiceListener() {
@@ -164,4 +171,18 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
         return this;
     }
 
+
+    public int getInterval() {
+        return interval;
+    }
+
+    public DateAndTimeChoiceDialog setInterval(int interval) {
+        this.interval = interval;
+        binding.wv1.setInterval(interval);
+        binding.wv2.setInterval(interval);
+        binding.wv3.setInterval(interval);
+        binding.wv4.setInterval(interval);
+        binding.wv5.setInterval(interval);
+        return this;
+    }
 }

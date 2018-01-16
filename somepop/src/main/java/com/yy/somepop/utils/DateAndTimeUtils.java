@@ -531,7 +531,7 @@ public class DateAndTimeUtils {
     public static ArrayList buildNomalMinuteList() {
         ArrayList minuteList = new ArrayList<>();
 
-        for (int i = 0; i < 60; i += 10) {
+        for (int i = 0; i < 60; i ++) {
             minuteList.add(i + "分");
         }
         return minuteList;

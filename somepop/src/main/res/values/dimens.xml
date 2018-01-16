@@ -4,4 +4,7 @@
     <dimen name="font_des">14sp</dimen>
     <dimen name="font_btn">14sp</dimen>
     <dimen name="division_size">2px</dimen>
+
+
+    <dimen name="itemsvisible">5</dimen>
 </resources>

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -77,12 +78,21 @@ public class WheelView extends View {
 
     // 显示几个条目
     int itemsVisible = 5;
+    // 当前选中的字体大小
     float textSizeCenter = 18;
+    //为选中的字体大小
     float textSizeOuter = 13;
+    //未选中的字体颜色
     int textColorOuter = 0xffbbbbbb;
+    //选中的字体颜色
     int textColorCenter = 0xff4d4d4d;
+    //分割线颜色
     int lineColor = 0xffe6e6e6;
+    //分割线高度
+    int lineHeight = 1;
+    //是否循环
     boolean isLoop = false;
+
     float lineSpaceingDimens ;
 
 
@@ -111,6 +121,9 @@ public class WheelView extends View {
     private int mOffset = 0;
     private float previousY;
     long startTime = 0;
+
+    int interval = 10;
+
 
     private Rect tempRect = new Rect();
 
@@ -187,11 +200,19 @@ public class WheelView extends View {
         paintIndicatorLine = new Paint();
         paintIndicatorLine.setColor(lineColor);
         paintIndicatorLine.setAntiAlias(true);
+        paintIndicatorLine.setStrokeWidth((float) lineHeight);
 
         if (android.os.Build.VERSION.SDK_INT >= 11) {
             setLayerType(LAYER_TYPE_SOFTWARE, null);
         }
     }
+
+
+    public void setLineColor(@ColorRes int res){
+        lineColor = context.getResources().getColor(res);
+        paintIndicatorLine.setColor(lineColor);
+    }
+
 
 
     private void remeasure(int widthMeasureSpec,int heightMeasureSpec) {
@@ -330,7 +351,6 @@ public class WheelView extends View {
         setItems(items);
         if(onItemSelectedListener!=null)
         {
-//            onItemSelectedListener.onItemSelected(initPosition,items.get(initPosition));
             postDelayed(new OnItemSelectedRunnable(this), 200L);
         }
     }
@@ -414,8 +434,10 @@ public class WheelView extends View {
 //            }
 //            k1++;
 //        }
-        canvas.drawLine(0.0F, firstLineY, measuredWidth, firstLineY, paintIndicatorLine);
-        canvas.drawLine(0.0F, secondLineY, measuredWidth, secondLineY, paintIndicatorLine);
+
+
+        canvas.drawLine((interval/2), firstLineY, measuredWidth-(interval/2), firstLineY, paintIndicatorLine);
+        canvas.drawLine((interval/2), secondLineY, measuredWidth-(interval/2), secondLineY, paintIndicatorLine);
 
         int j1 = 0;
 
@@ -628,5 +650,13 @@ public class WheelView extends View {
 
     public  interface OnItemSelectedListener {
         void onItemSelected(int selectedIndex, String item);
+    }
+
+    public int getInterval() {
+        return interval;
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
     }
 }

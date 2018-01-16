@@ -3,10 +3,10 @@
     <color name="default_text_color">#000000</color>
     <color name="default_division_color">#666666</color>
 
-    <!--<color name="textcolorcenter">0xff4d4d4d</color>-->
-    <!--<color name="textcolorouter">0xffbbbbbb</color>-->
+    <color name="textcolorcenter">#ff4d4d4d</color>
+    <color name="textcolorouter">#ffbbbbbb</color>
 
-    <!--<color name="linecolor">0xffe6e6e6</color>-->
+    <color name="linescolor">#ffe6e6e6</color>
 
 
 </resources>

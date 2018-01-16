@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="model"
+            type="com.yy.somepop.model.DataAndTimeChoiceModel"/>
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,7 +19,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             app:wheelGravity="center"
-            app:isLoop="true"
+            app:textSizeCenter="@{model.textSizeCenter}"
+            app:textColorCenter="@{model.textColorCenter}"
+            app:textSizeOuter="@{model.textSizeOuter}"
+            app:textColorOuter="@{model.textColorOuter}"
+            app:lineColor="@{model.lineColor}"
+            app:isLoop="@{model.isLoop}"
+            app:lineInterval="@{model.interval}"
+            app:itemsSize="@{model.itemsVisible}"
+            app:lineHeight="@{model.lineHeight}"
             >
         </com.yy.somepop.wheelview.WheelView>
         <com.yy.somepop.wheelview.WheelView
@@ -21,7 +36,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             app:wheelGravity="center"
-            app:isLoop="true"
+            app:textSizeCenter="@{model.textSizeCenter}"
+            app:textColorCenter="@{model.textColorCenter}"
+            app:textSizeOuter="@{model.textSizeOuter}"
+            app:textColorOuter="@{model.textColorOuter}"
+            app:lineColor="@{model.lineColor}"
+            app:isLoop="@{model.isLoop}"
+            app:lineInterval="@{model.interval}"
+            app:itemsSize="@{model.itemsVisible}"
+            app:lineHeight="@{model.lineHeight}"
             >
         </com.yy.somepop.wheelview.WheelView>
         <com.yy.somepop.wheelview.WheelView
@@ -30,7 +53,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             app:wheelGravity="center"
-            app:isLoop="true"
+            app:textSizeCenter="@{model.textSizeCenter}"
+            app:textColorCenter="@{model.textColorCenter}"
+            app:textSizeOuter="@{model.textSizeOuter}"
+            app:textColorOuter="@{model.textColorOuter}"
+            app:lineColor="@{model.lineColor}"
+            app:isLoop="@{model.isLoop}"
+            app:lineInterval="@{model.interval}"
+            app:itemsSize="@{model.itemsVisible}"
+            app:lineHeight="@{model.lineHeight}"
             >
         </com.yy.somepop.wheelview.WheelView>
         <com.yy.somepop.wheelview.WheelView
@@ -39,7 +70,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             app:wheelGravity="center"
-            app:isLoop="true"
+            app:textSizeCenter="@{model.textSizeCenter}"
+            app:textColorCenter="@{model.textColorCenter}"
+            app:textSizeOuter="@{model.textSizeOuter}"
+            app:textColorOuter="@{model.textColorOuter}"
+            app:lineColor="@{model.lineColor}"
+            app:isLoop="@{model.isLoop}"
+            app:lineInterval="@{model.interval}"
+            app:itemsSize="@{model.itemsVisible}"
+            app:lineHeight="@{model.lineHeight}"
             >
         </com.yy.somepop.wheelview.WheelView>
         <com.yy.somepop.wheelview.WheelView
@@ -48,7 +87,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             app:wheelGravity="center"
-            app:isLoop="true"
+            app:textSizeCenter="@{model.textSizeCenter}"
+            app:textColorCenter="@{model.textColorCenter}"
+            app:textSizeOuter="@{model.textSizeOuter}"
+            app:textColorOuter="@{model.textColorOuter}"
+            app:lineColor="@{model.lineColor}"
+            app:isLoop="@{model.isLoop}"
+            app:lineInterval="@{model.interval}"
+            app:itemsSize="@{model.itemsVisible}"
+            app:lineHeight="@{model.lineHeight}"
             >
         </com.yy.somepop.wheelview.WheelView>
     </LinearLayout>

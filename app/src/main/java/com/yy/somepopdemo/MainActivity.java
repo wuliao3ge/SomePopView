@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.yy.somepop.framework.DataChoiceListener;
 
 import com.yy.somepop.widget.DateAndTimeChoiceDialog;
+import com.yy.somepop.widget.DateChoiceDialog;
 import com.yy.somepop.widget.DefaultDialog;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -54,11 +55,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btn_no_title:
-                    new DateAndTimeChoiceDialog(this,R.style.dialog)
+                    new DateChoiceDialog(this,R.style.dialog)
                     .setDialogTitle("请选择时间")
 //                            .setStartTime(2011,1,5)
                             .setLineColor(R.color.colorPrimary)
-                            .setInterval(5)
+                            .setBtnColor(R.color.colorPrimary)
+                            .setStartTime(2017,6,11)
+                            .setEndTime(2018,1,12)
                             .setDataChoiceListener(new DataChoiceListener() {
                                 @Override
                                 public void dataChoice(long time) {

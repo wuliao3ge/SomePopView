@@ -8,25 +8,80 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.yy.somepop.R;
+import com.yy.somepop.wheelview.WheelView;
+
 /**
  * Created by ly on 2017/12/28.
  */
 
 public class AttrSettingUtils {
+    @BindingAdapter("lineInterval")
+    public static void setLineInterval(WheelView wheelView,int interval){
+        wheelView.setInterval(interval);
+    }
+
+    @BindingAdapter("itemsSize")
+    public static void setItemsSize(WheelView wheelView,int itemsVisible)
+    {
+        wheelView.setItemsVisible(itemsVisible);
+    }
+
+    @BindingAdapter("textSizeCenter")
+    public static void setTextSizeCenter(WheelView wheelView,int res)
+    {
+        wheelView.setTextSizeCenter(wheelView.getContext().getResources().getDimensionPixelSize(res));
+    }
+
+    @BindingAdapter("textSizeOuter")
+    public static void setTextSizeOuter(WheelView wheelView,int res)
+    {
+        wheelView.setTextSizeOuter(wheelView.getContext().getResources().getDimensionPixelSize(res));
+    }
+
+    @BindingAdapter("textColorOuter")
+    public static void setTextColorOuter(WheelView wheelView,int res)
+    {
+        wheelView.setTextColorOuter(wheelView.getResources().getColor(res));
+    }
+    @BindingAdapter("textColorCenter")
+    public static void setTextColorCenter(WheelView wheelView,int res)
+    {
+        wheelView.setTextColorCenter(wheelView.getResources().getColor(res));
+    }
+
+    @BindingAdapter("lineColor")
+    public static void setLineColor(WheelView wheelView,int res)
+    {
+        wheelView.setLineColor(wheelView.getResources().getColor(res));
+    }
+
+    @BindingAdapter("isLoop")
+    public static void setIsLoop(WheelView wheelView,boolean isLoop)
+    {
+        wheelView.setLoop(isLoop);
+    }
+
+    @BindingAdapter("lineHeight")
+    public static void setLineHeight(WheelView wheelView,int res)
+    {
+        wheelView.setLineHeight(wheelView.getContext().getResources().getDimensionPixelSize(res));
+    }
+
+
+
+    /****** baseDialog中使用 start *****/
 //    设置textview的字体大小
     @BindingAdapter("setTextSize")
     public static void setTextSize(TextView textView, int font){
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 textView.getContext().getResources().getDimensionPixelSize(font));
     }
-
 //  设置textview的字体颜色
     @BindingAdapter("setTextColor")
     public static void setTextColor(TextView textView, int color){
         textView.setTextColor(textView.getResources().getColor(color));
     }
-
-
     //设置LinearLayout背景颜色
     @BindingAdapter("setLayoutBackground")
     public static void setLLBackground(LinearLayout linearLayout, int Res){
@@ -34,9 +89,7 @@ public class AttrSettingUtils {
         {
             linearLayout.setBackgroundResource(Res);
         }
-
     }
-
     //设置TextView的背景颜色
     @BindingAdapter("setTvBackground")
     public static void setTvBackground(TextView textView, int Res){
@@ -56,8 +109,6 @@ public class AttrSettingUtils {
             view.setLayoutParams(params);
         }
     }
-
-
     @BindingAdapter("setDivisionSizeForV")
     public static void setDivisionSizeForV(View view, int Res)
     {
@@ -69,7 +120,6 @@ public class AttrSettingUtils {
             view.setLayoutParams(params);
         }
     }
-
     @BindingAdapter("setDivisionColor")
     public static void setDivisionColor(View view, int Res){
         if(Res>0)
@@ -77,7 +127,7 @@ public class AttrSettingUtils {
             view.setBackgroundColor(Res);
         }
     }
-
+    /****** baseDialog中使用 end *****/
 
 
 }

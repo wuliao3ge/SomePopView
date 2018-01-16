@@ -262,6 +262,19 @@ public abstract class BaseDialog<T> extends Dialog {
 
 
     /**
+     * 设置左侧和右侧按钮颜色
+     * @param id 颜色资源id
+     * @return
+     */
+    public  T setBtnColor(@ColorRes int id)
+    {
+        baseDialogModel.setLeftBtnColor(id);
+        baseDialogModel.setRightBtnColor(id);
+        return (T)this;
+    }
+
+
+    /**
      * 设置整体背景
      * @param id 背景id
      * @return

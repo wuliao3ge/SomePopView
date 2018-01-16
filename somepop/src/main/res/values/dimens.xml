@@ -5,6 +5,7 @@
     <dimen name="font_btn">14sp</dimen>
     <dimen name="division_size">2px</dimen>
 
-
-    <dimen name="itemsvisible">5</dimen>
+    <dimen name="textsizecenter">18sp</dimen>
+    <dimen name="textsizeouter">13sp</dimen>
+    <dimen name="lineheight">2px</dimen>
 </resources>

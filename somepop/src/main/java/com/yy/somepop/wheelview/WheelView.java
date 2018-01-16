@@ -122,7 +122,8 @@ public class WheelView extends View {
     private float previousY;
     long startTime = 0;
 
-    int interval = 10;
+    //间隔
+    int interval = 5;
 
 
     private Rect tempRect = new Rect();
@@ -144,13 +145,13 @@ public class WheelView extends View {
 
     private void initWheelView(Context context, AttributeSet attributeset) {
         TypedArray attribute = context.obtainStyledAttributes(attributeset, R.styleable.WheelView);
-        lineColor = attribute.getColor(R.styleable.WheelView_lineColor, lineColor);
-        itemsVisible = getFixedItemsVisible(attribute.getInt(R.styleable.WheelView_itemVisibleNum, itemsVisible));
-        isLoop = attribute.getBoolean(R.styleable.WheelView_isLoop, isLoop);
-        textColorCenter = attribute.getColor(R.styleable.WheelView_textColorCenter, textColorCenter);
-        textColorOuter = attribute.getColor(R.styleable.WheelView_textColorOuter, textColorOuter);
-        textSizeCenter = attribute.getDimension(R.styleable.WheelView_textSizeCenter, CommonUtils.dip2px(context,18));
-        textSizeOuter = attribute.getDimension(R.styleable.WheelView_textSizeOuter, CommonUtils.dip2px(context,13));
+//        lineColor = attribute.getColor(R.styleable.WheelView_lineColor, lineColor);
+//        itemsVisible = getFixedItemsVisible(attribute.getInt(R.styleable.WheelView_itemVisibleNum, itemsVisible));
+//        isLoop = attribute.getBoolean(R.styleable.WheelView_isLoop, isLoop);
+//        textColorCenter = attribute.getColor(R.styleable.WheelView_textColorCenter, textColorCenter);
+//        textColorOuter = attribute.getColor(R.styleable.WheelView_textColorOuter, textColorOuter);
+//        textSizeCenter = attribute.getDimension(R.styleable.WheelView_textSizeCenter, CommonUtils.dip2px(context,18));
+//        textSizeOuter = attribute.getDimension(R.styleable.WheelView_textSizeOuter, CommonUtils.dip2px(context,13));
         lineSpaceingDimens = attribute.getDimension(R.styleable.WheelView_lineSpaceingDimens, CommonUtils.dip2px(context,6));
         wheelGravity = attribute.getInt(R.styleable.WheelView_wheelGravity, wheelGravity);
 
@@ -208,10 +209,7 @@ public class WheelView extends View {
     }
 
 
-    public void setLineColor(@ColorRes int res){
-        lineColor = context.getResources().getColor(res);
-        paintIndicatorLine.setColor(lineColor);
-    }
+
 
 
 
@@ -309,9 +307,7 @@ public class WheelView extends View {
         }
     }
 
-    public final void setIsLoop(boolean isLoop) {
-        this.isLoop = isLoop;
-    }
+
 
 
     private final void setInitPosition(int initPosition) {
@@ -436,8 +432,8 @@ public class WheelView extends View {
 //        }
 
 
-        canvas.drawLine((interval/2), firstLineY, measuredWidth-(interval/2), firstLineY, paintIndicatorLine);
-        canvas.drawLine((interval/2), secondLineY, measuredWidth-(interval/2), secondLineY, paintIndicatorLine);
+        canvas.drawLine((interval), firstLineY, measuredWidth-(interval), firstLineY, paintIndicatorLine);
+        canvas.drawLine((interval), secondLineY, measuredWidth-(interval), secondLineY, paintIndicatorLine);
 
         int j1 = 0;
 
@@ -652,11 +648,55 @@ public class WheelView extends View {
         void onItemSelected(int selectedIndex, String item);
     }
 
-    public int getInterval() {
-        return interval;
+
+    public void setLineColor(int color){
+        this.lineColor = color;
+        paintIndicatorLine.setColor(color);
     }
 
     public void setInterval(int interval) {
         this.interval = interval;
+    }
+
+
+    public void setTextSizeCenter(float textSizeCenter) {
+        this.textSizeCenter = textSizeCenter;
+        paintCenterText.setTextSize(textSizeCenter);
+    }
+
+    public void setTextSizeOuter(float textSizeOuter) {
+        this.textSizeOuter = textSizeOuter;
+        paintOuterText.setTextSize(textSizeOuter);
+    }
+
+    public void setTextColorOuter(int textColorOuter) {
+        this.textColorOuter = textColorOuter;
+        paintOuterText.setColor(textColorOuter);
+    }
+
+
+
+    public void setTextColorCenter(int textColorCenter) {
+        this.textColorCenter = textColorCenter;
+        paintCenterText.setColor(textColorCenter);
+    }
+
+
+
+
+    public void setLineHeight(int lineHeight) {
+        this.lineHeight = lineHeight;
+        paintIndicatorLine.setStrokeWidth((float) lineHeight);
+    }
+
+
+    public void setLoop(boolean loop) {
+        isLoop = loop;
+    }
+
+
+
+    public void setItemsVisible(int itemsVisible) {
+        this.itemsVisible = itemsVisible;
     }
 }

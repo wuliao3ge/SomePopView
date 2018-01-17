@@ -90,10 +90,10 @@ public class TimeChoiceDialog extends BaseDialog<TimeChoiceDialog> {
                     String mSelectHour = binding.wv1.getSelectedItem();
                     String mSelectMin = binding.wv2.getSelectedItem();
                     Date date = DateAndTimeUtils.dateTimeFromCustomStr(mSelectHour, mSelectMin);
-                    String time = TimeUtils.dateTimeToStr(date);
-                    Toast.makeText(context, "selectDateTime: " + time + date.getTime(), Toast.LENGTH_SHORT).show();
-                    Log.i("selectDateTime:", String.valueOf(date.getTime()));
-                    Log.i("longToDate：", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date.getTime())));
+//                    String time = TimeUtils.dateTimeToStr(date);
+//                    Toast.makeText(context, "selectDateTime: " + time + date.getTime(), Toast.LENGTH_SHORT).show();
+//                    Log.i("selectDateTime:", String.valueOf(date.getTime()));
+//                    Log.i("longToDate：", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date.getTime())));
                     dataChoiceListener.dataChoice(date.getTime());
                 }
             }

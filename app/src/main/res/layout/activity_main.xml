@@ -14,11 +14,25 @@
         android:text="默认样式"
         />
     <Button
-        android:id="@+id/btn_no_title"
+        android:id="@+id/btn1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="没有标题"
+        android:text="日期加时间选择"
         />
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="日期选择"
+        />
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="时间选择"
+        />
+
+
 
 
 </LinearLayout>

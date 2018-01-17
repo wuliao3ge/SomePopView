@@ -300,6 +300,20 @@ public class DateAndTimeUtils {
     }
 
 
+    /**
+     * 根据选择的年月日时分生成deta
+     * @param hour 时
+     * @param min 分
+     * @return
+     */
+    public static final Date dateTimeFromCustomStr(String hour, String min){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,Integer.valueOf(hour.replace("点","")));
+        calendar.set(Calendar.MINUTE,Integer.valueOf(min.replace("分","")));
+        return calendar.getTime();
+    }
+
+
 
     /**
      * 判断是否为同一月
@@ -394,6 +408,27 @@ public class DateAndTimeUtils {
     }
 
 
+    /**
+     * 判断是否为同一天
+     * @param date1
+     * @param date2
+     * @return
+     */
+    public static boolean isSameHour(Date date1, Date date2) {
+        Calendar calDateA = Calendar.getInstance();
+        calDateA.setTime(date1);
+
+        Calendar calDateB = Calendar.getInstance();
+        calDateB.setTime(date2);
+
+        return calDateA.get(Calendar.YEAR) == calDateB.get(Calendar.YEAR)
+                && calDateA.get(Calendar.MONTH) == calDateB.get(Calendar.MONTH)
+                && calDateA.get(Calendar.DAY_OF_MONTH) == calDateB.get(Calendar.DAY_OF_MONTH)
+                &&calDateA.get(Calendar.HOUR_OF_DAY)==calDateB.get(Calendar.HOUR_OF_DAY);
+    }
+
+
+
 
     public static ArrayList<String> buildearYs(TimeRange timeRange) {
         Calendar calendarStart = Calendar.getInstance();
@@ -450,7 +485,20 @@ public class DateAndTimeUtils {
             return buildNomalHourList();
         }
     }
-    public static ArrayList buildMinutesByDayHour(WheelView wheelViewDay, WheelView wheelViewHour, TimeRange timeRange) {
+
+    public static ArrayList buildHoursByDay(TimeRange timeRange) {
+        if(isSameDay(timeRange.getStart_time(),timeRange.getEnd_time()))
+        {
+            return buildHourListStartAndEnd(timeRange);
+        }else {
+            return buildNomalHourList();
+        }
+
+    }
+
+
+
+    public static List<String> buildMinutesByDayHour(WheelView wheelViewDay, WheelView wheelViewHour, TimeRange timeRange) {
         if (wheelViewDay.getSelectedPosition() == 0 && wheelViewHour.getSelectedPosition() == 0) {
             return buildMinuteListStart(timeRange);
         } else if (wheelViewDay.getSelectedPosition() == wheelViewDay.getSize() - 1 &&
@@ -513,46 +561,89 @@ public class DateAndTimeUtils {
         return hourList;
     }
 
-    public static ArrayList buildMinuteListStart(TimeRange timeRange ) {
+    public static ArrayList buildHourListStartAndEnd(TimeRange timeRange) {
+
+        Calendar startcalendar = Calendar.getInstance();
+        startcalendar.setTime(timeRange.getStart_time());
+        Calendar endcalendar = Calendar.getInstance();
+        endcalendar.setTime(timeRange.getEnd_time());
+        int hourstart = startcalendar.get(Calendar.HOUR_OF_DAY);
+        int hourEnd = endcalendar.get(Calendar.HOUR_OF_DAY);
+
+        ArrayList hourList = new ArrayList<>();
+
+        for (int i = hourstart; i <= hourEnd; i++) {
+            hourList.add(i + "点");
+        }
+        return hourList;
+    }
+
+    public static List<String> buildMinute(int hour,TimeRange timeRange){
+
+        Calendar startcalendar = Calendar.getInstance();
+        startcalendar.setTime(timeRange.getStart_time());
+        Calendar endcalendar = Calendar.getInstance();
+        endcalendar.setTime(timeRange.getEnd_time());
+        if(isSameHour(timeRange.getStart_time(),timeRange.getEnd_time()))
+        {
+            return buildMinuteListStartAndEnd(timeRange);
+        } else if(hour==startcalendar.get(Calendar.HOUR_OF_DAY))
+        {
+            return buildMinuteListStart(timeRange);
+        }else if(hour==endcalendar.get(Calendar.HOUR_OF_DAY))
+        {
+            return buildHourListEnd(timeRange);
+        }else{
+            return buildNomalMinuteList();
+        }
+    }
+
+
+    public static List<String> buildMinuteListStart(TimeRange timeRange ) {
         Date dateStart = timeRange.getStart_time();
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.setTime(dateStart);
-        calendarStart.add(Calendar.MINUTE, 10);//分钟需要取整，5.55则从6:00开始
-        int minStart = (calendarStart.get(Calendar.MINUTE) / 10) * 10;//取整
-        Calendar calendarEnd = Calendar.getInstance();
-        calendarEnd.setTime(timeRange.getEnd_time());
-        int minEnd ;
-        if (isInSameHour(calendarStart, calendarEnd)) {
-            minEnd = (calendarEnd.get(Calendar.MINUTE) / 10) * 10;
-        }else{
-            minEnd = 50;
-        }
-        ArrayList minList = new ArrayList<>();
-
-        for (int i = minStart; i <= minEnd; i += 10) {
+        List<String> minList = new ArrayList<>();
+        for(int i= calendarStart.get(Calendar.MINUTE);i<60;i++)
+        {
             minList.add(i + "分");
         }
         return minList;
     }
-    public static ArrayList buildMinuteListEnd(TimeRange timeRange) {
+    public static List<String> buildMinuteListEnd(TimeRange timeRange) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(timeRange.getEnd_time());
-        int minEnd = (calendar.get(Calendar.MINUTE) / 10) * 10;
-        ArrayList minList = new ArrayList<>();
-
-        for (int i = 0; i <= minEnd; i += 10) {
+        int minEnd = calendar.get(Calendar.MINUTE);
+        List<String> minList = new ArrayList<>();
+        for (int i = 0; i <= minEnd; i ++) {
             minList.add(i + "分");
         }
 
         return minList;
     }
-    public static ArrayList buildNomalMinuteList() {
-        ArrayList minuteList = new ArrayList<>();
+    public static List<String> buildNomalMinuteList() {
+        List<String> minuteList = new ArrayList<>();
 
         for (int i = 0; i < 60; i ++) {
             minuteList.add(i + "分");
         }
         return minuteList;
+    }
+
+    public static ArrayList buildMinuteListStartAndEnd(TimeRange timeRange) {
+        Calendar startcalendar = Calendar.getInstance();
+        startcalendar.setTime(timeRange.getEnd_time());
+        Calendar endcalendar = Calendar.getInstance();
+        endcalendar.setTime(timeRange.getEnd_time());
+        int minstart = startcalendar.get(Calendar.MINUTE);
+        int minEnd = endcalendar.get(Calendar.MINUTE) ;
+        ArrayList minList = new ArrayList<>();
+
+        for (int i = minstart; i <= minEnd; i ++) {
+            minList.add(i + "分");
+        }
+
+        return minList;
     }
 
     //判断两个日期是否在同一天

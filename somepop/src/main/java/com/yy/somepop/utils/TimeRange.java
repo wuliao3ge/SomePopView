@@ -32,6 +32,15 @@ public class TimeRange {
         calendar.set(year,month-1,day);
         this.start_time = TimeUtils.dateTimeToStr(calendar.getTime());
     }
+    public void setStart_time(int hour,int min) {
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY,hour);
+        calendar.set(Calendar.MINUTE,min);
+        this.start_time = TimeUtils.dateTimeToStr(calendar.getTime());
+    }
+
 
 
     public Date getEnd_time() {
@@ -45,6 +54,15 @@ public class TimeRange {
     public void setEnd_time(int year,int month,int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year,month-1,day);
+        this.end_time = TimeUtils.dateTimeToStr(calendar.getTime());
+    }
+
+    public void setEnd_time(int hour,int min) {
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY,hour);
+        calendar.set(Calendar.MINUTE,min);
         this.end_time = TimeUtils.dateTimeToStr(calendar.getTime());
     }
 

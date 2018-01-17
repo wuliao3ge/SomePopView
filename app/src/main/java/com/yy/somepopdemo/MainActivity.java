@@ -13,6 +13,7 @@ import com.yy.somepop.framework.DataChoiceListener;
 import com.yy.somepop.widget.DateAndTimeChoiceDialog;
 import com.yy.somepop.widget.DateChoiceDialog;
 import com.yy.somepop.widget.DefaultDialog;
+import com.yy.somepop.widget.TimeChoiceDialog;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -23,7 +24,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ((Button)findViewById(R.id.btn_default)).setOnClickListener(this);
-        ((Button)findViewById(R.id.btn_no_title)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn1)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn2)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn3)).setOnClickListener(this);
     }
 
     @Override
@@ -54,14 +57,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        .setRightBtnText("嘿嘿嘿");
 
                 break;
-            case R.id.btn_no_title:
-                    new DateChoiceDialog(this,R.style.dialog)
+            case R.id.btn1:
+                new DateAndTimeChoiceDialog(this,R.style.dialog)
+                        .setDialogTitle("请选择时间")
+//                            .setStartTime(2011,1,5)
+                        .setLineColor(R.color.colorPrimary)
+                        .setBtnColor(R.color.colorPrimary)
+                        .setDataChoiceListener(new DataChoiceListener() {
+                            @Override
+                            public void dataChoice(long time) {
+                                Log.i("时间选择器",time+"");
+                            }
+                        })
+                        .show();
+                break;
+            case R.id.btn2:
+                new DateChoiceDialog(this,R.style.dialog)
+                        .setDialogTitle("请选择时间")
+//                            .setStartTime(2011,1,5)
+                        .setLineColor(R.color.colorPrimary)
+                        .setBtnColor(R.color.colorPrimary)
+                        .setDataChoiceListener(new DataChoiceListener() {
+                            @Override
+                            public void dataChoice(long time) {
+                                Log.i("时间选择器",time+"");
+                            }
+                        })
+                        .show();
+                break;
+            case R.id.btn3:
+                    new TimeChoiceDialog(this,R.style.dialog)
                     .setDialogTitle("请选择时间")
 //                            .setStartTime(2011,1,5)
                             .setLineColor(R.color.colorPrimary)
                             .setBtnColor(R.color.colorPrimary)
-                            .setStartTime(2017,6,11)
-                            .setEndTime(2018,1,12)
+                            .setStartTime(3,10)
+//                            .setEndTime(2018,1,12)
                             .setDataChoiceListener(new DataChoiceListener() {
                                 @Override
                                 public void dataChoice(long time) {

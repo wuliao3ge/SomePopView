@@ -97,9 +97,9 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
                     String mSelectDay = binding.wv3.getSelectedItem();
                     Date date = DateAndTimeUtils.dateTimeFromCustomStr(mSelectYear,mSelectMonth,mSelectDay);
                     String time = TimeUtils.dateTimeToStr(date);
-                    Toast.makeText(context, "selectDateTime: "+time+date.getTime(), Toast.LENGTH_SHORT).show();
-                    Log.i("selectDateTime:",String.valueOf(date.getTime()));
-                    Log.i("longToDate：",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date.getTime())));
+//                    Toast.makeText(context, "selectDateTime: "+time+date.getTime(), Toast.LENGTH_SHORT).show();
+//                    Log.i("selectDateTime:",String.valueOf(date.getTime()));
+//                    Log.i("longToDate：",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date.getTime())));
                     dataChoiceListener.dataChoice(date.getTime());
                 }
             }

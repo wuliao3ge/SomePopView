@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new DateAndTimeChoiceDialog(this,R.style.dialog)
                         .setDialogTitle("请选择时间")
 //                            .setStartTime(2011,1,5)
-                        .setLineColor(R.color.colorPrimary)
-                        .setBtnColor(R.color.colorPrimary)
+                        .setTextColorCenter(R.color.colorPrimary)
+//                        .setBtnColor(R.color.colorPrimary)
                         .setDataChoiceListener(new DataChoiceListener() {
                             @Override
                             public void dataChoice(long time) {

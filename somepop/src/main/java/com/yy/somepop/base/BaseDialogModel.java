@@ -1,6 +1,9 @@
 package com.yy.somepop.base;
 
+import android.app.Application;
+
 import com.yy.somepop.R;
+import com.yy.somepop.SomePopView;
 import com.yy.somepop.framework.DefaultListener;
 
 /**
@@ -15,37 +18,37 @@ public class BaseDialogModel {
     private String leftbtntext = "取消";
     private String rightbtntext = "确定";
     //整体背景颜色
-    private int defaultBackground  = R.drawable.bg_round_white;
+    private int defaultBackground  = SomePopView.getInstance().getDefaultBackground();
 //    标题背景颜色
-    private int titleBackground ;
+    private int titleBackground  = SomePopView.getInstance().getTitleBackground();
 //    标题字体大小
-    private int titleSize  = R.dimen.font_title;
+    private int titleSize  = SomePopView.getInstance().getTitleSize();
 //    标题颜色
-    private int titleColor = R.color.default_text_color;
+    private int titleColor = SomePopView.getInstance().getTitleColor();
     //消息背景颜色
-    private int messageBackground ;
+    private int messageBackground = SomePopView.getInstance().getMessageBackground();
 //    消息字体大小
-    private int messageSize = R.dimen.font_title;
+    private int messageSize = SomePopView.getInstance().getMessageSize();
 //    消息字体颜色
-    private int messageColor = R.color.default_text_color;
+    private int messageColor = SomePopView.getInstance().getMessageColor();
 //    左侧按钮背景颜色
-    private int leftBtnBackground;
+    private int leftBtnBackground = SomePopView.getInstance().getLeftBtnBackground();
     //    左侧按钮字体大小
-    private int leftBtnSize = R.dimen.font_des;
+    private int leftBtnSize = SomePopView.getInstance().getLeftBtnSize();
     //    左侧那妞颜色
-    private int leftBtnColor = R.color.default_text_color;
+    private int leftBtnColor = SomePopView.getInstance().getLeftBtnColor();
     //    右侧按钮背景颜色
-    private int rightBtnBackground;
+    private int rightBtnBackground = SomePopView.getInstance().getRightBtnBackground();
     //    右侧按钮字体大小
-    private int rightBtnSize = R.dimen.font_des;
+    private int rightBtnSize = SomePopView.getInstance().getRightBtnSize();
     //    右侧按钮字体颜色
-    private int rightBtnColor = R.color.default_text_color;
+    private int rightBtnColor = SomePopView.getInstance().getRightBtnColor();
     //是否显示标题和消息之间的分割线 默认不显示
-    private boolean isShowDivision = false;
+    private boolean isShowDivision = SomePopView.getInstance().isShowDivision();
 //  分割线颜色
-    private int divisionColor = R.color.default_division_color;
+    private int divisionColor =SomePopView.getInstance().getDivisionColor();
 //    分割线大小
-    private int divisionSize =R.dimen.division_size;
+    private int divisionSize =SomePopView.getInstance().getDivisionSize();
 
     //左侧按钮监听
     private DefaultListener rightListener;
@@ -59,7 +62,9 @@ public class BaseDialogModel {
 
     private BaseDialog baseDialog;
 
+    public BaseDialogModel() {
 
+    }
 
     public BaseDialogModel(BaseDialog baseDialog) {
         this.baseDialog = baseDialog;

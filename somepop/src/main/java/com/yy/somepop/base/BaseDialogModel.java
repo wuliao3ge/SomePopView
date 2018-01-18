@@ -287,4 +287,6 @@ public class BaseDialogModel {
     public void setCenterListener(DefaultListener centerListener) {
         this.centerListener = centerListener;
     }
+
+
 }

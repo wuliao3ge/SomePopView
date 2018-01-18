@@ -15,6 +15,7 @@ import android.view.View;
 
 import com.yy.somepop.R;
 import com.yy.somepop.databinding.DialogBaseBinding;
+import com.yy.somepop.framework.DefaultListener;
 
 /**
  * Created by ly on 2017/12/29.
@@ -357,4 +358,28 @@ public abstract class BaseDialog<T> extends Dialog {
         baseDialogModel.setDivisionSize(id);
         return (T)this;
     }
+
+
+    /**
+     * 设置风格线高度（宽度）
+     * @param defaultListener
+     * @return
+     */
+    public  T setRightListener(DefaultListener defaultListener)
+    {
+        baseDialogModel.setRightListener(defaultListener);
+        return (T)this;
+    }
+
+    /**
+     * 设置风格线高度（宽度）
+     * @param defaultListener
+     * @return
+     */
+    public  T setLeftListener(DefaultListener defaultListener)
+    {
+        baseDialogModel.setLeftListener(defaultListener);
+        return (T)this;
+    }
+
 }

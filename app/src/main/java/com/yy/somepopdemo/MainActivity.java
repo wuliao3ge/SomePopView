@@ -1,15 +1,18 @@
 package com.yy.somepopdemo;
 
 
+import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.yy.somepop.framework.DataChoiceListener;
 
+import com.yy.somepop.framework.DefaultListener;
 import com.yy.somepop.widget.DateAndTimeChoiceDialog;
 import com.yy.somepop.widget.DateChoiceDialog;
 import com.yy.somepop.widget.DefaultDialog;
@@ -39,6 +42,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setDialogTitle("hahahah")
                         .setDialogMessage("gagagag");
                 defaultDialog.setCanceledOnTouchOutside(false);
+//                defaultDialog.setLeftListener(new DefaultListener() {
+//                    @Override
+//                    public void onClick(Dialog dialog) {
+//                        Toast.makeText(MainActivity.this,"zuoanniu",Toast.LENGTH_LONG).show();
+//                    }
+//                }).setRightListener(new DefaultListener() {
+//                    @Override
+//                    public void onClick(Dialog dialog) {
+//                        Toast.makeText(MainActivity.this,"youanniu",Toast.LENGTH_LONG).show();
+//                    }
+//                });
                 defaultDialog.show();
 
 //                        .setDialogMessage(R.string.message)

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.yy.somepop.R;
 import com.yy.somepop.SomePopView;
+import com.yy.somepop.enums.Align;
 import com.yy.somepop.framework.DefaultListener;
 
 /**
@@ -57,6 +58,8 @@ public class BaseDialogModel {
 //  中间按钮监听
     private DefaultListener centerListener;
 
+    private Align titleAlign=SomePopView.getInstance().getTitleAlign();
+    private Align messageAlign = SomePopView.getInstance().getMessageAlign();
 
 
 
@@ -288,5 +291,19 @@ public class BaseDialogModel {
         this.centerListener = centerListener;
     }
 
+    public Align getTitleAlign() {
+        return titleAlign;
+    }
 
+    public void setTitleAlign(Align titleAlign) {
+        this.titleAlign = titleAlign;
+    }
+
+    public Align getMessageAlign() {
+        return messageAlign;
+    }
+
+    public void setMessageAlign(Align messageAlign) {
+        this.messageAlign = messageAlign;
+    }
 }

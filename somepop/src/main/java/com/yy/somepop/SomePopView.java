@@ -5,6 +5,7 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 
 import com.yy.somepop.base.BaseDialogModel;
+import com.yy.somepop.enums.Align;
 
 /**
  * Created by lyly on 2018/1/17.
@@ -47,6 +48,9 @@ public class SomePopView {
     private int divisionColor = R.color.default_division_color;
     //    分割线大小
     private int divisionSize =R.dimen.division_size;
+
+    private Align titleAlign=Align.CENTER;
+    private Align messageAlign = Align.CENTER;
 
     public static SomePopView getInstance() {
         if(somePopView==null)
@@ -247,6 +251,24 @@ public class SomePopView {
         return this;
     }
 
+    public SomePopView setTitleAlign(Align titleAlign) {
+        this.titleAlign = titleAlign;
+        return this;
+    }
+
+    public SomePopView setMessageAlign(Align messageAlign) {
+        this.messageAlign = messageAlign;
+        return this;
+    }
+
+    public Align getTitleAlign() {
+        return titleAlign;
+
+    }
+
+    public Align getMessageAlign() {
+        return messageAlign;
+    }
 
     public int getDefaultBackground() {
         return defaultBackground;

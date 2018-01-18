@@ -8,4 +8,6 @@
     <dimen name="textsizecenter">18sp</dimen>
     <dimen name="textsizeouter">13sp</dimen>
     <dimen name="lineheight">2px</dimen>
+
+    <dimen name="text_margin">10dp</dimen>
 </resources>

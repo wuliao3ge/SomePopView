@@ -2,6 +2,7 @@ package com.yy.somepop.utils;
 
 import android.databinding.BindingAdapter;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yy.somepop.R;
+import com.yy.somepop.enums.Align;
 import com.yy.somepop.wheelview.WheelView;
 
 /**
@@ -16,6 +18,22 @@ import com.yy.somepop.wheelview.WheelView;
  */
 
 public class AttrSettingUtils {
+
+    @BindingAdapter("textgravity")
+    public static void setGravity(TextView textView, Align align)
+    {
+        if(align.equals(Align.CENTER))
+        {
+            textView.setGravity(Gravity.CENTER);
+        }else if(align.equals(Align.LEFT)){
+            textView.setGravity(Gravity.LEFT);
+        }else if(align.equals(Align.RIGHT))
+        {
+            textView.setGravity(Gravity.RIGHT);
+        }
+    }
+
+
     @BindingAdapter("lineInterval")
     public static void setLineInterval(WheelView wheelView,int interval){
         wheelView.setInterval(interval);

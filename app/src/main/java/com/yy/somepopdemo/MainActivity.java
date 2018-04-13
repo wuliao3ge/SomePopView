@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -13,9 +14,11 @@ import android.widget.Toast;
 import com.yy.somepop.framework.DataChoiceListener;
 
 import com.yy.somepop.framework.DefaultListener;
+import com.yy.somepop.framework.ListItemListener;
 import com.yy.somepop.widget.DateAndTimeChoiceDialog;
 import com.yy.somepop.widget.DateChoiceDialog;
 import com.yy.somepop.widget.DefaultDialog;
+import com.yy.somepop.widget.ListDialog;
 import com.yy.somepop.widget.TimeChoiceDialog;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -26,10 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ((Button)findViewById(R.id.btn_default)).setOnClickListener(this);
-        ((Button)findViewById(R.id.btn1)).setOnClickListener(this);
-        ((Button)findViewById(R.id.btn2)).setOnClickListener(this);
-        ((Button)findViewById(R.id.btn3)).setOnClickListener(this);
     }
 
     @Override
@@ -114,6 +113,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                             })
                     .show();
+                break;
+            case R.id.btn4:
+                new ListDialog(this,R.style.dialog)
+                        .setDefaultBackground(R.drawable.bg_round_white)
+                        .addItem("哈哈哈")
+                        .addItem("嘿嘿嘿")
+                        .addItem("取消")
+                        .setListItemListener(new ListItemListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                switch (position)
+                                {
+
+                                }
+                            }
+                        })
+                        .show();
                 break;
         }
     }

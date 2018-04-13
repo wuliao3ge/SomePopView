@@ -382,4 +382,16 @@ public abstract class BaseDialog<T> extends Dialog {
         return (T)this;
     }
 
+
+    /**
+     * 是否显示下方按钮
+     * @param isShow
+     * @return
+     */
+    public T isShowBtn(boolean isShow)
+    {
+        baseDialogModel.setShowBtn(isShow);
+        return (T)this;
+    }
+
 }

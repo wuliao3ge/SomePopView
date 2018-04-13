@@ -74,7 +74,9 @@
             android:id="@+id/dialog_default_btn_ll"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="@{model.isShowBtn?View.VISIBLE:View.GONE}"
+            >
 
             <TextView
                 android:id="@+id/dialog_default_btn1"

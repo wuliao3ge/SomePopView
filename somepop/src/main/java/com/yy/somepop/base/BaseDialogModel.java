@@ -57,6 +57,7 @@ public class BaseDialogModel {
     private DefaultListener leftListener;
 //  中间按钮监听
     private DefaultListener centerListener;
+    private boolean isShowBtn;
 
     private Align titleAlign=SomePopView.getInstance().getTitleAlign();
     private Align messageAlign = SomePopView.getInstance().getMessageAlign();
@@ -105,6 +106,13 @@ public class BaseDialogModel {
     }
 
 
+    public boolean isShowBtn() {
+        return isShowBtn;
+    }
+
+    public void setShowBtn(boolean showBtn) {
+        isShowBtn = showBtn;
+    }
 
     public String getTitle() {
         return title;

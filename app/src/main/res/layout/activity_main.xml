@@ -12,26 +12,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="默认样式"
+        android:onClick="onClick"
         />
     <Button
         android:id="@+id/btn1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="日期加时间选择"
+        android:onClick="onClick"
         />
     <Button
         android:id="@+id/btn2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="日期选择"
+        android:onClick="onClick"
         />
     <Button
         android:id="@+id/btn3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="时间选择"
+        android:onClick="onClick"
         />
-
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List对话框"
+        android:onClick="onClick"
+        />
 
 
 

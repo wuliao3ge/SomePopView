@@ -25,7 +25,7 @@ public abstract class BaseDialog<T> extends Dialog {
 
     protected BaseDialogModel baseDialogModel;
     protected Context context;
-    private DialogBaseBinding binding;
+    protected DialogBaseBinding binding;
     private View additionalView;
     public BaseDialog(@NonNull Context context) {
         super(context);

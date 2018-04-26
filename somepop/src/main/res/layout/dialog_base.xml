@@ -75,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:visibility="@{model.leftListener!=null &amp;&amp; model.rightListener!=null?View.VISIBLE:View.GONE}"
+            android:visibility="@{model.showBtn?View.VISIBLE:View.GONE}"
             >
 
             <TextView
@@ -88,13 +88,34 @@
                 app:setTextSize="@{model.leftBtnSize}"
                 app:setTextColor="@{model.leftBtnColor}"
                 android:onClick="@{()->model.onLeftListener()}"
+                android:visibility="@{model.leftListener==null &amp;&amp; model.rightListener==null &amp;&amp; model.centerListener!=null?View.GONE:View.VISIBLE}"
                 />
-
             <View
                 android:layout_width="@dimen/division_size"
                 android:layout_height="match_parent"
                 app:setDivisionColor="@{model.divisionColor}"
                 app:setDivisionSizeForH="@{model.divisionSize}"
+                android:visibility="@{model.leftListener==null &amp;&amp; model.rightListener==null &amp;&amp; model.centerListener!=null?View.GONE:View.VISIBLE}"
+                />
+
+            <TextView
+                android:id="@+id/dialog_default_btn3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_weight="1.0"
+                android:text="@{model.centerbtntext}"
+                app:setTextSize="@{model.centerBtnSize}"
+                app:setTextColor="@{model.centerBtnColor}"
+                android:visibility="@{model.centerListener!=null?View.VISIBLE:View.GONE}"
+                android:onClick="@{()->model.onCenterListener()}"
+                />
+            <View
+                android:layout_width="@dimen/division_size"
+                android:layout_height="match_parent"
+                app:setDivisionColor="@{model.divisionColor}"
+                app:setDivisionSizeForH="@{model.divisionSize}"
+                android:visibility="@{model.leftListener==null &amp;&amp; model.rightListener==null &amp;&amp; model.centerListener!=null?View.GONE:View.VISIBLE}"
                 />
 
             <TextView
@@ -107,21 +128,12 @@
                 app:setTextSize="@{model.rightBtnSize}"
                 app:setTextColor="@{model.rightBtnColor}"
                 android:onClick="@{()->model.onRightListener()}"
+                android:visibility="@{model.leftListener==null &amp;&amp; model.rightListener==null &amp;&amp; model.centerListener!=null?View.GONE:View.VISIBLE}"
                 />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/dialog_default_btn3"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:text="@{model.centerbtntext}"
-            app:setTextSize="@{model.centerBtnSize}"
-            app:setTextColor="@{model.centerBtnColor}"
-            android:visibility="@{model.centerListener!=null?View.VISIBLE:View.GONE}"
-            android:onClick="@{()->model.onCenterListener()}"
-            />
+
     </LinearLayout>
 </layout>
 

@@ -95,7 +95,7 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
                 binding.wv3.setItems(daysStrList,newIndexMin);
             }
         });
-        baseDialogModel.setCenterListener(new DefaultListener() {
+        baseDialogModel.setRightListener(new DefaultListener() {
             @Override
             public void onClick(Dialog dialog) {
                 if(dataChoiceListener!=null)

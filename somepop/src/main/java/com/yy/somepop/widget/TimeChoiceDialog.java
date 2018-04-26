@@ -83,7 +83,7 @@ public class TimeChoiceDialog extends BaseDialog<TimeChoiceDialog> {
                 binding.wv2.setItems(monthsStrList, newIndexHour);
             }
         });
-        baseDialogModel.setCenterListener(new DefaultListener() {
+        baseDialogModel.setRightListener(new DefaultListener() {
             @Override
             public void onClick(Dialog dialog) {
                 if (dataChoiceListener != null) {

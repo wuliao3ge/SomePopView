@@ -49,6 +49,7 @@ public class ProgressBarDialog extends BaseDialog<ProgressBarDialog>{
 
     @Override
     public void setView() {
+        isShowBtn(false);
         //将布局设置给Dialog
         addView(dialogProgressbarBinding.getRoot());
     }

@@ -87,7 +87,7 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
                 binding.wv3.setItems(daysStrList,newIndexMin);
             }
         });
-        baseDialogModel.setCenterListener(new DefaultListener() {
+        baseDialogModel.setRightListener(new DefaultListener() {
             @Override
             public void onClick(Dialog dialog) {
                 if(dataChoiceListener!=null)

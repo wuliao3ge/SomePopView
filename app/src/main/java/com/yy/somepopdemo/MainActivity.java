@@ -67,25 +67,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setDialogTitle("hahahah")
                         .setDialogMessage("gagagag");
                 defaultDialog.setCanceledOnTouchOutside(false);
-                defaultDialog.setCenterListener(new DefaultListener() {
-                    @Override
-                    public void onClick(Dialog dialog) {
-                        Toast.makeText(MainActivity.this,"中间",Toast.LENGTH_LONG).show();
-                    }
-                });
-//                defaultDialog.setLeftListener(new DefaultListener() {
+//                defaultDialog.setCenterListener(new DefaultListener() {
 //                    @Override
 //                    public void onClick(Dialog dialog) {
-//                        Toast.makeText(MainActivity.this,"zuoanniu",Toast.LENGTH_LONG).show();
-//                    }
-//                }).setRightListener(new DefaultListener() {
-//                    @Override
-//                    public void onClick(Dialog dialog) {
-//                        Toast.makeText(MainActivity.this,"youanniu",Toast.LENGTH_LONG).show();
+//                        Toast.makeText(MainActivity.this,"中间",Toast.LENGTH_LONG).show();
 //                    }
 //                });
+                defaultDialog.setLeftListener(new DefaultListener() {
+                    @Override
+                    public void onClick(Dialog dialog) {
+                        Toast.makeText(MainActivity.this,"zuoanniu",Toast.LENGTH_LONG).show();
+                    }
+                }).setRightListener(new DefaultListener() {
+                    @Override
+                    public void onClick(Dialog dialog) {
+                        Toast.makeText(MainActivity.this,"youanniu",Toast.LENGTH_LONG).show();
+                    }
+                });
                 defaultDialog.show();
-
 //                        .setDialogMessage(R.string.message)
 //                        .setTitleSize(R.dimen.font_title )
 //                        .setTitleColor(R.color.colorPrimary)
@@ -100,12 +99,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        .setisShowDivision(false)
 //                        .setLeftBtnText("哈哈哈")
 //                        .setRightBtnText("嘿嘿嘿");
-
                 break;
             case R.id.btn1:
                 new DateAndTimeChoiceDialog(this,R.style.dialog)
                         .setDialogTitle("请选择时间")
-//                            .setStartTime(2011,1,5)
+                            .setStartTime(2018,3,5)
                         .setTextColorCenter(R.color.colorPrimary)
 //                        .setBtnColor(R.color.colorPrimary)
                         .setDataChoiceListener(new DataChoiceListener() {

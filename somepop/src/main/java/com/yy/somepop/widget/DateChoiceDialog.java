@@ -42,6 +42,11 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
     private DialogSelectDateBinding binding;
     private DataAndTimeChoiceModel model;
 
+
+    private int currentYearIndex = 0;
+    private int currentMonthIndex = 0;
+    private int currentDayIndex = 0;
+
     public DateChoiceDialog(@NonNull Context context) {
         super(context);
     }
@@ -67,9 +72,40 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
     public void setView() {
         setisShowDivision(true);
         binding.setModel(model);
-        binding.wv1.setItems(DateAndTimeUtils.buildYears(timeRange),0);
-        binding.wv2.setItems(DateAndTimeUtils.buildMonths(binding.wv1,timeRange),0);
-        binding.wv3.setItems(DateAndTimeUtils.buildDays(binding.wv1,binding.wv2,timeRange),0);
+
+        Date currentDate = new Date();
+        Date startDate = getStartTime();
+
+        if(startDate.getTime()<currentDate.getTime())
+        {
+            Calendar currentcalendar=Calendar.getInstance();
+            currentcalendar.setTime(currentDate);
+            int currentyear=currentcalendar.get(Calendar.YEAR);
+            Calendar startcalendar=Calendar.getInstance();
+            startcalendar.setTime(startDate);
+            int startyear=startcalendar.get(Calendar.YEAR);
+
+            currentYearIndex = currentyear - startyear;
+            if(currentYearIndex==0)
+            {
+                currentMonthIndex = currentcalendar.get(Calendar.MONTH)-startcalendar.get(Calendar.MINUTE);
+            }else{
+                currentMonthIndex = currentcalendar.get(Calendar.MONTH);
+            }
+            if(currentMonthIndex==0&&currentYearIndex==0)
+            {
+                currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-startcalendar.get(Calendar.DAY_OF_MONTH);
+            }else{
+                currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH);
+            }
+
+
+        }
+
+
+        binding.wv1.setItems(DateAndTimeUtils.buildYears(timeRange),currentYearIndex);
+        binding.wv2.setItems(DateAndTimeUtils.buildMonths(binding.wv1,timeRange),currentMonthIndex);
+        binding.wv3.setItems(DateAndTimeUtils.buildDays(binding.wv1,binding.wv2,timeRange),currentDayIndex);
         //联动逻辑效果
         binding.wv1.setOnItemSelectedListener(new WheelView.OnItemSelectedListener() {
             @Override

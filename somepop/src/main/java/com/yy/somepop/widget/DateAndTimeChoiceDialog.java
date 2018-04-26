@@ -45,6 +45,11 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
 
 
     private DataAndTimeChoiceModel model;
+    private int currentYearIndex = 0;
+    private int currentMonthIndex = 0;
+    private int currentDayIndex = 0;
+    private int currentHourIndex = 0;
+    private int currentMinuIndex = 0;
 
 
     public DateAndTimeChoiceDialog(@NonNull Context context) {
@@ -73,11 +78,59 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
     public void setView() {
         setisShowDivision(true);
         binding.setModel(model);
-        binding.wv1.setItems(DateAndTimeUtils.buildYears(timeRange),0);
-        binding.wv2.setItems(DateAndTimeUtils.buildMonths(binding.wv1,timeRange),0);
-        binding.wv3.setItems(DateAndTimeUtils.buildDays(binding.wv1,binding.wv2,timeRange),0);
-        binding.wv4.setItems(DateAndTimeUtils.buildNomalHourList(),0);
-        binding.wv5.setItems(DateAndTimeUtils.buildNomalMinuteList(),0);
+
+        Date currentDate = new Date();
+        Date startDate = getStartTime();
+
+        if(startDate.getTime()<currentDate.getTime())
+        {
+            Calendar currentcalendar=Calendar.getInstance();
+            currentcalendar.setTime(currentDate);
+            int currentyear=currentcalendar.get(Calendar.YEAR);
+            Calendar startcalendar=Calendar.getInstance();
+            startcalendar.setTime(startDate);
+            int startyear=startcalendar.get(Calendar.YEAR);
+            currentYearIndex = currentyear - startyear;
+//            currentMonthIndex = currentcalendar.get(Calendar.MONTH);
+//            currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH);
+//
+//            currentHourIndex = currentcalendar.get(Calendar.HOUR_OF_DAY);
+//            currentMinuIndex = currentcalendar.get(Calendar.MINUTE);
+            if(currentYearIndex==0)
+            {
+                currentMonthIndex = currentcalendar.get(Calendar.MONTH)-startcalendar.get(Calendar.MONTH);
+            }else{
+                currentMonthIndex = currentcalendar.get(Calendar.MONTH);
+            }
+
+            if(currentMonthIndex==0&&currentYearIndex==0)
+            {
+                currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-startcalendar.get(Calendar.DAY_OF_MONTH);
+            }else{
+                currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH);
+            }
+
+            if(currentMonthIndex==0&&currentYearIndex==0&&currentDayIndex==0)
+            {
+                currentHourIndex = currentcalendar.get(Calendar.HOUR_OF_DAY)-startcalendar.get(Calendar.HOUR_OF_DAY);
+            }else{
+                currentHourIndex = currentcalendar.get(Calendar.HOUR_OF_DAY);
+            }
+
+            if(currentMonthIndex==0&&currentYearIndex==0&&currentDayIndex==0&&currentHourIndex==0)
+            {
+                currentMinuIndex = currentcalendar.get(Calendar.MINUTE)-startcalendar.get(Calendar.MINUTE);
+            }else{
+                currentMinuIndex = currentcalendar.get(Calendar.MINUTE);
+            }
+        }
+
+        binding.wv1.setItems(DateAndTimeUtils.buildYears(timeRange), currentYearIndex);
+        binding.wv2.setItems(DateAndTimeUtils.buildMonths(binding.wv1,timeRange),currentMonthIndex);
+        binding.wv3.setItems(DateAndTimeUtils.buildDays(binding.wv1,binding.wv2,timeRange),currentDayIndex);
+        binding.wv4.setItems(DateAndTimeUtils.buildNomalHourList(),currentHourIndex);
+        binding.wv5.setItems(DateAndTimeUtils.buildNomalMinuteList(),currentMinuIndex);
+
         //联动逻辑效果
         binding.wv1.setOnItemSelectedListener(new WheelView.OnItemSelectedListener() {
             @Override
@@ -138,6 +191,9 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
         timeRange.setEnd_time(endTime);
         return this;
     }
+
+
+
 
 
     public DateAndTimeChoiceDialog setStartTime(int year,int month,int day) {

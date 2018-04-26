@@ -24,6 +24,7 @@ import com.yy.somepop.utils.TimeUtils;
 import com.yy.somepop.wheelview.WheelView;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +45,9 @@ public class TimeChoiceDialog extends BaseDialog<TimeChoiceDialog> {
     private DialogSelectTimeBinding binding;
     private DataAndTimeChoiceModel model;
 
+
+    private int currentHourIndex = 0;
+    private int currentMinuIndex = 0;
 
     public TimeChoiceDialog(@NonNull Context context) {
         super(context);
@@ -72,8 +76,33 @@ public class TimeChoiceDialog extends BaseDialog<TimeChoiceDialog> {
     public void setView() {
         setisShowDivision(true);
         binding.setModel(model);
-        binding.wv1.setItems(DateAndTimeUtils.buildHoursByDay(timeRange), 0);
-        binding.wv2.setItems(DateAndTimeUtils.buildMinute(Integer.valueOf(binding.wv1.getSelectedItem().replace("点","")), timeRange), 0);
+
+        Date currentDate = new Date();
+        Date startDate = getStartTime();
+
+        if(startDate.getTime()<currentDate.getTime())
+        {
+            Calendar currentcalendar=Calendar.getInstance();
+            currentcalendar.setTime(currentDate);
+            int currentyear=currentcalendar.get(Calendar.YEAR);
+            Calendar startcalendar=Calendar.getInstance();
+            startcalendar.setTime(startDate);
+            int startyear=startcalendar.get(Calendar.YEAR);
+
+            currentHourIndex = currentcalendar.get(Calendar.HOUR_OF_DAY)-startcalendar.get(Calendar.HOUR_OF_DAY);
+
+
+
+            if(currentHourIndex==0)
+            {
+                currentMinuIndex = currentcalendar.get(Calendar.MINUTE)-startcalendar.get(Calendar.MINUTE);
+            }else{
+                currentMinuIndex = currentcalendar.get(Calendar.MINUTE);
+            }
+        }
+
+        binding.wv1.setItems(DateAndTimeUtils.buildHoursByDay(timeRange), currentHourIndex);
+        binding.wv2.setItems(DateAndTimeUtils.buildMinute(Integer.valueOf(binding.wv1.getSelectedItem().replace("点","")), timeRange), currentMinuIndex);
         //联动逻辑效果
         binding.wv1.setOnItemSelectedListener(new WheelView.OnItemSelectedListener() {
             @Override

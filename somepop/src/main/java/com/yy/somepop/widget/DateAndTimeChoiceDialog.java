@@ -91,11 +91,7 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
             startcalendar.setTime(startDate);
             int startyear=startcalendar.get(Calendar.YEAR);
             currentYearIndex = currentyear - startyear;
-//            currentMonthIndex = currentcalendar.get(Calendar.MONTH);
-//            currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH);
 //
-//            currentHourIndex = currentcalendar.get(Calendar.HOUR_OF_DAY);
-//            currentMinuIndex = currentcalendar.get(Calendar.MINUTE);
             if(currentYearIndex==0)
             {
                 currentMonthIndex = currentcalendar.get(Calendar.MONTH)-startcalendar.get(Calendar.MONTH);
@@ -107,7 +103,7 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
             {
                 currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-startcalendar.get(Calendar.DAY_OF_MONTH);
             }else{
-                currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH);
+                currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-1;
             }
 
             if(currentMonthIndex==0&&currentYearIndex==0&&currentDayIndex==0)

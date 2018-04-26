@@ -96,7 +96,7 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
             {
                 currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-startcalendar.get(Calendar.DAY_OF_MONTH);
             }else{
-                currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH);
+                currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-1;
             }
 
 

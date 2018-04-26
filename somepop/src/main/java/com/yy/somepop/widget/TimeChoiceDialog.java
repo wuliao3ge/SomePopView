@@ -84,20 +84,18 @@ public class TimeChoiceDialog extends BaseDialog<TimeChoiceDialog> {
         {
             Calendar currentcalendar=Calendar.getInstance();
             currentcalendar.setTime(currentDate);
-            int currentyear=currentcalendar.get(Calendar.YEAR);
+
             Calendar startcalendar=Calendar.getInstance();
             startcalendar.setTime(startDate);
-            int startyear=startcalendar.get(Calendar.YEAR);
+
 
             currentHourIndex = currentcalendar.get(Calendar.HOUR_OF_DAY)-startcalendar.get(Calendar.HOUR_OF_DAY);
-
-
 
             if(currentHourIndex==0)
             {
                 currentMinuIndex = currentcalendar.get(Calendar.MINUTE)-startcalendar.get(Calendar.MINUTE);
             }else{
-                currentMinuIndex = currentcalendar.get(Calendar.MINUTE);
+                currentMinuIndex = currentcalendar.get(Calendar.MINUTE)-1;
             }
         }
 

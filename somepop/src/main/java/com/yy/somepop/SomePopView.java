@@ -42,6 +42,14 @@ public class SomePopView {
     private int rightBtnSize = R.dimen.font_des;
     //    右侧按钮字体颜色
     private int rightBtnColor = R.color.default_text_color;
+    //    右侧按钮背景颜色
+    private int centerBtnBackground;
+    //    右侧按钮字体大小
+    private int centerBtnSize = R.dimen.font_des;
+    //    右侧按钮字体颜色
+    private int centerBtnColor = R.color.default_text_color;
+
+
     //是否显示标题和消息之间的分割线 默认不显示
     private boolean isShowDivision = false;
     //  分割线颜色
@@ -261,6 +269,21 @@ public class SomePopView {
         return this;
     }
 
+    public SomePopView setCenterBtnBackground(int centerBtnBackground) {
+        this.centerBtnBackground = centerBtnBackground;
+        return this;
+    }
+
+    public SomePopView setCenterBtnSize(int centerBtnSize) {
+        this.centerBtnSize = centerBtnSize;
+        return this;
+    }
+
+    public SomePopView setCenterBtnColor(int centerBtnColor) {
+        this.centerBtnColor = centerBtnColor;
+        return this;
+    }
+
     public Align getTitleAlign() {
         return titleAlign;
 
@@ -332,5 +355,17 @@ public class SomePopView {
 
     public int getDivisionSize() {
         return divisionSize;
+    }
+
+    public int getCenterBtnBackground() {
+        return centerBtnBackground;
+    }
+
+    public int getCenterBtnSize() {
+        return centerBtnSize;
+    }
+
+    public int getCenterBtnColor() {
+        return centerBtnColor;
     }
 }

@@ -18,6 +18,7 @@ public class BaseDialogModel {
     private String message = "";
     private String leftbtntext = "取消";
     private String rightbtntext = "确定";
+    private String centerbtntext = "确定";
     //整体背景颜色
     private int defaultBackground  = SomePopView.getInstance().getDefaultBackground();
 //    标题背景颜色
@@ -44,6 +45,13 @@ public class BaseDialogModel {
     private int rightBtnSize = SomePopView.getInstance().getRightBtnSize();
     //    右侧按钮字体颜色
     private int rightBtnColor = SomePopView.getInstance().getRightBtnColor();
+    //    中间按钮背景颜色
+    private int centerBtnBackground = SomePopView.getInstance().getCenterBtnBackground();
+    //    中间按钮字体大小
+    private int centerBtnSize = SomePopView.getInstance().getCenterBtnSize();
+    //    中间按钮字体颜色
+    private int centerBtnColor = SomePopView.getInstance().getCenterBtnColor();
+
     //是否显示标题和消息之间的分割线 默认不显示
     private boolean isShowDivision = SomePopView.getInstance().isShowDivision();
 //  分割线颜色
@@ -57,7 +65,7 @@ public class BaseDialogModel {
     private DefaultListener leftListener;
 //  中间按钮监听
     private DefaultListener centerListener;
-    private boolean isShowBtn;
+    private boolean isShowBtn = true;
 
     private Align titleAlign=SomePopView.getInstance().getTitleAlign();
     private Align messageAlign = SomePopView.getInstance().getMessageAlign();
@@ -92,6 +100,17 @@ public class BaseDialogModel {
             if(rightListener!=null)
             {
                 rightListener.onClick(baseDialog);
+            }
+        }
+    }
+
+    public void onCenterListener(){
+        if(baseDialog!=null)
+        {
+            baseDialog.dismiss();
+            if(centerListener!=null)
+            {
+                centerListener.onClick(baseDialog);
             }
         }
     }
@@ -195,6 +214,14 @@ public class BaseDialogModel {
         this.rightbtntext = rightbtntext;
     }
 
+    public String getCenterbtntext() {
+        return centerbtntext;
+    }
+
+    public void setCenterBtntext(String centerbtntext) {
+        this.centerbtntext = centerbtntext;
+    }
+
     public int getLeftBtnSize() {
         return leftBtnSize;
     }
@@ -265,6 +292,30 @@ public class BaseDialogModel {
 
     public void setRightBtnBackground(int rightBtnBackground) {
         this.rightBtnBackground = rightBtnBackground;
+    }
+
+    public int getCenterBtnBackground() {
+        return centerBtnBackground;
+    }
+
+    public void setCenterBtnBackground(int centerBtnBackground) {
+        this.centerBtnBackground = centerBtnBackground;
+    }
+
+    public int getCenterBtnSize() {
+        return centerBtnSize;
+    }
+
+    public void setCenterBtnSize(int centerBtnSize) {
+        this.centerBtnSize = centerBtnSize;
+    }
+
+    public int getCenterBtnColor() {
+        return centerBtnColor;
+    }
+
+    public void setCenterBtnColor(int centerBtnColor) {
+        this.centerBtnColor = centerBtnColor;
     }
 
     public boolean isShowDivision() {

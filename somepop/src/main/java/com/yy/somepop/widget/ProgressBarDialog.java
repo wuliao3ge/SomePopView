@@ -49,25 +49,27 @@ public class ProgressBarDialog extends BaseDialog<ProgressBarDialog>{
 
     @Override
     public void setView() {
-        binding.dialogDefaultBtnLl.setVisibility(View.GONE);
         //将布局设置给Dialog
         addView(dialogProgressbarBinding.getRoot());
     }
 
 
-    public void setProgressMax(int max)
+    public ProgressBarDialog setProgressMax(int max)
     {
         dialogProgressbarBinding.numberProgressBar.setMax(max);
+        return this;
     }
-    public void setProgressRead(int readLength)
+    public ProgressBarDialog setProgressRead(int readLength)
     {
         dialogProgressbarBinding.numberProgressBar.setProgress(readLength);
+        return this;
     }
 
-    public void upProgress(int max,int readLength)
+    public ProgressBarDialog upProgress(int max,int readLength)
     {
         dialogProgressbarBinding.numberProgressBar.setMax(max);
         dialogProgressbarBinding.numberProgressBar.setProgress(readLength);
+        return this;
     }
 
 }

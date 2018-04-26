@@ -74,6 +74,14 @@ public abstract class BaseDialog<T> extends Dialog {
     }
 
 
+    public DialogBaseBinding getBinding() {
+        return binding;
+    }
+
+    public void setBinding(DialogBaseBinding binding) {
+        this.binding = binding;
+    }
+
     abstract public void init();
     abstract public void setView();
 
@@ -263,7 +271,44 @@ public abstract class BaseDialog<T> extends Dialog {
 
 
     /**
-     * 设置左侧和右侧按钮颜色
+     * 设置右侧按钮描述
+     * @param text 描述
+     * @return
+     */
+    public  T setCenterBtnText(@NonNull CharSequence text)
+    {
+        baseDialogModel.setCenterBtntext(text.toString());
+        return (T)this;
+    }
+
+
+    /**
+     * 设置右侧按钮字体大小
+     * @param id 字体大小资源id
+     * @return
+     */
+    public  T setCenterBtnSize(@DimenRes int id)
+    {
+        baseDialogModel.setCenterBtnSize(id);
+        return (T)this;
+    }
+
+    /**
+     * 设置右侧按钮颜色
+     * @param id 颜色资源id
+     * @return
+     */
+    public  T setCenterBtnColor(@ColorRes int id)
+    {
+        baseDialogModel.setCenterBtnColor(id);
+        return (T)this;
+    }
+
+
+
+
+    /**
+     * 设置按钮颜色
      * @param id 颜色资源id
      * @return
      */
@@ -271,6 +316,20 @@ public abstract class BaseDialog<T> extends Dialog {
     {
         baseDialogModel.setLeftBtnColor(id);
         baseDialogModel.setRightBtnColor(id);
+        baseDialogModel.setCenterBtnColor(id);
+        return (T)this;
+    }
+
+    /**
+     * 设置按钮字体大小
+     * @param id 字体大小资源id
+     * @return
+     */
+    public  T setBtnSize(@DimenRes int id)
+    {
+        baseDialogModel.setRightBtnSize(id);
+        baseDialogModel.setLeftBtnSize(id);
+        baseDialogModel.setCenterBtnSize(id);
         return (T)this;
     }
 
@@ -349,7 +408,7 @@ public abstract class BaseDialog<T> extends Dialog {
     }
 
     /**
-     * 设置风格线高度（宽度）
+     * 设置分割线高度（宽度）
      * @param id 资源id
      * @return
      */
@@ -361,7 +420,7 @@ public abstract class BaseDialog<T> extends Dialog {
 
 
     /**
-     * 设置风格线高度（宽度）
+     * 设置右侧按钮监听
      * @param defaultListener
      * @return
      */
@@ -372,13 +431,24 @@ public abstract class BaseDialog<T> extends Dialog {
     }
 
     /**
-     * 设置风格线高度（宽度）
+     * 设置左侧按钮监听
      * @param defaultListener
      * @return
      */
     public  T setLeftListener(DefaultListener defaultListener)
     {
         baseDialogModel.setLeftListener(defaultListener);
+        return (T)this;
+    }
+
+
+    /**
+     * 设置中间按钮监听
+     * @param defaultListener
+     * @return
+     */
+    public T setCenterListener(DefaultListener defaultListener){
+        baseDialogModel.setCenterListener(defaultListener);
         return (T)this;
     }
 

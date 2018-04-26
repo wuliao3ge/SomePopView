@@ -2,6 +2,8 @@ package com.yy.somepopdemo;
 
 
 import android.app.Dialog;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,11 +21,35 @@ import com.yy.somepop.widget.DateAndTimeChoiceDialog;
 import com.yy.somepop.widget.DateChoiceDialog;
 import com.yy.somepop.widget.DefaultDialog;
 import com.yy.somepop.widget.ListDialog;
+import com.yy.somepop.widget.ProgressBarDialog;
 import com.yy.somepop.widget.TimeChoiceDialog;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import java.util.Timer;
+import java.util.TimerTask;
 
-    DefaultDialog bottomDialog;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    ProgressBarDialog progressBarDialog;
+
+
+    private final Timer timer = new Timer();
+    private TimerTask task;
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            // 要做的事情
+            super.handleMessage(msg);
+            progressBarDialog.setProgressRead(msg.what);
+        }
+    };
+
+
+
+    private int press=0;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +67,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setDialogTitle("hahahah")
                         .setDialogMessage("gagagag");
                 defaultDialog.setCanceledOnTouchOutside(false);
+                defaultDialog.setCenterListener(new DefaultListener() {
+                    @Override
+                    public void onClick(Dialog dialog) {
+                        Toast.makeText(MainActivity.this,"中间",Toast.LENGTH_LONG).show();
+                    }
+                });
 //                defaultDialog.setLeftListener(new DefaultListener() {
 //                    @Override
 //                    public void onClick(Dialog dialog) {
@@ -130,6 +162,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         })
                         .show();
+                break;
+            case R.id.btn5:
+                if(progressBarDialog==null)
+                {
+                    progressBarDialog = new ProgressBarDialog(this,R.style.dialog)
+                            .setDefaultBackground(R.drawable.bg_white)
+                            .setProgressMax(20);
+                    progressBarDialog.show();
+                }else{
+                    press = 0;
+                    progressBarDialog.show();
+                }
+
+                task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        if(press<20)
+                        {
+                            press++;
+                            handler.sendEmptyMessage(press);
+                        }else{
+                            progressBarDialog.dismiss();
+                        }
+
+                    }
+                };
+                timer.schedule(task, 1000, 1000);
                 break;
         }
     }

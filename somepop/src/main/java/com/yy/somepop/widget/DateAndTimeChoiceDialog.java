@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.yy.somepop.R;
 import com.yy.somepop.base.BaseDialog;
@@ -18,6 +19,7 @@ import com.yy.somepop.framework.DefaultListener;
 import com.yy.somepop.model.DataAndTimeChoiceModel;
 import com.yy.somepop.utils.DateAndTimeUtils;
 import com.yy.somepop.utils.TimeRange;
+import com.yy.somepop.utils.TimeUtils;
 import com.yy.somepop.wheelview.WheelView;
 
 import java.util.Calendar;
@@ -93,7 +95,7 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
                 binding.wv3.setItems(daysStrList,newIndexMin);
             }
         });
-        baseDialogModel.setRightListener(new DefaultListener() {
+        baseDialogModel.setCenterListener(new DefaultListener() {
             @Override
             public void onClick(Dialog dialog) {
                 if(dataChoiceListener!=null)
@@ -104,8 +106,8 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
                     String mSelectHour = binding.wv4.getSelectedItem();
                     String mSelectMin = binding.wv5.getSelectedItem();
                     Date date = DateAndTimeUtils.dateTimeFromCustomStr(mSelectYear,mSelectMonth,mSelectDay,mSelectHour,mSelectMin);
-//                    String time = TimeUtils.dateTimeToStr(date);
-//                    Toast.makeText(context, "selectDateTime: "+time+date.getTime(), Toast.LENGTH_SHORT).show();
+                    String time = TimeUtils.dateTimeToStr(date);
+                    Toast.makeText(context, "selectDateTime: "+time+date.getTime(), Toast.LENGTH_SHORT).show();
 //                    Log.i("selectDateTime:",String.valueOf(date.getTime()));
 //                    Log.i("longToDate：",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date.getTime())));
                     dataChoiceListener.dataChoice(date.getTime());

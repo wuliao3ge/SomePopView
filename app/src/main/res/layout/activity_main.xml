@@ -43,6 +43,13 @@
         android:onClick="onClick"
         />
 
+    <Button
+        android:id="@+id/btn5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="进度条对话框(样式目前为固定后期完善)"
+        android:onClick="onClick"
+        />
 
 
 </LinearLayout>

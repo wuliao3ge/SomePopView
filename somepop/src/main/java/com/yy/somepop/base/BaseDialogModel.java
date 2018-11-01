@@ -1,6 +1,7 @@
 package com.yy.somepop.base;
 
 import android.app.Application;
+import android.widget.TableRow;
 
 import com.yy.somepop.R;
 import com.yy.somepop.SomePopView;
@@ -70,7 +71,9 @@ public class BaseDialogModel {
     private Align titleAlign=SomePopView.getInstance().getTitleAlign();
     private Align messageAlign = SomePopView.getInstance().getMessageAlign();
 
-
+    private TableRow.LayoutParams leftLp;
+    private TableRow.LayoutParams rightLp;
+    private TableRow.LayoutParams centerLp;
 
     private BaseDialog baseDialog;
 
@@ -364,5 +367,30 @@ public class BaseDialogModel {
 
     public void setMessageAlign(Align messageAlign) {
         this.messageAlign = messageAlign;
+    }
+
+
+    public TableRow.LayoutParams getLeftLp() {
+        return leftLp;
+    }
+
+    public void setLeftLp(TableRow.LayoutParams leftLp) {
+        this.leftLp = leftLp;
+    }
+
+    public TableRow.LayoutParams getRightLp() {
+        return rightLp;
+    }
+
+    public void setRightLp(TableRow.LayoutParams rightLp) {
+        this.rightLp = rightLp;
+    }
+
+    public TableRow.LayoutParams getCenterLp() {
+        return centerLp;
+    }
+
+    public void setCenterLp(TableRow.LayoutParams centerLp) {
+        this.centerLp = centerLp;
     }
 }

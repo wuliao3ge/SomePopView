@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.yy.somepop.R;
@@ -145,6 +146,16 @@ public class AttrSettingUtils {
             view.setBackgroundColor(Res);
         }
     }
+
+
+    @BindingAdapter("setLp")
+    public static void setLp(TextView textView, TableRow.LayoutParams lp){
+        if(lp!=null)
+        {
+            textView.setLayoutParams(lp);
+        }
+    }
+
     /****** baseDialog中使用 end *****/
 
 

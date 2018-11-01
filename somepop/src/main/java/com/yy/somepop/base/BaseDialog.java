@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TableRow;
 
 import com.yy.somepop.R;
 import com.yy.somepop.databinding.DialogBaseBinding;
@@ -461,6 +462,37 @@ public abstract class BaseDialog<T> extends Dialog {
     public T isShowBtn(boolean isShow)
     {
         baseDialogModel.setShowBtn(isShow);
+        return (T)this;
+    }
+
+
+    /**
+     * 设置左按钮布局
+     * @param lp
+     * @return
+     */
+    public  T setLeftLp(@NonNull TableRow.LayoutParams lp){
+        baseDialogModel.setLeftLp(lp);
+        return (T)this;
+    }
+
+    /**
+     * 设置左按钮布局
+     * @param lp
+     * @return
+     */
+    public  T setRightLp(@NonNull TableRow.LayoutParams lp){
+        baseDialogModel.setRightLp(lp);
+        return (T)this;
+    }
+
+    /**
+     * 设置左按钮布局
+     * @param lp
+     * @return
+     */
+    public  T setCenterLp(@NonNull TableRow.LayoutParams lp){
+        baseDialogModel.setCenterLp(lp);
         return (T)this;
     }
 

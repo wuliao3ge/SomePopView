@@ -1,6 +1,7 @@
 package com.yy.somepopdemo;
 
 
+import android.app.ActionBar;
 import android.app.Dialog;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TableRow;
 import android.widget.Toast;
 
 
@@ -74,8 +76,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this,"youanniu",Toast.LENGTH_LONG).show();
                     }
                 });
-                defaultDialog.setTitleBackground(R.drawable.bg_white);
-                defaultDialog.setRightBtnBackground(R.drawable.bg_btn_forgetpwd_red);
+                defaultDialog.setRightBtnBackground(R.drawable.bg_btn_dialog_left);
+                android.widget.TableRow.LayoutParams lp = new android.widget.TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+                lp.setMargins(20, 10, 5, 10);
+                defaultDialog.setLeftLp(lp);
                 defaultDialog.setLeftBtnBackground(R.drawable.bg_btn_forgetpwd_gray);
                 defaultDialog.show();
 //                        .setDialogMessage(R.string.message)

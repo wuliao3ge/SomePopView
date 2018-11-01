@@ -129,8 +129,6 @@ public class TimeChoiceDialog extends BaseDialog<TimeChoiceDialog> {
         addView(binding.getRoot());
     }
 
-
-
     public Date getStartTime() {
         return timeRange.getStart_time();
     }

@@ -57,7 +57,9 @@ public class SomePopView {
     //    分割线大小
     private int divisionSize =R.dimen.division_size;
 
+    //标题对齐方式
     private Align titleAlign=Align.CENTER;
+    //中间消息对齐方式
     private Align messageAlign = Align.CENTER;
 
     public static SomePopView getInstance() {

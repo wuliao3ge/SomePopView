@@ -28,7 +28,7 @@ public abstract class BaseDialog<T> extends Dialog {
     protected DialogBaseBinding binding;
     private View additionalView;
     public BaseDialog(@NonNull Context context) {
-        super(context);
+        super(context,R.style.dialog);
         this.context = context;
         baseDialogModel = new BaseDialogModel(this);
         init();

@@ -7,5 +7,5 @@ package com.yy.somepop.enums;
 public enum  Align {
     LEFT,
     RIGHT,
-    CENTER;
+    CENTER
 }

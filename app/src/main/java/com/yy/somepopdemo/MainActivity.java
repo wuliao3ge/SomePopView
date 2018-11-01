@@ -29,8 +29,6 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     ProgressBarDialog progressBarDialog;
-
-
     private final Timer timer = new Timer();
     private TimerTask task;
     Handler handler = new Handler() {
@@ -42,15 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             progressBarDialog.setProgressRead(msg.what);
         }
     };
-
-
-
     private int press=0;
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (id)
         {
             case R.id.btn_default:
-                DefaultDialog defaultDialog = new DefaultDialog(this,R.style.dialog)
+                DefaultDialog defaultDialog = new DefaultDialog(this)
                         .setDialogTitle("hahahah")
                         .setDialogMessage("gagagag");
                 defaultDialog.setCanceledOnTouchOutside(false);
@@ -84,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this,"youanniu",Toast.LENGTH_LONG).show();
                     }
                 });
+                defaultDialog.setTitleBackground(R.drawable.bg_white);
+                defaultDialog.setRightBtnBackground(R.drawable.bg_btn_forgetpwd_red);
+                defaultDialog.setLeftBtnBackground(R.drawable.bg_btn_forgetpwd_gray);
                 defaultDialog.show();
 //                        .setDialogMessage(R.string.message)
 //                        .setTitleSize(R.dimen.font_title )
@@ -103,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn1:
                 new DateAndTimeChoiceDialog(this,R.style.dialog)
                         .setDialogTitle("请选择时间")
-                            .setStartTime(2018,3,5)
+//                            .setStartTime(2018,4,5)
                         .setTextColorCenter(R.color.colorPrimary)
 //                        .setBtnColor(R.color.colorPrimary)
                         .setDataChoiceListener(new DataChoiceListener() {
@@ -188,6 +181,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 };
                 timer.schedule(task, 1000, 1000);
+                break;
+            case R.id.btn6:
+
                 break;
         }
     }

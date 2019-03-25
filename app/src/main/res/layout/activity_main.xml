@@ -58,6 +58,12 @@
         android:text="全局对话框"
         android:onClick="onClick"
         />
-
+    <Button
+        android:id="@+id/btn7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="单按钮对话框"
+        android:onClick="onClick"
+        />
 
 </LinearLayout>

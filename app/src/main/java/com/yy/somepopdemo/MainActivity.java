@@ -189,6 +189,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn6:
 
                 break;
+            case R.id.btn7:
+                DefaultDialog defaultDialog2 = new DefaultDialog(this,R.style.dialog)
+                        .setDialogTitle("ddd")
+                        .setDialogMessage("cccc")
+                        .setCenterBtnText("知道了")
+                        .setCenterListener(new DefaultListener() {
+                            @Override
+                            public void onClick(Dialog dialog) {
+                            }
+                        });
+                defaultDialog2.setCanceledOnTouchOutside(false);
+                defaultDialog2.show();
+                break;
+
+
         }
     }
 

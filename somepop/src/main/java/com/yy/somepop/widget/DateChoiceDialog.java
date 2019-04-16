@@ -75,11 +75,36 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
 
         Date currentDate = new Date();
         Date startDate = getStartTime();
+        Date endDate = getEndTime();
 
-        if(startDate.getTime()<=currentDate.getTime())
+        //开始时间小于当前时间并且结束时间大于当前时间
+        if(startDate.getTime()<=currentDate.getTime()&&endDate.getTime()>=currentDate.getTime())
         {
             Calendar currentcalendar=Calendar.getInstance();
             currentcalendar.setTime(currentDate);
+            int currentyear=currentcalendar.get(Calendar.YEAR);
+            Calendar startcalendar=Calendar.getInstance();
+            startcalendar.setTime(startDate);
+            int startyear=startcalendar.get(Calendar.YEAR);
+
+            currentYearIndex = currentyear - startyear;
+            if(currentYearIndex==0)
+            {
+                currentMonthIndex = currentcalendar.get(Calendar.MONTH)-startcalendar.get(Calendar.MONTH);
+            }else{
+                currentMonthIndex = currentcalendar.get(Calendar.MONTH);
+            }
+            if(currentMonthIndex==0&&currentYearIndex==0)
+            {
+                currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-startcalendar.get(Calendar.DAY_OF_MONTH);
+            }else{
+                currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-1;
+            }
+        }
+        //开始时间小于当前时间并且结束时间也小于当前时间
+        else if(startDate.getTime()<=currentDate.getTime()&&endDate.getTime()<=currentDate.getTime()){
+            Calendar currentcalendar=Calendar.getInstance();
+            currentcalendar.setTime(endDate);
             int currentyear=currentcalendar.get(Calendar.YEAR);
             Calendar startcalendar=Calendar.getInstance();
             startcalendar.setTime(startDate);

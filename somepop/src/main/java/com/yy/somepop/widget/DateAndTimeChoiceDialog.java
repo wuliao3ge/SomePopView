@@ -82,7 +82,7 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
         Date currentDate = new Date();
         Date startDate = getStartTime();
 
-        if(startDate.getTime()<currentDate.getTime())
+        if(startDate.getTime()<=currentDate.getTime())
         {
             Calendar currentcalendar=Calendar.getInstance();
             currentcalendar.setTime(currentDate);

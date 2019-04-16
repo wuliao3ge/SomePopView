@@ -76,7 +76,7 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
         Date currentDate = new Date();
         Date startDate = getStartTime();
 
-        if(startDate.getTime()<currentDate.getTime())
+        if(startDate.getTime()<=currentDate.getTime())
         {
             Calendar currentcalendar=Calendar.getInstance();
             currentcalendar.setTime(currentDate);
@@ -88,7 +88,7 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
             currentYearIndex = currentyear - startyear;
             if(currentYearIndex==0)
             {
-                currentMonthIndex = currentcalendar.get(Calendar.MONTH)-startcalendar.get(Calendar.MINUTE);
+                currentMonthIndex = currentcalendar.get(Calendar.MONTH)-startcalendar.get(Calendar.MONTH);
             }else{
                 currentMonthIndex = currentcalendar.get(Calendar.MONTH);
             }
@@ -98,8 +98,6 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
             }else{
                 currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-1;
             }
-
-
         }
 
 

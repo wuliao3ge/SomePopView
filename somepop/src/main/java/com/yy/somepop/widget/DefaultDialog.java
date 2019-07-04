@@ -1,11 +1,10 @@
 package com.yy.somepop.widget;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.yy.somepop.base.BaseDialog;
-import com.yy.somepop.databinding.DialogBaseBinding;
 
 /**
  * Created by ly on 2017/12/27.

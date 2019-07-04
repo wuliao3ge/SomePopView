@@ -2,14 +2,13 @@ package com.yy.somepop.widget;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DimenRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import com.yy.somepop.R;
 import com.yy.somepop.base.BaseDialog;
@@ -19,7 +18,6 @@ import com.yy.somepop.framework.DefaultListener;
 import com.yy.somepop.model.DataAndTimeChoiceModel;
 import com.yy.somepop.utils.DateAndTimeUtils;
 import com.yy.somepop.utils.TimeRange;
-import com.yy.somepop.utils.TimeUtils;
 import com.yy.somepop.wheelview.WheelView;
 
 import java.util.Calendar;

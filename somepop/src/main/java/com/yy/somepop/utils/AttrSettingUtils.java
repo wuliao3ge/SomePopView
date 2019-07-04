@@ -1,16 +1,14 @@
 package com.yy.somepop.utils;
 
-import android.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.yy.somepop.R;
 import com.yy.somepop.enums.Align;
 import com.yy.somepop.wheelview.WheelView;
 

@@ -1,16 +1,14 @@
 package com.yy.somepopdemo;
 
 
-import android.app.ActionBar;
 import android.app.Dialog;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.TableRow;
 import android.widget.Toast;
 

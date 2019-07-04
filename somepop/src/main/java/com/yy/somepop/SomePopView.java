@@ -1,10 +1,9 @@
 package com.yy.somepop;
 
-import android.support.annotation.ColorRes;
-import android.support.annotation.DimenRes;
-import android.support.annotation.DrawableRes;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
+import androidx.annotation.DrawableRes;
 
-import com.yy.somepop.base.BaseDialogModel;
 import com.yy.somepop.enums.Align;
 
 /**

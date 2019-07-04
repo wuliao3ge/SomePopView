@@ -1,10 +1,9 @@
 package com.yy.somepop.model;
 
-import android.support.annotation.ColorRes;
-import android.support.annotation.DimenRes;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 
 import com.yy.somepop.R;
-import com.yy.somepop.utils.TimeRange;
 
 /**
  * <pre>

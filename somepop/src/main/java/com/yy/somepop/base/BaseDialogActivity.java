@@ -2,7 +2,7 @@ package com.yy.somepop.base;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by ly on 2018/4/28.

@@ -1,7 +1,9 @@
 package com.yy.somepop.utils;
 
+import android.content.Context;
 import android.content.Intent;
 
+import com.yy.somepop.R;
 import com.yy.somepop.wheelview.WheelView;
 
 import java.text.ParseException;
@@ -36,7 +38,7 @@ public class DateAndTimeUtils {
         return timeRange;
     }
 
-    public static List<String> buildYears(TimeRange timeRange) {
+    public static List<String> buildYears(Context context,TimeRange timeRange) {
         List<String> yearList = new ArrayList<>();
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.setTime(timeRange.getStart_time());
@@ -51,7 +53,7 @@ public class DateAndTimeUtils {
         int[] years = new int[endYear-startYear+1];
         for(int i  = 0;i<years.length;i++)
         {
-            yearList.add(startYear+i+"年");
+            yearList.add(startYear+i+context.getString(R.string.year));
         }
         return yearList;
     }
@@ -62,7 +64,7 @@ public class DateAndTimeUtils {
      * @param timeRange 开始和结束时间
      * @return
      */
-    public static List<String> buildMonths(WheelView wheelViewYear, TimeRange timeRange)
+    public static List<String> buildMonths(Context context,WheelView wheelViewYear, TimeRange timeRange)
     {
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.setTime(timeRange.getStart_time());
@@ -70,17 +72,17 @@ public class DateAndTimeUtils {
         calendarEnd.setTime(timeRange.getEnd_time());
         int startYear = calendarStart.get(Calendar.YEAR);
         int endYear = calendarEnd.get(Calendar.YEAR);
-        int currentYear = Integer.valueOf(wheelViewYear.getSelectedItem().replace("年",""));
+        int currentYear = Integer.valueOf(wheelViewYear.getSelectedItem().replace(context.getString(R.string.year),""));
         if(currentYear>startYear&&currentYear<endYear)
         {
-            return buildNomalMonthList();
+            return buildNomalMonthList(context);
         }else if(currentYear==startYear&&currentYear==endYear){
-            return buildStartAndEndMonthList(timeRange);
+            return buildStartAndEndMonthList(context,timeRange);
         }else if(currentYear == startYear)
         {
-            return buildMonthListStart(timeRange);
+            return buildMonthListStart(context,timeRange);
         }else{
-            return buildMonthListEnd(timeRange);
+            return buildMonthListEnd(context,timeRange);
         }
     }
 
@@ -89,7 +91,7 @@ public class DateAndTimeUtils {
      * @param timeRange 开始和结束时间
      * @return
      */
-    public static List<String> buildMonthListStart(TimeRange timeRange)
+    public static List<String> buildMonthListStart(Context context,TimeRange timeRange)
     {
         List<String> months = new ArrayList<>();
         Calendar calendarStart = Calendar.getInstance();
@@ -97,7 +99,7 @@ public class DateAndTimeUtils {
         int startMonth = calendarStart.get(Calendar.MONTH)+1;
         for(int i= startMonth;i<=12;i++)
         {
-            months.add(i+"月");
+            months.add(i+context.getString(R.string.month));
         }
         return months;
     }
@@ -107,7 +109,7 @@ public class DateAndTimeUtils {
      * @param timeRange 开始和结束时间
      * @return
      */
-    public static List<String> buildMonthListEnd(TimeRange timeRange)
+    public static List<String> buildMonthListEnd(Context context,TimeRange timeRange)
     {
         List<String> months = new ArrayList<>();
         Calendar calendarEnd = Calendar.getInstance();
@@ -115,7 +117,7 @@ public class DateAndTimeUtils {
         int endMonth = calendarEnd.get(Calendar.MONTH)+1;
         for(int i= 1;i<=endMonth;i++)
         {
-            months.add(i+"月");
+            months.add(i+context.getString(R.string.month));
         }
         return months;
     }
@@ -124,11 +126,11 @@ public class DateAndTimeUtils {
      * 生成全年的月份列表
      * @return
      */
-    public static List<String> buildNomalMonthList(){
+    public static List<String> buildNomalMonthList(Context context){
         List<String> months = new ArrayList<>();
         for(int i = 1;i<=12;i++)
         {
-            months.add(i+"月");
+            months.add(i+context.getString(R.string.month));
         }
         return months;
     }
@@ -138,7 +140,7 @@ public class DateAndTimeUtils {
      * @param timeRange 开始和结束时间
      * @return
      */
-    public static List<String> buildStartAndEndMonthList(TimeRange timeRange)
+    public static List<String> buildStartAndEndMonthList(Context context,TimeRange timeRange)
     {
         List<String> months = new ArrayList<>();
         Calendar calendarStart = Calendar.getInstance();
@@ -149,7 +151,7 @@ public class DateAndTimeUtils {
         int endMonth = calendarEnd.get(Calendar.MONTH)+1;
         for(int i= startMonth;i<=endMonth;i++)
         {
-            months.add(i+"月");
+            months.add(i+context.getString(R.string.month));
         }
         return months;
     }
@@ -162,22 +164,22 @@ public class DateAndTimeUtils {
      * @param timeRange 开始和结束时间
      * @return
      */
-    public static List<String> buildDays(WheelView wheelViewYear,WheelView wheelViewMonth,TimeRange timeRange) {
+    public static List<String> buildDays(Context context,WheelView wheelViewYear,WheelView wheelViewMonth,TimeRange timeRange) {
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.setTime(timeRange.getStart_time());
         Calendar calendarEnd = Calendar.getInstance();
         calendarEnd.setTime(timeRange.getEnd_time());
-        int currentYear = Integer.valueOf(wheelViewYear.getSelectedItem().replace("年",""));
-        int currentMonth = Integer.valueOf(wheelViewMonth.getSelectedItem().replace("月",""));
+        int currentYear = Integer.valueOf(wheelViewYear.getSelectedItem().replace(context.getString(R.string.year),""));
+        int currentMonth = Integer.valueOf(wheelViewMonth.getSelectedItem().replace(context.getString(R.string.month),""));
         if(isSameMonth(timeRange.getStart_time(),timeRange.getEnd_time()))
         {
-            return buildStartAndEndDayList(timeRange);
+            return buildStartAndEndDayList(context,timeRange);
         }else if(isSameMonth(currentYear,currentMonth,timeRange.getStart_time())){
-            return buildDayListStart(currentYear,currentMonth,timeRange);
+            return buildDayListStart(context,currentYear,currentMonth,timeRange);
         }else if(isSameMonth(currentYear,currentMonth,timeRange.getEnd_time())){
-            return buildDayListEnd(timeRange);
+            return buildDayListEnd(context,timeRange);
         }else{
-            return buildNomalDayList(currentYear,currentMonth);
+            return buildNomalDayList(context,currentYear,currentMonth);
         }
     }
 
@@ -186,7 +188,7 @@ public class DateAndTimeUtils {
      * @param timeRange 开始和结束时间
      * @return
      */
-    public static List<String> buildDayListStart(int currentYear,int currentMonth,TimeRange timeRange)
+    public static List<String> buildDayListStart(Context context,int currentYear,int currentMonth,TimeRange timeRange)
     {
 
         List<String> months = new ArrayList<>();
@@ -197,7 +199,7 @@ public class DateAndTimeUtils {
         int endDay = calendarStart.getActualMaximum(Calendar.DATE);
         for(int i= startDay;i<=endDay;i++)
         {
-            months.add(i+"日");
+            months.add(i+context.getString(R.string.day));
         }
         return months;
     }
@@ -207,7 +209,7 @@ public class DateAndTimeUtils {
      * @param timeRange 开始和结束时间
      * @return
      */
-    public static List<String> buildDayListEnd(TimeRange timeRange)
+    public static List<String> buildDayListEnd(Context context,TimeRange timeRange)
     {
         List<String> days = new ArrayList<>();
         Calendar calendarEnd = Calendar.getInstance();
@@ -215,7 +217,7 @@ public class DateAndTimeUtils {
         int endDay = calendarEnd.get(Calendar.DAY_OF_MONTH);
         for(int i= 1;i<=endDay;i++)
         {
-            days.add(i+"日");
+            days.add(i+context.getString(R.string.day));
         }
         return days;
     }
@@ -224,14 +226,14 @@ public class DateAndTimeUtils {
      * 生成整个月的日期
      * @return
      */
-    public static List<String> buildNomalDayList(int currentYear,int currentMonth){
+    public static List<String> buildNomalDayList(Context context,int currentYear,int currentMonth){
         List<String> days = new ArrayList<>();
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.set(currentYear,currentMonth,0);
         int endDay = calendarStart.getActualMaximum(Calendar.DATE);
         for(int i = 1;i<=endDay;i++)
         {
-            days.add(i+"日");
+            days.add(i+context.getString(R.string.day));
         }
         return days;
     }
@@ -241,7 +243,7 @@ public class DateAndTimeUtils {
      * @param timeRange 开始和结束时间
      * @return
      */
-    public static List<String> buildStartAndEndDayList(TimeRange timeRange)
+    public static List<String> buildStartAndEndDayList(Context context,TimeRange timeRange)
     {
         List<String> days = new ArrayList<>();
         Calendar calendarStart = Calendar.getInstance();
@@ -252,7 +254,7 @@ public class DateAndTimeUtils {
         int endDay = calendarEnd.get(Calendar.DAY_OF_MONTH);
         for(int i= starDay;i<=endDay;i++)
         {
-            days.add(i+"日");
+            days.add(i+context.getString(R.string.day));
         }
         return days;
     }
@@ -278,6 +280,32 @@ public class DateAndTimeUtils {
         }
         return date;
     }
+
+
+    /**
+     * 根据选择的年月日时分生成deta
+     * @param year 年
+     * @param month 月
+     * @param day 日
+     * @return
+     */
+    public static final Date dateTimeFromCustomStr(Context context, String year, String month,
+                                                   String day){
+        Date date=new Date();
+
+        String s = "yyyy"+ context.getString(R.string.year)
+                +"MM"+context.getString(R.string.month)
+                +"dd"+context.getString(R.string.day);
+        SimpleDateFormat sdf=new SimpleDateFormat(s);//小写的mm表示的是分钟
+        String dstr=year+month+day;
+        try {
+            date = sdf.parse(dstr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
 
     /**
      * 根据选择的年月日时分生成deta
@@ -306,10 +334,10 @@ public class DateAndTimeUtils {
      * @param min 分
      * @return
      */
-    public static final Date dateTimeFromCustomStr(String hour, String min){
+    public static final Date dateTimeFromCustomStr(Context context,String hour, String min){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,Integer.valueOf(hour.replace("点","")));
-        calendar.set(Calendar.MINUTE,Integer.valueOf(min.replace("分","")));
+        calendar.set(Calendar.HOUR_OF_DAY,Integer.valueOf(hour.replace(context.getString(R.string.hour),"")));
+        calendar.set(Calendar.MINUTE,Integer.valueOf(min.replace(context.getString(R.string.minute),"")));
         return calendar.getTime();
     }
 
@@ -476,40 +504,40 @@ public class DateAndTimeUtils {
 
         return  daysList;
     }
-    public static ArrayList buildHoursByDay(WheelView wheelViewDay, TimeRange timeRange) {
+    public static ArrayList buildHoursByDay(Context context,WheelView wheelViewDay, TimeRange timeRange) {
         if (wheelViewDay.getSelectedPosition() == 0) {
-            return buildHourListStart(timeRange);
+            return buildHourListStart(context,timeRange);
         } else if (wheelViewDay.getSelectedPosition() == wheelViewDay.getSize() - 1) {
-            return buildHourListEnd(timeRange);
+            return buildHourListEnd(context,timeRange);
         }else {
-            return buildNomalHourList();
+            return buildNomalHourList(context);
         }
     }
 
-    public static ArrayList buildHoursByDay(TimeRange timeRange) {
+    public static ArrayList buildHoursByDay(Context context,TimeRange timeRange) {
         if(isSameDay(timeRange.getStart_time(),timeRange.getEnd_time()))
         {
-            return buildHourListStartAndEnd(timeRange);
+            return buildHourListStartAndEnd(context,timeRange);
         }else {
-            return buildNomalHourList();
+            return buildNomalHourList(context);
         }
 
     }
 
 
 
-    public static List<String> buildMinutesByDayHour(WheelView wheelViewDay, WheelView wheelViewHour, TimeRange timeRange) {
+    public static List<String> buildMinutesByDayHour(Context context,WheelView wheelViewDay, WheelView wheelViewHour, TimeRange timeRange) {
         if (wheelViewDay.getSelectedPosition() == 0 && wheelViewHour.getSelectedPosition() == 0) {
-            return buildMinuteListStart(timeRange);
+            return buildMinuteListStart(context,timeRange);
         } else if (wheelViewDay.getSelectedPosition() == wheelViewDay.getSize() - 1 &&
                 wheelViewHour.getSelectedPosition() == wheelViewHour.getSize() - 1) {
-            return buildMinuteListEnd(timeRange);
+            return buildMinuteListEnd(context,timeRange);
         } else {
-            return buildNomalMinuteList();
+            return buildNomalMinuteList(context);
         }
     }
 
-    public static ArrayList buildHourListStart(TimeRange timeRange) {
+    public static ArrayList buildHourListStart(Context context,TimeRange timeRange) {
         Date dateStart = timeRange.getStart_time();
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.setTime(dateStart);
@@ -531,21 +559,21 @@ public class DateAndTimeUtils {
         }
 
         for (int i = hourStart; i <= hourEnd; i++) {
-            hourList.add(i + "点");
+            hourList.add(i + context.getString(R.string.hour));
         }
 
         return hourList;
     }
-    public static ArrayList buildNomalHourList() {
+    public static ArrayList buildNomalHourList(Context context) {
         ArrayList hourList = new ArrayList<>();
 
         for (int i = 0; i < 24; i++) {
-            hourList.add(i + "点");
+            hourList.add(i + context.getString(R.string.hour));
         }
 
         return hourList;
     }
-    public static ArrayList buildHourListEnd(TimeRange timeRange) {
+    public static ArrayList buildHourListEnd(Context context,TimeRange timeRange) {
         Date dateEnd = timeRange.getEnd_time();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateEnd);
@@ -555,13 +583,13 @@ public class DateAndTimeUtils {
         ArrayList hourList = new ArrayList<>();
 
         for (int i = 0; i <= hourEnd; i++) {
-            hourList.add(i + "点");
+            hourList.add(i + context.getString(R.string.hour));
         }
 
         return hourList;
     }
 
-    public static ArrayList buildHourListStartAndEnd(TimeRange timeRange) {
+    public static ArrayList buildHourListStartAndEnd(Context context,TimeRange timeRange) {
 
         Calendar startcalendar = Calendar.getInstance();
         startcalendar.setTime(timeRange.getStart_time());
@@ -573,12 +601,12 @@ public class DateAndTimeUtils {
         ArrayList hourList = new ArrayList<>();
 
         for (int i = hourstart; i <= hourEnd; i++) {
-            hourList.add(i + "点");
+            hourList.add(i + context.getString(R.string.hour));
         }
         return hourList;
     }
 
-    public static List<String> buildMinute(int hour,TimeRange timeRange){
+    public static List<String> buildMinute(Context context,int hour,TimeRange timeRange){
 
         Calendar startcalendar = Calendar.getInstance();
         startcalendar.setTime(timeRange.getStart_time());
@@ -586,51 +614,50 @@ public class DateAndTimeUtils {
         endcalendar.setTime(timeRange.getEnd_time());
         if(isSameHour(timeRange.getStart_time(),timeRange.getEnd_time()))
         {
-            return buildMinuteListStartAndEnd(timeRange);
+            return buildMinuteListStartAndEnd(context,timeRange);
         } else if(hour==startcalendar.get(Calendar.HOUR_OF_DAY))
         {
-            return buildMinuteListStart(timeRange);
+            return buildMinuteListStart(context,timeRange);
         }else if(hour==endcalendar.get(Calendar.HOUR_OF_DAY))
         {
-            return buildHourListEnd(timeRange);
+            return buildHourListEnd(context,timeRange);
         }else{
-            return buildNomalMinuteList();
+            return buildNomalMinuteList(context);
         }
     }
 
 
-    public static List<String> buildMinuteListStart(TimeRange timeRange ) {
+    public static List<String> buildMinuteListStart(Context context,TimeRange timeRange ) {
         Date dateStart = timeRange.getStart_time();
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.setTime(dateStart);
         List<String> minList = new ArrayList<>();
         for(int i= calendarStart.get(Calendar.MINUTE);i<60;i++)
         {
-            minList.add(i + "分");
+            minList.add(i + context.getString(R.string.minute));
         }
         return minList;
     }
-    public static List<String> buildMinuteListEnd(TimeRange timeRange) {
+    public static List<String> buildMinuteListEnd(Context context,TimeRange timeRange) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(timeRange.getEnd_time());
         int minEnd = calendar.get(Calendar.MINUTE);
         List<String> minList = new ArrayList<>();
         for (int i = 0; i <= minEnd; i ++) {
-            minList.add(i + "分");
+            minList.add(i + context.getString(R.string.minute));
         }
 
         return minList;
     }
-    public static List<String> buildNomalMinuteList() {
+    public static List<String> buildNomalMinuteList(Context context) {
         List<String> minuteList = new ArrayList<>();
-
         for (int i = 0; i < 60; i ++) {
-            minuteList.add(i + "分");
+            minuteList.add(i + context.getString(R.string.minute));
         }
         return minuteList;
     }
 
-    public static ArrayList buildMinuteListStartAndEnd(TimeRange timeRange) {
+    public static ArrayList buildMinuteListStartAndEnd(Context context,TimeRange timeRange) {
         Calendar startcalendar = Calendar.getInstance();
         startcalendar.setTime(timeRange.getEnd_time());
         Calendar endcalendar = Calendar.getInstance();
@@ -640,7 +667,7 @@ public class DateAndTimeUtils {
         ArrayList minList = new ArrayList<>();
 
         for (int i = minstart; i <= minEnd; i ++) {
-            minList.add(i + "分");
+            minList.add(i + context.getString(R.string.minute));
         }
 
         return minList;

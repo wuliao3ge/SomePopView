@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SlidePicker</string>
+    <string name="confirm">confirm</string>
+    <string name="cancel">cancel</string>
+    <string name="title">title</string>
+    <string name="message">message</string>
+    <string name="year">year</string>
+    <string name="month">month</string>
+    <string name="day">day</string>
+    <string name="hour">hour</string>
+    <string name="minute">minute</string>
+    <string name="second">second</string>
+</resources>
+

@@ -2,18 +2,18 @@ package com.yy.somepop.widget;
 
 import android.app.Dialog;
 import android.content.Context;
-import androidx.databinding.DataBindingUtil;
+import android.view.LayoutInflater;
+import android.view.View;
+
 import androidx.annotation.ColorRes;
 import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import android.view.LayoutInflater;
-import android.view.View;
+import androidx.databinding.DataBindingUtil;
 
 import com.yy.somepop.R;
 import com.yy.somepop.base.BaseDialog;
-import com.yy.somepop.databinding.DialogSelectDateBinding;
+import com.yy.somepop.databinding.DialogBirthdayBinding;
 import com.yy.somepop.framework.DataChoiceListener;
 import com.yy.somepop.framework.DefaultListener;
 import com.yy.somepop.model.DataAndTimeChoiceModel;
@@ -25,39 +25,40 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by ly on 2017/12/25.
- */
-
-public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
+public class BirthdayChoiceDialog extends BaseDialog<BirthdayChoiceDialog> {
 
     private DataChoiceListener dataChoiceListener;
+    private DialogBirthdayBinding binding;
     private TimeRange timeRange;
-    private DialogSelectDateBinding binding;
+
+
+
     private DataAndTimeChoiceModel model;
-
-
     private int currentYearIndex = 0;
     private int currentMonthIndex = 0;
     private int currentDayIndex = 0;
+    private int currentHourIndex = 0;
+    private int currentMinuIndex = 0;
 
-    public DateChoiceDialog(@NonNull Context context) {
+
+    public BirthdayChoiceDialog(@NonNull Context context) {
         super(context);
     }
 
-    public DateChoiceDialog(@NonNull Context context, int themeResId) {
+    public BirthdayChoiceDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
     }
 
-    protected DateChoiceDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    protected BirthdayChoiceDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
+
 
     @Override
     public void init() {
         model = new DataAndTimeChoiceModel();
         timeRange = DateAndTimeUtils.getTimeRange();
-        View outerView = LayoutInflater.from(context).inflate(R.layout.dialog_select_date,
+        View outerView = LayoutInflater.from(context).inflate(R.layout.dialog_birthday,
                 null);
         binding = DataBindingUtil.bind(outerView);
     }
@@ -71,7 +72,6 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
         Date startDate = getStartTime();
         Date endDate = getEndTime();
 
-        //开始时间小于当前时间并且结束时间大于当前时间
         if(startDate.getTime()<=currentDate.getTime()&&endDate.getTime()>=currentDate.getTime())
         {
             Calendar currentcalendar=Calendar.getInstance();
@@ -80,19 +80,34 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
             Calendar startcalendar=Calendar.getInstance();
             startcalendar.setTime(startDate);
             int startyear=startcalendar.get(Calendar.YEAR);
-
             currentYearIndex = currentyear - startyear;
+//
             if(currentYearIndex==0)
             {
                 currentMonthIndex = currentcalendar.get(Calendar.MONTH)-startcalendar.get(Calendar.MONTH);
             }else{
                 currentMonthIndex = currentcalendar.get(Calendar.MONTH);
             }
+
             if(currentMonthIndex==0&&currentYearIndex==0)
             {
                 currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-startcalendar.get(Calendar.DAY_OF_MONTH);
             }else{
                 currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-1;
+            }
+
+            if(currentMonthIndex==0&&currentYearIndex==0&&currentDayIndex==0)
+            {
+                currentHourIndex = currentcalendar.get(Calendar.HOUR_OF_DAY)-startcalendar.get(Calendar.HOUR_OF_DAY);
+            }else{
+                currentHourIndex = currentcalendar.get(Calendar.HOUR_OF_DAY);
+            }
+
+            if(currentMonthIndex==0&&currentYearIndex==0&&currentDayIndex==0&&currentHourIndex==0)
+            {
+                currentMinuIndex = currentcalendar.get(Calendar.MINUTE)-startcalendar.get(Calendar.MINUTE);
+            }else{
+                currentMinuIndex = currentcalendar.get(Calendar.MINUTE);
             }
         }
         //开始时间小于当前时间并且结束时间也小于当前时间
@@ -103,26 +118,41 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
             Calendar startcalendar=Calendar.getInstance();
             startcalendar.setTime(startDate);
             int startyear=startcalendar.get(Calendar.YEAR);
-
             currentYearIndex = currentyear - startyear;
+//
             if(currentYearIndex==0)
             {
                 currentMonthIndex = currentcalendar.get(Calendar.MONTH)-startcalendar.get(Calendar.MONTH);
             }else{
                 currentMonthIndex = currentcalendar.get(Calendar.MONTH);
             }
+
             if(currentMonthIndex==0&&currentYearIndex==0)
             {
                 currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-startcalendar.get(Calendar.DAY_OF_MONTH);
             }else{
                 currentDayIndex = currentcalendar.get(Calendar.DAY_OF_MONTH)-1;
             }
+
+            if(currentMonthIndex==0&&currentYearIndex==0&&currentDayIndex==0)
+            {
+                currentHourIndex = currentcalendar.get(Calendar.HOUR_OF_DAY)-startcalendar.get(Calendar.HOUR_OF_DAY);
+            }else{
+                currentHourIndex = currentcalendar.get(Calendar.HOUR_OF_DAY);
+            }
+
+            if(currentMonthIndex==0&&currentYearIndex==0&&currentDayIndex==0&&currentHourIndex==0)
+            {
+                currentMinuIndex = currentcalendar.get(Calendar.MINUTE)-startcalendar.get(Calendar.MINUTE);
+            }else{
+                currentMinuIndex = currentcalendar.get(Calendar.MINUTE);
+            }
         }
 
-
-        binding.wv1.setItems(DateAndTimeUtils.buildYears(context,timeRange),currentYearIndex);
+        binding.wv1.setItems(DateAndTimeUtils.buildYears(context,timeRange), currentYearIndex);
         binding.wv2.setItems(DateAndTimeUtils.buildMonths(context,binding.wv1,timeRange),currentMonthIndex);
         binding.wv3.setItems(DateAndTimeUtils.buildDays(context,binding.wv1,binding.wv2,timeRange),currentDayIndex);
+
         //联动逻辑效果
         binding.wv1.setOnItemSelectedListener(new WheelView.OnItemSelectedListener() {
             @Override
@@ -148,11 +178,7 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
                     String mSelectYear = binding.wv1.getSelectedItem();
                     String mSelectMonth = binding.wv2.getSelectedItem();
                     String mSelectDay = binding.wv3.getSelectedItem();
-                    Date date = DateAndTimeUtils.dateTimeFromCustomStr(mSelectYear,mSelectMonth,mSelectDay);
-//                    String time = TimeUtils.dateTimeToStr(date);
-//                    Toast.makeText(context, "selectDateTime: "+time+date.getTime(), Toast.LENGTH_SHORT).show();
-//                    Log.i("selectDateTime:",String.valueOf(date.getTime()));
-//                    Log.i("longToDate：",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date.getTime())));
+                    Date date = DateAndTimeUtils.dateTimeFromCustomStr(context,mSelectYear,mSelectMonth,mSelectDay);
                     dataChoiceListener.dataChoice(date.getTime());
                 }
             }
@@ -163,13 +189,12 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
 
 
 
-
-
     public Date getStartTime() {
         return timeRange.getStart_time();
     }
 
-    public DateChoiceDialog setStartTime(Date startTime) {
+    public BirthdayChoiceDialog setStartTime(Date startTime) {
+//        this.startTime = startTime;
         timeRange.setStart_time(startTime);
         return this;
     }
@@ -178,19 +203,22 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
         return timeRange.getEnd_time();
     }
 
-    public DateChoiceDialog setEndTime(Date endTime) {
+    public BirthdayChoiceDialog setEndTime(Date endTime) {
         timeRange.setEnd_time(endTime);
         return this;
     }
 
 
-    public DateChoiceDialog setStartTime(int year,int month,int day) {
+
+
+
+    public BirthdayChoiceDialog setStartTime(int year,int month,int day) {
 
         timeRange.setStart_time(year,month,day);
         return this;
     }
 
-    public DateChoiceDialog setEndTime(int year,int month,int day) {
+    public BirthdayChoiceDialog setEndTime(int year,int month,int day) {
         timeRange.setEnd_time(year,month,day);
         return this;
     }
@@ -199,69 +227,66 @@ public class DateChoiceDialog extends BaseDialog<DateChoiceDialog> {
         return dataChoiceListener;
     }
 
-    public DateChoiceDialog setDataChoiceListener(DataChoiceListener dataChoiceListener) {
+    public BirthdayChoiceDialog setDataChoiceListener(DataChoiceListener dataChoiceListener) {
         this.dataChoiceListener = dataChoiceListener;
         return this;
     }
 
-    public DateChoiceDialog setLineColor(@ColorRes int Res) {
+
+    public BirthdayChoiceDialog setLineColor(@ColorRes int Res) {
         model.setLineColor(Res);
         return this;
     }
 
-    public DateChoiceDialog setInterval(int interval) {
+    public BirthdayChoiceDialog setInterval(int interval) {
         model.setInterval(interval);
         return this;
     }
 
-
-
-
-    public DateChoiceDialog setItemsVisible(int itemsVisible) {
+    public BirthdayChoiceDialog setItemsVisible(int itemsVisible) {
         model.setItemsVisible(itemsVisible);
         return this;
     }
 
 
 
-    public DateChoiceDialog setTextSizeCenter(@DimenRes int textSizeCenter) {
+    public BirthdayChoiceDialog setTextSizeCenter(@DimenRes int textSizeCenter) {
         model.setTextSizeCenter(textSizeCenter);
         return this;
     }
 
 
 
-    public DateChoiceDialog setTextSizeOuter(@DimenRes int textSizeOuter) {
+    public BirthdayChoiceDialog setTextSizeOuter(@DimenRes int textSizeOuter) {
         model.setTextSizeOuter(textSizeOuter);
         return this;
     }
 
 
 
-    public DateChoiceDialog setTextColorOuter(@ColorRes int textColorOuter) {
+    public BirthdayChoiceDialog setTextColorOuter(@ColorRes int textColorOuter) {
         model.setTextColorOuter(textColorOuter);
         return this;
     }
 
 
 
-    public DateChoiceDialog setTextColorCenter(@ColorRes int textColorCenter) {
+    public BirthdayChoiceDialog setTextColorCenter(@ColorRes int textColorCenter) {
         model.setTextColorCenter(textColorCenter);
         return this;
     }
 
 
 
-    public DateChoiceDialog setLoop(boolean loop) {
+    public BirthdayChoiceDialog setLoop(boolean loop) {
         model.setLoop(loop);
         return this;
     }
 
 
 
-    public DateChoiceDialog setLineHeight(@DimenRes int lineHeight) {
+    public BirthdayChoiceDialog setLineHeight(@DimenRes int lineHeight) {
         model.setLineHeight(lineHeight);
         return this;
     }
-
 }

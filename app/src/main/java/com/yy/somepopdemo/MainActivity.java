@@ -19,6 +19,7 @@ import com.yy.somepop.framework.DataChoiceListener;
 
 import com.yy.somepop.framework.DefaultListener;
 import com.yy.somepop.framework.ListItemListener;
+import com.yy.somepop.widget.BirthdayChoiceDialog;
 import com.yy.somepop.widget.DateAndTimeChoiceDialog;
 import com.yy.somepop.widget.DateChoiceDialog;
 import com.yy.somepop.widget.DefaultDialog;
@@ -205,13 +206,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn8:
                 ProgressBar progressBar = new ProgressBar(this);
-
-
                 new LodingDialog(this)
                         .setView(progressBar)
                         .show();
                 break;
-
+            case R.id.btn9:
+                new BirthdayChoiceDialog(this,R.style.dialog)
+                        .setDialogTitle("请选择时间")
+//                            .setStartTime(2018,4,5)
+                        .setTextColorCenter(R.color.colorPrimary)
+//                        .setBtnColor(R.color.colorPrimary)
+                        .setDataChoiceListener(new DataChoiceListener() {
+                            @Override
+                            public void dataChoice(long time) {
+                                Log.i("时间选择器",time+"");
+                            }
+                        })
+                        .show();
+                break;
 
         }
     }

@@ -158,17 +158,17 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
             }
         }
 
-        binding.wv1.setItems(DateAndTimeUtils.buildYears(timeRange), currentYearIndex);
-        binding.wv2.setItems(DateAndTimeUtils.buildMonths(binding.wv1,timeRange),currentMonthIndex);
-        binding.wv3.setItems(DateAndTimeUtils.buildDays(binding.wv1,binding.wv2,timeRange),currentDayIndex);
-        binding.wv4.setItems(DateAndTimeUtils.buildNomalHourList(),currentHourIndex);
-        binding.wv5.setItems(DateAndTimeUtils.buildNomalMinuteList(),currentMinuIndex);
+        binding.wv1.setItems(DateAndTimeUtils.buildYears(context,timeRange), currentYearIndex);
+        binding.wv2.setItems(DateAndTimeUtils.buildMonths(context,binding.wv1,timeRange),currentMonthIndex);
+        binding.wv3.setItems(DateAndTimeUtils.buildDays(context,binding.wv1,binding.wv2,timeRange),currentDayIndex);
+        binding.wv4.setItems(DateAndTimeUtils.buildNomalHourList(context),currentHourIndex);
+        binding.wv5.setItems(DateAndTimeUtils.buildNomalMinuteList(context),currentMinuIndex);
 
         //联动逻辑效果
         binding.wv1.setOnItemSelectedListener(new WheelView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index,String item) {
-                List<String> monthsStrList = DateAndTimeUtils.buildMonths(binding.wv1,timeRange);
+                List<String> monthsStrList = DateAndTimeUtils.buildMonths(context,binding.wv1,timeRange);
                 int newIndexHour = monthsStrList.indexOf(binding.wv2.getSelectedItem());
                 binding.wv2.setItems(monthsStrList,newIndexHour);
             }
@@ -176,7 +176,7 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
         binding.wv2.setOnItemSelectedListener(new WheelView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index,String item) {
-                List<String> daysStrList = DateAndTimeUtils.buildDays(binding.wv1, binding.wv2, timeRange);
+                List<String> daysStrList = DateAndTimeUtils.buildDays(context,binding.wv1, binding.wv2, timeRange);
                 int newIndexMin = daysStrList.indexOf(binding.wv3.getSelectedItem());
                 binding.wv3.setItems(daysStrList,newIndexMin);
             }

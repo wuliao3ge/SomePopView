@@ -96,13 +96,13 @@ public class TimeChoiceDialog extends BaseDialog<TimeChoiceDialog> {
             }
         }
 
-        binding.wv1.setItems(DateAndTimeUtils.buildHoursByDay(timeRange), currentHourIndex);
-        binding.wv2.setItems(DateAndTimeUtils.buildMinute(Integer.valueOf(binding.wv1.getSelectedItem().replace("点","")), timeRange), currentMinuIndex);
+        binding.wv1.setItems(DateAndTimeUtils.buildHoursByDay(context,timeRange), currentHourIndex);
+        binding.wv2.setItems(DateAndTimeUtils.buildMinute(context,Integer.valueOf(binding.wv1.getSelectedItem().replace("点","")), timeRange), currentMinuIndex);
         //联动逻辑效果
         binding.wv1.setOnItemSelectedListener(new WheelView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index, String item) {
-                List<String> monthsStrList = DateAndTimeUtils.buildMinute(Integer.valueOf(binding.wv1.getSelectedItem().replace("点","")), timeRange);
+                List<String> monthsStrList = DateAndTimeUtils.buildMinute(context,Integer.valueOf(binding.wv1.getSelectedItem().replace("点","")), timeRange);
                 int newIndexHour = monthsStrList.indexOf(binding.wv2.getSelectedItem());
                 binding.wv2.setItems(monthsStrList, newIndexHour);
             }
@@ -113,7 +113,7 @@ public class TimeChoiceDialog extends BaseDialog<TimeChoiceDialog> {
                 if (dataChoiceListener != null) {
                     String mSelectHour = binding.wv1.getSelectedItem();
                     String mSelectMin = binding.wv2.getSelectedItem();
-                    Date date = DateAndTimeUtils.dateTimeFromCustomStr(mSelectHour, mSelectMin);
+                    Date date = DateAndTimeUtils.dateTimeFromCustomStr(context,mSelectHour, mSelectMin);
 //                    String time = TimeUtils.dateTimeToStr(date);
 //                    Toast.makeText(context, "selectDateTime: " + time + date.getTime(), Toast.LENGTH_SHORT).show();
 //                    Log.i("selectDateTime:", String.valueOf(date.getTime()));

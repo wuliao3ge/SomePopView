@@ -54,12 +54,19 @@ public class ListDialog extends BaseDialog<ListDialog>{
         isShowBtn(false);
     }
 
-
     public ListDialog addItem(String s)
     {
         list.add(s);
         return this;
     }
+
+    public ListDialog addItem(int s)
+    {
+        list.add(context.getString(s));
+        return this;
+    }
+
+
     public ListDialog addAllItem(List<String> list)
     {
         list.addAll(list);

@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.yy.somepop.widget.DateAndTimeChoiceDialog;
 import com.yy.somepop.widget.DateChoiceDialog;
 import com.yy.somepop.widget.DefaultDialog;
 import com.yy.somepop.widget.ListDialog;
+import com.yy.somepop.widget.LodingDialog;
 import com.yy.somepop.widget.ProgressBarDialog;
 import com.yy.somepop.widget.TimeChoiceDialog;
 
@@ -199,6 +202,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
                 defaultDialog2.setCanceledOnTouchOutside(false);
                 defaultDialog2.show();
+                break;
+            case R.id.btn8:
+                ProgressBar progressBar = new ProgressBar(this);
+
+
+                new LodingDialog(this)
+                        .setView(progressBar)
+                        .show();
                 break;
 
 

@@ -191,7 +191,7 @@ public class DateAndTimeChoiceDialog extends BaseDialog<DateAndTimeChoiceDialog>
                     String mSelectDay = binding.wv3.getSelectedItem();
                     String mSelectHour = binding.wv4.getSelectedItem();
                     String mSelectMin = binding.wv5.getSelectedItem();
-                    Date date = DateAndTimeUtils.dateTimeFromCustomStr(mSelectYear,mSelectMonth,mSelectDay,mSelectHour,mSelectMin);
+                    Date date = DateAndTimeUtils.dateTimeFromCustomStr(context,mSelectYear,mSelectMonth,mSelectDay,mSelectHour,mSelectMin);
 //                    String time = TimeUtils.dateTimeToStr(date);
 //                    Toast.makeText(context, "selectDateTime: "+time+date.getTime(), Toast.LENGTH_SHORT).show();
 //                    Log.i("selectDateTime:",String.valueOf(date.getTime()));

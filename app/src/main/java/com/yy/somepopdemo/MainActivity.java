@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
@@ -19,7 +18,6 @@ import com.yy.somepop.framework.DataChoiceListener;
 
 import com.yy.somepop.framework.DefaultListener;
 import com.yy.somepop.framework.ListItemListener;
-import com.yy.somepop.widget.BirthdayChoiceDialog;
 import com.yy.somepop.widget.DateAndTimeChoiceDialog;
 import com.yy.somepop.widget.DateChoiceDialog;
 import com.yy.somepop.widget.DefaultDialog;
@@ -78,11 +76,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this,"youanniu",Toast.LENGTH_LONG).show();
                     }
                 });
-                defaultDialog.setRightBtnBackground(R.drawable.bg_btn_dialog_left);
-                android.widget.TableRow.LayoutParams lp = new android.widget.TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
-                lp.setMargins(20, 10, 5, 10);
-                defaultDialog.setLeftLp(lp);
-                defaultDialog.setLeftBtnBackground(R.drawable.bg_btn_forgetpwd_gray);
+//                defaultDialog.setRightBtnBackground(R.drawable.bg_btn_dialog_left);
+//                android.widget.TableRow.LayoutParams lp = new android.widget.TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+//                lp.setMargins(20, 10, 5, 10);
+//                defaultDialog.setLeftLp(lp);
+//                defaultDialog.setLeftBtnBackground(R.drawable.bg_btn_forgetpwd_gray);
                 defaultDialog.show();
 //                        .setDialogMessage(R.string.message)
 //                        .setTitleSize(R.dimen.font_title )
@@ -210,21 +208,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setView(progressBar)
                         .show();
                 break;
-            case R.id.btn9:
-                new BirthdayChoiceDialog(this,R.style.dialog)
-                        .setDialogTitle("请选择时间")
-//                            .setStartTime(2018,4,5)
-                        .setTextColorCenter(R.color.colorPrimary)
-//                        .setBtnColor(R.color.colorPrimary)
-                        .setDataChoiceListener(new DataChoiceListener() {
-                            @Override
-                            public void dataChoice(long time) {
-                                Log.i("时间选择器",time+"");
-                            }
-                        })
-                        .show();
-                break;
-
         }
     }
 

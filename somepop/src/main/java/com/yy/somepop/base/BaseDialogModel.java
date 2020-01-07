@@ -83,6 +83,9 @@ public class BaseDialogModel {
 
     public BaseDialogModel(BaseDialog baseDialog) {
         this.baseDialog = baseDialog;
+        leftbtntext = baseDialog.getContext().getString(R.string.cancel);
+        rightbtntext = baseDialog.getContext().getString(R.string.confirm);
+        centerbtntext = baseDialog.getContext().getString(R.string.confirm);
     }
 
     public void onLeftListener(){

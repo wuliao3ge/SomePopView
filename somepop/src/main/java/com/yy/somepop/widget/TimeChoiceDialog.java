@@ -97,12 +97,12 @@ public class TimeChoiceDialog extends BaseDialog<TimeChoiceDialog> {
         }
 
         binding.wv1.setItems(DateAndTimeUtils.buildHoursByDay(context,timeRange), currentHourIndex);
-        binding.wv2.setItems(DateAndTimeUtils.buildMinute(context,Integer.valueOf(binding.wv1.getSelectedItem().replace("点","")), timeRange), currentMinuIndex);
+        binding.wv2.setItems(DateAndTimeUtils.buildMinute(context,Integer.valueOf(binding.wv1.getSelectedItem().replace(context.getString(R.string.hour),"")), timeRange), currentMinuIndex);
         //联动逻辑效果
         binding.wv1.setOnItemSelectedListener(new WheelView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index, String item) {
-                List<String> monthsStrList = DateAndTimeUtils.buildMinute(context,Integer.valueOf(binding.wv1.getSelectedItem().replace("点","")), timeRange);
+                List<String> monthsStrList = DateAndTimeUtils.buildMinute(context,Integer.valueOf(binding.wv1.getSelectedItem().replace(context.getString(R.string.hour),"")), timeRange);
                 int newIndexHour = monthsStrList.indexOf(binding.wv2.getSelectedItem());
                 binding.wv2.setItems(monthsStrList, newIndexHour);
             }

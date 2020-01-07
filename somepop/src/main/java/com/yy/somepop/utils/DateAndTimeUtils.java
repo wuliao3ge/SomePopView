@@ -268,11 +268,16 @@ public class DateAndTimeUtils {
      * @param min 分
      * @return
      */
-    public static final Date dateTimeFromCustomStr(String year,String month,
+    public static final Date dateTimeFromCustomStr(Context context,String year,String month,
                                                    String day,String hour, String min){
         Date date=new Date();
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日HH点mm分");//小写的mm表示的是分钟
-        String dstr=year+month+day+hour+min;
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");//小写的mm表示的是分钟
+        year = year.replace(context.getString(R.string.year),"");
+        month = month.replace(context.getString(R.string.month),"");
+        day = day.replace(context.getString(R.string.day),"");
+        hour = hour.replace(context.getString(R.string.hour),"");
+        min = min.replace(context.getString(R.string.minute),"");
+        String dstr=year+"-"+month+"-"+day+" "+hour+":"+min;
         try {
             date = sdf.parse(dstr);
         } catch (ParseException e) {
@@ -292,33 +297,11 @@ public class DateAndTimeUtils {
     public static final Date dateTimeFromCustomStr(Context context, String year, String month,
                                                    String day){
         Date date=new Date();
-
-        String s = "yyyy"+ context.getString(R.string.year)
-                +"MM"+context.getString(R.string.month)
-                +"dd"+context.getString(R.string.day);
-        SimpleDateFormat sdf=new SimpleDateFormat(s);//小写的mm表示的是分钟
-        String dstr=year+month+day;
-        try {
-            date = sdf.parse(dstr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
-    }
-
-
-    /**
-     * 根据选择的年月日时分生成deta
-     * @param year 年
-     * @param month 月
-     * @param day 日
-     * @return
-     */
-    public static final Date dateTimeFromCustomStr(String year,String month,
-                                                   String day){
-        Date date=new Date();
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");//小写的mm表示的是分钟
-        String dstr=year+month+day;
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
+        year = year.replace(context.getString(R.string.year),"");
+        month = month.replace(context.getString(R.string.month),"");
+        day = day.replace(context.getString(R.string.day),"");
+        String dstr=year+"-"+month+"-"+day;
         try {
             date = sdf.parse(dstr);
         } catch (ParseException e) {

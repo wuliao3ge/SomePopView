@@ -389,6 +389,16 @@ public abstract class BaseDialog<T> extends Dialog {
 
 
     /**
+     * 设置右侧按钮背景
+     * @param id 背景id
+     * @return
+     */
+    public  T setCenterBtnBackground(@DrawableRes int id){
+        baseDialogModel.setCenterBtnBackground(id);
+        return (T)this;
+    }
+
+    /**
      * 设置是否显示横向分割线
      * @param  ishsow 是否显示
      * @return

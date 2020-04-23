@@ -2,32 +2,34 @@ package com.yy.somepopdemo;
 
 
 import android.app.Dialog;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
-import android.widget.TableRow;
 import android.widget.Toast;
 
-
 import com.yy.somepop.framework.DataChoiceListener;
-
 import com.yy.somepop.framework.DefaultListener;
+import com.yy.somepop.framework.ListChoiceListener;
 import com.yy.somepop.framework.ListItemListener;
 import com.yy.somepop.widget.DateAndTimeChoiceDialog;
 import com.yy.somepop.widget.DateChoiceDialog;
 import com.yy.somepop.widget.DefaultDialog;
+import com.yy.somepop.widget.ListChoiceDialog;
 import com.yy.somepop.widget.ListDialog;
 import com.yy.somepop.widget.LodingDialog;
 import com.yy.somepop.widget.ProgressBarDialog;
 import com.yy.somepop.widget.TimeChoiceDialog;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     ProgressBarDialog progressBarDialog;
@@ -206,6 +208,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ProgressBar progressBar = new ProgressBar(this);
                 new LodingDialog(this)
                         .setView(progressBar)
+                        .show();
+                break;
+            case R.id.btn9:
+                List<String> list = new ArrayList<String>();
+                list.add("2015");
+                list.add("2016");
+                list.add("2017");
+                list.add("2018");
+                list.add("2019");
+                list.add("2020");
+                new ListChoiceDialog(this,R.style.dialog)
+                        .setDialogTitle("请选择年份")
+                        .setLineColor(R.color.colorPrimary)
+                        .setBtnColor(R.color.colorPrimary)
+                        .setDataList(list)
+                        .setInitIndex(3)
+                        .setListChoiceListener(new ListChoiceListener() {
+                            @Override
+                            public void dataChoice(String item) {
+                                Log.i("列表选择器",item);
+                            }
+                        })
                         .show();
                 break;
         }
